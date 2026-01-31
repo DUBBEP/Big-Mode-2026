@@ -1,11 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Components")]
-    private Rigidbody2D rb;
+    [SerializeField] private Rigidbody2D rb;
     private LayerMask groundLayer;
 
     [SerializeField] private MovementProfileSO movementData;
@@ -21,7 +20,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
         rb.mass = 3f;
         rb.gravityScale = 5f;
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
