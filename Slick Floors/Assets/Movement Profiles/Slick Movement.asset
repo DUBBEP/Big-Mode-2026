@@ -23,9 +23,9 @@ MonoBehaviour:
   doubleJumpEnabled: 0
   jumpForce: 66
   wallJumpForce: {x: 30, y: 50}
-  jumpGravityScale: 1
-  jumpCancelGravityScale: 2
-  fallingGravityScale: 3
+  jumpGravityScale: 3
+  jumpCancelGravityScale: 13
+  fallingGravityScale: 12
   coyoteTime: 0.15
   jumpBufferTime: 0.15
   wallJumpMovementLockTime: 0.2

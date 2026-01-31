@@ -14,8 +14,8 @@ public class PlayerMovement : MonoBehaviour
     private float _jumpBufferCounter;
     private float _wallJumpLockCounter;
 
-    public bool isGrounded;
-    public int wallSide;
+    private bool isGrounded;
+    private int wallSide;
     private bool _canDoubleJump;
     private float _horizontalInput;
 
@@ -76,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (_jumpBufferCounter > 0)
         {
+
             if (wallSide != 0 && !isGrounded)
             {
                 _wallJumpLockCounter = movementData.wallJumpMovementLockTime;
@@ -98,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void ExecuteJump(Vector2 force)
     {
-        rb.linearVelocity = new Vector2(rb.linearVelocity.x * 0.5f, 0);
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
         rb.AddForce(force, ForceMode2D.Impulse);
         _jumpBufferCounter = 0;
         _coyoteCounter = 0;

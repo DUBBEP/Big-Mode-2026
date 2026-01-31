@@ -13,19 +13,19 @@ MonoBehaviour:
   m_Name: Default Movement
   m_EditorClassIdentifier: Assembly-CSharp::MovementProfileSO
   groundOffset: {x: 0, y: -1.5}
-  groundSize: {x: 0.95, y: 0.1}
+  groundSize: {x: 0.65, y: 0.1}
   wallCheckSize: {x: 0.2, y: 2.5}
   wallCheckOffset: 0.5
-  moveSpeed: 40
-  acceleration: 20
-  deceleration: 10
-  airResist: 0.8
+  moveSpeed: 20
+  acceleration: 25
+  deceleration: 30
+  airResist: 0.3
   doubleJumpEnabled: 0
-  jumpForce: 66
+  jumpForce: 100
   wallJumpForce: {x: 30, y: 50}
-  jumpGravityScale: 1
-  jumpCancelGravityScale: 2
-  fallingGravityScale: 3
-  coyoteTime: 0.15
-  jumpBufferTime: 0.15
+  jumpGravityScale: 8
+  jumpCancelGravityScale: 15
+  fallingGravityScale: 12
+  coyoteTime: 0.06
+  jumpBufferTime: 0.06
   wallJumpMovementLockTime: 0.2

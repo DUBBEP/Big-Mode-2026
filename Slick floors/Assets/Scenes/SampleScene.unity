@@ -2232,23 +2232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e6d78fcfe727b48ad072dc9ebd9700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  groundOffset: {x: 0, y: -1.5}
-  groundSize: {x: 0.99, y: 0.1}
-  wallCheckSize: {x: 1.1, y: 3}
-  wallCheckOffset: 0.5
-  moveSpeed: 40
-  acceleration: 20
-  deceleration: 0
-  airResist: 0.8
-  doubleJumpEnabled: 0
-  jumpForce: 66
-  wallJumpForce: {x: 100, y: 33}
-  jumpGravityScale: 4
-  jumpCancelGravityScale: 16
-  fallingGravityScale: 12
-  coyoteTime: 0.15
-  jumpBufferTime: 0.15
-  wallJumpMovementLockTime: 0.2
+  movementData: {fileID: 11400000, guid: 90e60aea790c814489dd7b11b84123f1, type: 2}
   isGrounded: 0
   wallSide: 0
 --- !u!114 &2066047016

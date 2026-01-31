@@ -16,14 +16,14 @@ MonoBehaviour:
   groundSize: {x: 0.95, y: 0.1}
   wallCheckSize: {x: 0.2, y: 2.5}
   wallCheckOffset: 0.5
-  moveSpeed: 40
-  acceleration: 20
-  deceleration: 10
+  moveSpeed: 8
+  acceleration: 10
+  deceleration: 150
   airResist: 0.8
   doubleJumpEnabled: 0
-  jumpForce: 66
+  jumpForce: 20
   wallJumpForce: {x: 30, y: 50}
-  jumpGravityScale: 1
+  jumpGravityScale: 4
   jumpCancelGravityScale: 2
   fallingGravityScale: 3
   coyoteTime: 0.15
