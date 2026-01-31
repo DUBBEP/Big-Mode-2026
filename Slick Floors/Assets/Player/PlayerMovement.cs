@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D rbody;
     [Header("Movement")]
     public float moveSpeed = 40f;
-    public float acceleration = 10f;
+    public float acceleration = 20f;
     public float deceleration = 8f;
     public float airResist = 0.5f;
     public float velocityPower = 0.9f;
@@ -36,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
     {
     }
 
-    void Update()
+    void FixedUpdate()
     {
         float targetSpeed = horizontalMovement * moveSpeed;
         float speedDif = targetSpeed - rbody.linearVelocity.x;
