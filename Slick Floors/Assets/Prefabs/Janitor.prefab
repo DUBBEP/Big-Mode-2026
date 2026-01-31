@@ -341,7 +341,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.20126498, y: -0.00000009452742}
+  m_ConnectedAnchor: {x: 0.20126498, y: -0.00000008838554}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -367,7 +367,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -514,7 +514,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.0019312338, y: -0.03014587}
+  m_ConnectedAnchor: {x: 0.0019312338, y: -0.030145874}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -630,7 +630,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.012165943, y: 0.0010958485}
+  m_ConnectedAnchor: {x: -0.012165943, y: 0.0010958542}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -688,7 +688,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.2605487, y: 0.029686848}
+  m_ConnectedAnchor: {x: 0.2605487, y: 0.029686853}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -761,7 +761,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.14433166, y: -0.000000024567528}
+  m_ConnectedAnchor: {x: 0.14433166, y: -0.000000012283764}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -819,7 +819,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -921,7 +921,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.20072828, y: -0.0000005033465}
+  m_ConnectedAnchor: {x: 0.20072828, y: -0.0000005187012}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -947,7 +947,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -1031,7 +1031,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.26038632, y: -0.02726845}
+  m_ConnectedAnchor: {x: 0.26038632, y: -0.027268445}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:

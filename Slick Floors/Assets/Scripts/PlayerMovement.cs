@@ -3,6 +3,12 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Detection Settings")]
+    public Vector2 groundOffset = new Vector2();
+    public Vector2 groundSize = new Vector2();
+    public Vector2 wallCheckSize = new Vector2(); // Height should match player
+    public Vector2 wallCheckOffset = new Vector2(); // Horizontal distance from center
+
     [Header("Components")]
     [SerializeField] private Rigidbody2D rb;
     private LayerMask groundLayer;
@@ -13,17 +19,17 @@ public class PlayerMovement : MonoBehaviour
     private float _jumpBufferCounter;
     private float _wallJumpLockCounter;
 
-    private bool isGrounded;
-    private int wallSide;
+    private bool _isGrounded;
+    private int _wallSide;
     private bool _canDoubleJump;
     private float _horizontalInput;
+
+    public float HorizontalInput { get { return _horizontalInput; } private set { } }
 
     void Awake()
     {
         rb.mass = 3f;
-        rb.gravityScale = 5f;
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
-        rb.freezeRotation = true;
         groundLayer = LayerMask.GetMask("Ground");
     }
 
@@ -37,17 +43,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckPhysics()
     {
-        isGrounded = Physics2D.OverlapBox(
-            (Vector2)transform.position + movementData.groundOffset, 
-            movementData.groundSize, 0f, groundLayer);
+        _isGrounded = Physics2D.OverlapBox(
+            (Vector2)transform.position + groundOffset, 
+            groundSize, 0f, groundLayer);
 
-        if (isGrounded)
+        if (_isGrounded)
         {
             _coyoteCounter = movementData.coyoteTime;
             if (movementData.doubleJumpEnabled)
                 _canDoubleJump = true;
             else
                 _canDoubleJump = false;
+
+            rb.gravityScale = 1f;
         }
         else if (rb.linearVelocity.y < 0f)
         {
@@ -55,15 +63,15 @@ public class PlayerMovement : MonoBehaviour
         } 
 
         // BoxCast for Left and Right sides
-        Vector2 leftBoxPos = (Vector2)transform.position + new Vector2(-movementData.wallCheckOffset, 0);
-        Vector2 rightBoxPos = (Vector2)transform.position + new Vector2(movementData.wallCheckOffset, 0);
+        Vector2 leftBoxPos = (Vector2)transform.position + new Vector2(-wallCheckOffset.x, wallCheckOffset.y);
+        Vector2 rightBoxPos = (Vector2)transform.position + new Vector2(wallCheckOffset.x, wallCheckOffset.y);
 
-        bool leftWall = Physics2D.OverlapBox(leftBoxPos, movementData.wallCheckSize, 0f, groundLayer);
-        bool rightWall = Physics2D.OverlapBox(rightBoxPos, movementData.wallCheckSize, 0f, groundLayer);
+        bool leftWall = Physics2D.OverlapBox(leftBoxPos, wallCheckSize, 0f, groundLayer);
+        bool rightWall = Physics2D.OverlapBox(rightBoxPos, wallCheckSize, 0f, groundLayer);
 
-        if (rightWall) wallSide = 1;
-        else if (leftWall) wallSide = -1;
-        else wallSide = 0;
+        if (rightWall) _wallSide = 1;
+        else if (leftWall) _wallSide = -1;
+        else _wallSide = 0;
     }
 
     private void HandleTimers()
@@ -75,10 +83,10 @@ public class PlayerMovement : MonoBehaviour
         if (_jumpBufferCounter > 0)
         {
 
-            if (wallSide != 0 && !isGrounded)
+            if (_wallSide != 0 && !_isGrounded)
             {
                 _wallJumpLockCounter = movementData.wallJumpMovementLockTime;
-                ExecuteJump(new Vector2(movementData.wallJumpForce.x * -wallSide, movementData.wallJumpForce.y));
+                ExecuteJump(new Vector2(movementData.wallJumpForce.x * -_wallSide, movementData.wallJumpForce.y));
                 Debug.Log("Did wall jump");
             }
             else if (_coyoteCounter > 0)
@@ -124,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
         float targetSpeed = _horizontalInput * movementData.moveSpeed;
         float speedDif = targetSpeed - rb.linearVelocity.x;
         float accelType = (Mathf.Abs(targetSpeed) > 0.01f) ? movementData.acceleration : movementData.deceleration;
-        float accelRate = isGrounded ? accelType : accelType * movementData.airResist;
+        float accelRate = _isGrounded ? accelType : accelType * movementData.airResist;
         rb.AddForce(Vector2.right * speedDif * accelRate);
     }
 
@@ -132,13 +140,14 @@ public class PlayerMovement : MonoBehaviour
     {
         // Ground
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube((Vector2)transform.position + movementData.groundOffset, movementData.groundSize);
+        Gizmos.DrawWireCube((Vector2)transform.position + groundOffset, groundSize);
 
         // Walls
         Gizmos.color = Color.blue;
-        Vector2 leftBoxPos = (Vector2)transform.position + new Vector2(-movementData.wallCheckOffset, 0);
-        Vector2 rightBoxPos = (Vector2)transform.position + new Vector2(movementData.wallCheckOffset, 0);
-        Gizmos.DrawWireCube(leftBoxPos, movementData.wallCheckSize);
-        Gizmos.DrawWireCube(rightBoxPos, movementData.wallCheckSize);
+        Vector2 leftBoxPos = (Vector2)transform.position + new Vector2(-wallCheckOffset.x, wallCheckOffset.y);
+        Vector2 rightBoxPos = (Vector2)transform.position + new Vector2(wallCheckOffset.x, wallCheckOffset.y);
+        Gizmos.DrawWireCube(leftBoxPos, wallCheckSize);
+        Gizmos.DrawWireCube(rightBoxPos, wallCheckSize);
     }
+
 }

@@ -12,16 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b2bdaf1ce30c9e4ca7d2ca948c6a284, type: 3}
   m_Name: Default Movement
   m_EditorClassIdentifier: Assembly-CSharp::MovementProfileSO
-  groundOffset: {x: 0, y: -1.04}
-  groundSize: {x: 0.65, y: 0.1}
-  wallCheckSize: {x: 0.3, y: 2}
-  wallCheckOffset: 0.25
-  moveSpeed: 20
+  moveSpeed: 3
   acceleration: 25
   deceleration: 30
   airResist: 0.3
   doubleJumpEnabled: 0
-  jumpForce: 100
+  jumpForce: 150
   wallJumpForce: {x: 30, y: 50}
   jumpGravityScale: 8
   jumpCancelGravityScale: 15
