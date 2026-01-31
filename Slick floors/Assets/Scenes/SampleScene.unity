@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 886251e9a18ece04ea8e61686c173e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachinePositionComposer
-  CameraDistance: 10
+  CameraDistance: 20
   DeadZoneDepth: 0
   Composition:
     ScreenPosition: {x: 0, y: 0}
@@ -220,7 +220,7 @@ Transform:
   m_GameObject: {fileID: 102706515}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.23, y: -0.62, z: -10}
+  m_LocalPosition: {x: -0.23, y: -0.62, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -509,7 +509,7 @@ GameObject:
   - component: {fileID: 359013671}
   - component: {fileID: 359013672}
   m_Layer: 0
-  m_Name: Collider
+  m_Name: CharacterCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -547,7 +547,7 @@ BoxCollider2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_LayerOverridePriority: 0
+  m_LayerOverridePriority: -1
   m_ForceSendLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -576,37 +576,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1 &391036928
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 391036929}
-  m_Layer: 0
-  m_Name: GroundCheck
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &391036929
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 391036928}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2066047014}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,7 +708,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.23, y: -0.62, z: -10}
+  m_LocalPosition: {x: -0.23, y: -0.62, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1132,6 +1101,7 @@ GameObject:
   - component: {fileID: 964561230}
   - component: {fileID: 964561231}
   - component: {fileID: 964561232}
+  - component: {fileID: 964561233}
   m_Layer: 0
   m_Name: Mop
   m_TagString: Untagged
@@ -1235,6 +1205,28 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   cleanSurface: {fileID: 1337710377011476828, guid: 7ecc77ef3158ace41ade4522d064a1fe, type: 3}
+--- !u!64 &964561233
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964561229}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &1701995901
 GameObject:
   m_ObjectHideFlags: 0
@@ -1542,11 +1534,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.23, y: -0.62, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 359013671}
-  - {fileID: 391036929}
   - {fileID: 661493956}
   - {fileID: 964561230}
   m_Father: {fileID: 0}
@@ -1563,22 +1554,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e6d78fcfe727b48ad072dc9ebd9700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  rbody: {fileID: 0}
-  moveSpeed: 40
-  acceleration: 20
-  deceleration: 8
-  airResist: 0.5
-  velocityPower: 0.9
-  horizontalMovement: 0
-  jumpForce: 30
-  groundCheck: {fileID: 0}
-  groundCheckSize: {x: 1, y: 0.1}
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
-  cleanSurfaceMultiplier: 2
-  dirtySurfaceMultiplier: 0.4
-  superSlickSurfaceMultiplier: 5
+  groundOffset: {x: 0, y: -1.5}
+  groundSize: {x: 0.99, y: 0.1}
+  wallCheckSize: {x: 1.1, y: 3}
+  moveSpeed: 40
+  acceleration: 20
+  airResist: 0.8
+  velocityPower: 0.9
+  jumpForce: 66
+  wallJumpForce: {x: 100, y: 33}
+  coyoteTime: 0.15
+  jumpBufferTime: 0.15
+  isGrounded: 0
+  wallSide: 0
 --- !u!114 &2066047016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1608,7 +1599,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2066047015}
         m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: Move
+        m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1664,7 +1655,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2066047015}
         m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: Jump
+        m_MethodName: OnJump
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1676,6 +1667,54 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f7e69ad1-2ddd-4db8-8f1c-7fe8a0068a2d
     m_ActionName: 'Player/Jump[/Keyboard/w,/Keyboard/upArrow,/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 964561229}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b9a21dd7-3afd-419d-802a-8594f444dd0f
+    m_ActionName: 'Player/Mop[/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2066047015}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a245a902-2ccc-410a-8468-4ebf2f895b2d
+    m_ActionName: 'Player/WallJump[/Keyboard/w,/Keyboard/upArrow,/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2066047015}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: OnJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 61ddcebd-d5c6-4cda-bc67-a6420790e636
+    m_ActionName: 'Player/DoubleJump[/Keyboard/w,/Keyboard/upArrow,/Keyboard/space]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

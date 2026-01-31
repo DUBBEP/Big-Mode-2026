@@ -1,120 +1,146 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
-    public Rigidbody2D rbody;
+    [Header("Components")]
+    private Rigidbody2D rb;
+    private LayerMask groundLayer;
+
+    [Header("Detection Settings")]
+    [SerializeField] private Vector2 groundOffset = new Vector2(0f, -1.5f);
+    [SerializeField] private Vector2 groundSize = new Vector2(0.95f, 0.1f);
+    [SerializeField] private Vector2 wallCheckSize = new Vector2(0.2f, 2.5f); // Height should match player
+    [SerializeField] private float wallCheckOffset = 0.5f; // Horizontal distance from center
+
     [Header("Movement")]
     public float moveSpeed = 40f;
     public float acceleration = 20f;
-    public float deceleration = 8f;
-    public float airResist = 0.5f;
-    public float velocityPower = 0.9f;
-    public float horizontalMovement;
+    public float airResist = 0.8f;
+
     [Header("Jumping")]
-    public float jumpForce = 30f;
-    [Header("Ground Check")]
-    public Transform groundCheck;
-    public Vector2 groundCheckSize = new Vector2(1f, 0.1f);
-    public LayerMask groundLayer;
-    [Header("On Surface Materials")]
-    bool onCleanSurface = false;
-    bool onDirtySurface = false;
-    bool onSuperSlickSurface = false;
-    [Header("Surface Materials Acceleration Multipliers")]
-    public float cleanSurfaceMultiplier = 2f;
-    public float dirtySurfaceMultiplier = 0.4f;
-    public float superSlickSurfaceMultiplier = 5f;
+    public float jumpForce = 66f;
+    public Vector2 wallJumpForce = new Vector2(30f, 50f);
+
+    [Header("Feel Improvements")]
+    [SerializeField] private float coyoteTime = 0.15f;
+    [SerializeField] private float jumpBufferTime = 0.15f;
+    [SerializeField] private float wallJumpMovementLockTime = 0.2f;
+
+    private float _coyoteCounter;
+    private float _jumpBufferCounter;
+    private float _wallJumpLockCounter;
+
+    public bool isGrounded;
+    public int wallSide;
+    private bool _canDoubleJump;
+    private float _horizontalInput;
+
     void Awake()
     {
-        rbody = GetComponent<Rigidbody2D>();
-        groundCheck = transform.Find("GroundCheck");
-        groundLayer= LayerMask.GetMask("Ground");
-    }
-    
-    void Start()
-    {
-    }
-
-    void FixedUpdate()
-    {
-        float targetSpeed = horizontalMovement * moveSpeed;
-        float speedDif = targetSpeed - rbody.linearVelocity.x;
-        float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? acceleration : deceleration;
-        if (!IsGrounded()){
-            accelRate *= airResist;
-        }
-        if (onSuperSlickSurface){
-            accelRate *= superSlickSurfaceMultiplier;
-        }
-        else if (onCleanSurface){
-            accelRate *= cleanSurfaceMultiplier;
-        }
-        else if (onDirtySurface){
-            accelRate *= dirtySurfaceMultiplier;
-        }
-        float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, velocityPower) * Mathf.Sign(speedDif);
-        rbody.AddForce(movement * Vector2.right);
+        rb = GetComponent<Rigidbody2D>();
+        rb.mass = 3f;
+        rb.gravityScale = 5f;
+        rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
+        rb.freezeRotation = true;
+        groundLayer = LayerMask.GetMask("Ground");
     }
 
-    public void Move(InputAction.CallbackContext context)
+    void Update()
     {
-        horizontalMovement = context.ReadValue<Vector2>().x;
+        CheckPhysics();
+        HandleTimers();
     }
 
-    public void Jump(InputAction.CallbackContext context){
-        if (context.performed && IsGrounded())
-        {
-            rbody.linearVelocity = new Vector2(rbody.linearVelocity.x, jumpForce);
-        }
-        if (context.canceled && rbody.linearVelocity.y > 0)
-        {
-            rbody.linearVelocity = new Vector2(rbody.linearVelocity.x, rbody.linearVelocity.y * 0.5f);
-        }
-    }
-    private bool IsGrounded()
+    void FixedUpdate() => ApplyMovement();
+
+    private void CheckPhysics()
     {
-        if (Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0f, groundLayer))
+        isGrounded = Physics2D.OverlapBox((Vector2)transform.position + groundOffset, groundSize, 0f, groundLayer);
+
+        if (isGrounded)
         {
-            return true;
+            _coyoteCounter = coyoteTime;
+            _canDoubleJump = true;
         }
-        return false;
+
+        // BoxCast for Left and Right sides
+        Vector2 leftBoxPos = (Vector2)transform.position + new Vector2(-wallCheckOffset, 0);
+        Vector2 rightBoxPos = (Vector2)transform.position + new Vector2(wallCheckOffset, 0);
+
+        bool leftWall = Physics2D.OverlapBox(leftBoxPos, wallCheckSize, 0f, groundLayer);
+        bool rightWall = Physics2D.OverlapBox(rightBoxPos, wallCheckSize, 0f, groundLayer);
+
+        if (rightWall) wallSide = 1;
+        else if (leftWall) wallSide = -1;
+        else wallSide = 0;
     }
+
+    private void HandleTimers()
+    {
+        _coyoteCounter -= Time.deltaTime;
+        _jumpBufferCounter -= Time.deltaTime;
+        _wallJumpLockCounter -= Time.deltaTime;
+
+        if (_jumpBufferCounter > 0)
+        {
+            if (_coyoteCounter > 0)
+            {
+                ExecuteJump(Vector2.up * jumpForce);
+            }
+            else if (wallSide != 0 && !isGrounded)
+            {
+                _wallJumpLockCounter = wallJumpMovementLockTime;
+                ExecuteJump(new Vector2(wallJumpForce.x * -wallSide, wallJumpForce.y));
+            }
+            else if (_canDoubleJump)
+            {
+                ExecuteJump(Vector2.up * jumpForce);
+                _canDoubleJump = false;
+            }
+        }
+    }
+
+    private void ExecuteJump(Vector2 force)
+    {
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x * 0.5f, 0);
+        rb.AddForce(force, ForceMode2D.Impulse);
+        _jumpBufferCounter = 0;
+        _coyoteCounter = 0;
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.performed) _jumpBufferCounter = jumpBufferTime;
+
+        if (context.canceled && rb.linearVelocity.y > 0)
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
+    }
+
+    public void OnMove(InputAction.CallbackContext context) => _horizontalInput = context.ReadValue<Vector2>().x;
+
+    private void ApplyMovement()
+    {
+        if (_wallJumpLockCounter > 0) return;
+
+        float targetSpeed = _horizontalInput * moveSpeed;
+        float speedDif = targetSpeed - rb.linearVelocity.x;
+        float accelRate = isGrounded ? acceleration : acceleration * airResist;
+        rb.AddForce(Vector2.right * speedDif * accelRate);
+    }
+
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(groundCheck.position, groundCheckSize);
-    }
+        // Ground
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube((Vector2)transform.position + groundOffset, groundSize);
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("CleanSurface"))
-        {
-            onCleanSurface = true;
-        }
-        if (other.CompareTag("DirtySurface"))
-        {
-            onDirtySurface = true;
-        }
-        if (other.CompareTag("SuperSlickSurface"))
-        {
-            onSuperSlickSurface = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("CleanSurface"))
-        {
-            onCleanSurface = false;
-        }
-        if (other.CompareTag("DirtySurface"))
-        {
-            onDirtySurface = false;
-        }
-        if (other.CompareTag("SuperSlickSurface"))
-        {
-            onSuperSlickSurface = false;
-        }
+        // Walls
+        Gizmos.color = Color.blue;
+        Vector2 leftBoxPos = (Vector2)transform.position + new Vector2(-wallCheckOffset, 0);
+        Vector2 rightBoxPos = (Vector2)transform.position + new Vector2(wallCheckOffset, 0);
+        Gizmos.DrawWireCube(leftBoxPos, wallCheckSize);
+        Gizmos.DrawWireCube(rightBoxPos, wallCheckSize);
     }
 }
