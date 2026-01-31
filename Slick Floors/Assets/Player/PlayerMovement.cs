@@ -5,9 +5,9 @@ public class PlayerMovement : MonoBehaviour
 {
     public Rigidbody2D rbody;
     [Header("Movement")]
-    public float moveSpeed = 50f;
+    public float moveSpeed = 40f;
     public float acceleration = 10f;
-    public float deceleration = 2f;
+    public float deceleration = 8f;
     public float airResist = 0.5f;
     public float velocityPower = 0.9f;
     public float horizontalMovement;
@@ -17,13 +17,25 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheck;
     public Vector2 groundCheckSize = new Vector2(1f, 0.1f);
     public LayerMask groundLayer;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [Header("On Surface Materials")]
+    bool onCleanSurface = false;
+    bool onDirtySurface = false;
+    bool onSuperSlickSurface = false;
+    [Header("Surface Materials Acceleration Multipliers")]
+    public float cleanSurfaceMultiplier = 2f;
+    public float dirtySurfaceMultiplier = 0.4f;
+    public float superSlickSurfaceMultiplier = 5f;
+    void Awake()
     {
         rbody = GetComponent<Rigidbody2D>();
+        groundCheck = transform.Find("GroundCheck");
+        groundLayer= LayerMask.GetMask("Ground");
+    }
+    
+    void Start()
+    {
     }
 
-    // Update is called once per frame
     void Update()
     {
         float targetSpeed = horizontalMovement * moveSpeed;
@@ -31,6 +43,15 @@ public class PlayerMovement : MonoBehaviour
         float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? acceleration : deceleration;
         if (!IsGrounded()){
             accelRate *= airResist;
+        }
+        if (onSuperSlickSurface){
+            accelRate *= superSlickSurfaceMultiplier;
+        }
+        else if (onCleanSurface){
+            accelRate *= cleanSurfaceMultiplier;
+        }
+        else if (onDirtySurface){
+            accelRate *= dirtySurfaceMultiplier;
         }
         float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, velocityPower) * Mathf.Sign(speedDif);
         rbody.AddForce(movement * Vector2.right);
@@ -63,5 +84,37 @@ public class PlayerMovement : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(groundCheck.position, groundCheckSize);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("CleanSurface"))
+        {
+            onCleanSurface = true;
+        }
+        if (other.CompareTag("DirtySurface"))
+        {
+            onDirtySurface = true;
+        }
+        if (other.CompareTag("SuperSlickSurface"))
+        {
+            onSuperSlickSurface = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("CleanSurface"))
+        {
+            onCleanSurface = false;
+        }
+        if (other.CompareTag("DirtySurface"))
+        {
+            onDirtySurface = false;
+        }
+        if (other.CompareTag("SuperSlickSurface"))
+        {
+            onSuperSlickSurface = false;
+        }
     }
 }
