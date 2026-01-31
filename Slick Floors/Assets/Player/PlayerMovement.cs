@@ -8,25 +8,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private LayerMask groundLayer;
 
-    [Header("Detection Settings")]
-    [SerializeField] private Vector2 groundOffset = new Vector2(0f, -1.5f);
-    [SerializeField] private Vector2 groundSize = new Vector2(0.95f, 0.1f);
-    [SerializeField] private Vector2 wallCheckSize = new Vector2(0.2f, 2.5f); // Height should match player
-    [SerializeField] private float wallCheckOffset = 0.5f; // Horizontal distance from center
-
-    [Header("Movement")]
-    public float moveSpeed = 40f;
-    public float acceleration = 20f;
-    public float airResist = 0.8f;
-
-    [Header("Jumping")]
-    public float jumpForce = 66f;
-    public Vector2 wallJumpForce = new Vector2(30f, 50f);
-
-    [Header("Feel Improvements")]
-    [SerializeField] private float coyoteTime = 0.15f;
-    [SerializeField] private float jumpBufferTime = 0.15f;
-    [SerializeField] private float wallJumpMovementLockTime = 0.2f;
+    [SerializeField] private MovementProfileSO movementData;
 
     private float _coyoteCounter;
     private float _jumpBufferCounter;
@@ -57,20 +39,29 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckPhysics()
     {
-        isGrounded = Physics2D.OverlapBox((Vector2)transform.position + groundOffset, groundSize, 0f, groundLayer);
+        isGrounded = Physics2D.OverlapBox(
+            (Vector2)transform.position + movementData.groundOffset, 
+            movementData.groundSize, 0f, groundLayer);
 
         if (isGrounded)
         {
-            _coyoteCounter = coyoteTime;
-            _canDoubleJump = true;
+            _coyoteCounter = movementData.coyoteTime;
+            if (movementData.doubleJumpEnabled)
+                _canDoubleJump = true;
+            else
+                _canDoubleJump = false;
         }
+        else if (rb.linearVelocity.y < 0f)
+        {
+            rb.gravityScale = movementData.fallingGravityScale;
+        } 
 
         // BoxCast for Left and Right sides
-        Vector2 leftBoxPos = (Vector2)transform.position + new Vector2(-wallCheckOffset, 0);
-        Vector2 rightBoxPos = (Vector2)transform.position + new Vector2(wallCheckOffset, 0);
+        Vector2 leftBoxPos = (Vector2)transform.position + new Vector2(-movementData.wallCheckOffset, 0);
+        Vector2 rightBoxPos = (Vector2)transform.position + new Vector2(movementData.wallCheckOffset, 0);
 
-        bool leftWall = Physics2D.OverlapBox(leftBoxPos, wallCheckSize, 0f, groundLayer);
-        bool rightWall = Physics2D.OverlapBox(rightBoxPos, wallCheckSize, 0f, groundLayer);
+        bool leftWall = Physics2D.OverlapBox(leftBoxPos, movementData.wallCheckSize, 0f, groundLayer);
+        bool rightWall = Physics2D.OverlapBox(rightBoxPos, movementData.wallCheckSize, 0f, groundLayer);
 
         if (rightWall) wallSide = 1;
         else if (leftWall) wallSide = -1;
@@ -85,19 +76,22 @@ public class PlayerMovement : MonoBehaviour
 
         if (_jumpBufferCounter > 0)
         {
-            if (_coyoteCounter > 0)
+            if (wallSide != 0 && !isGrounded)
             {
-                ExecuteJump(Vector2.up * jumpForce);
+                _wallJumpLockCounter = movementData.wallJumpMovementLockTime;
+                ExecuteJump(new Vector2(movementData.wallJumpForce.x * -wallSide, movementData.wallJumpForce.y));
+                Debug.Log("Did wall jump");
             }
-            else if (wallSide != 0 && !isGrounded)
+            else if (_coyoteCounter > 0)
             {
-                _wallJumpLockCounter = wallJumpMovementLockTime;
-                ExecuteJump(new Vector2(wallJumpForce.x * -wallSide, wallJumpForce.y));
+                ExecuteJump(Vector2.up * movementData.jumpForce);
+                Debug.Log("Did normal jump");
             }
             else if (_canDoubleJump)
             {
-                ExecuteJump(Vector2.up * jumpForce);
+                ExecuteJump(Vector2.up * movementData.jumpForce);
                 _canDoubleJump = false;
+                Debug.Log("Did double jump");
             }
         }
     }
@@ -112,10 +106,14 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if (context.performed) _jumpBufferCounter = jumpBufferTime;
+        if (context.performed)
+        {
+            _jumpBufferCounter = movementData.jumpBufferTime;
+            rb.gravityScale = movementData.jumpGravityScale;
+        }
 
         if (context.canceled && rb.linearVelocity.y > 0)
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
+            rb.gravityScale = movementData.jumpCancelGravityScale;
     }
 
     public void OnMove(InputAction.CallbackContext context) => _horizontalInput = context.ReadValue<Vector2>().x;
@@ -124,9 +122,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_wallJumpLockCounter > 0) return;
 
-        float targetSpeed = _horizontalInput * moveSpeed;
+        float targetSpeed = _horizontalInput * movementData.moveSpeed;
         float speedDif = targetSpeed - rb.linearVelocity.x;
-        float accelRate = isGrounded ? acceleration : acceleration * airResist;
+        float accelType = (Mathf.Abs(targetSpeed) > 0.01f) ? movementData.acceleration : movementData.deceleration;
+        float accelRate = isGrounded ? accelType : accelType * movementData.airResist;
         rb.AddForce(Vector2.right * speedDif * accelRate);
     }
 
@@ -134,13 +133,13 @@ public class PlayerMovement : MonoBehaviour
     {
         // Ground
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube((Vector2)transform.position + groundOffset, groundSize);
+        Gizmos.DrawWireCube((Vector2)transform.position + movementData.groundOffset, movementData.groundSize);
 
         // Walls
         Gizmos.color = Color.blue;
-        Vector2 leftBoxPos = (Vector2)transform.position + new Vector2(-wallCheckOffset, 0);
-        Vector2 rightBoxPos = (Vector2)transform.position + new Vector2(wallCheckOffset, 0);
-        Gizmos.DrawWireCube(leftBoxPos, wallCheckSize);
-        Gizmos.DrawWireCube(rightBoxPos, wallCheckSize);
+        Vector2 leftBoxPos = (Vector2)transform.position + new Vector2(-movementData.wallCheckOffset, 0);
+        Vector2 rightBoxPos = (Vector2)transform.position + new Vector2(movementData.wallCheckOffset, 0);
+        Gizmos.DrawWireCube(leftBoxPos, movementData.wallCheckSize);
+        Gizmos.DrawWireCube(rightBoxPos, movementData.wallCheckSize);
     }
 }
