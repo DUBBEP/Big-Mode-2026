@@ -406,7 +406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf36d5ae657a4ef4b84e0a8c4fdfddf0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PhysicalBalance
-  onPlayerDeath: {fileID: 0}
+  onPlayerDeath: {fileID: 11400000, guid: c230f6eba3c0609458be9264e4736eb6, type: 2}
   targetRotation: -90
   forceStrength: 1
   damping: 0
@@ -1029,6 +1029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51de406960820fc47a4db5f7f8874f78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PhysicalBody
+  onPlayerDeath: {fileID: 11400000, guid: c230f6eba3c0609458be9264e4736eb6, type: 2}
   targetHeight: 1.7
   springStrength: 325
   damping: 50
@@ -1047,12 +1048,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e6d78fcfe727b48ad072dc9ebd9700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  onPlayerDeath: {fileID: 11400000, guid: c230f6eba3c0609458be9264e4736eb6, type: 2}
   movementData: {fileID: 11400000, guid: 90e60aea790c814489dd7b11b84123f1, type: 2}
   groundOffset: {x: 0, y: -1.46}
   groundSize: {x: 0.45, y: 0.1}
   wallCheckSize: {x: 0.14, y: 1.35}
   wallCheckOffset: {x: 0.2, y: -0.27}
   rb: {fileID: 580408746834809346}
+  useWalk: 0
   walkStepSpeed: 10
   stepSize: 15
   legForce: 5
