@@ -12,20 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b2bdaf1ce30c9e4ca7d2ca948c6a284, type: 3}
   m_Name: Dirty Movement
   m_EditorClassIdentifier: Assembly-CSharp::MovementProfileSO
-  groundOffset: {x: 0, y: -1.5}
-  groundSize: {x: 0.95, y: 0.1}
-  wallCheckSize: {x: 0.2, y: 2.5}
-  wallCheckOffset: 0.5
   moveSpeed: 8
-  acceleration: 10
+  acceleration: 2
   deceleration: 150
   airResist: 0.8
   doubleJumpEnabled: 0
-  jumpForce: 20
+  jumpForce: 30
   wallJumpForce: {x: 30, y: 50}
   jumpGravityScale: 4
-  jumpCancelGravityScale: 2
-  fallingGravityScale: 3
-  coyoteTime: 0.15
-  jumpBufferTime: 0.15
+  jumpCancelGravityScale: 12
+  fallingGravityScale: 4
+  coyoteTime: 0.6
+  jumpBufferTime: 0.6
   wallJumpMovementLockTime: 0.2

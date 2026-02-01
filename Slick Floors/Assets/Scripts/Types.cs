@@ -8,3 +8,10 @@ public class DamageSource
     public GameObject recievingObject = null;
 
 }
+
+public enum GroundType
+{
+    Dirty,
+    Neutral,
+    Clean,
+}
