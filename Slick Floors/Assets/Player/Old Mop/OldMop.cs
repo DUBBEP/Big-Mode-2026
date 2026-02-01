@@ -56,7 +56,6 @@ public class OldMop : MonoBehaviour
         {
             Debug.Log($"Mop has found tile");
             tile.ChangeTyle(GroundType.Clean);
-            player.SetMovementProfile(tile.currentMovementProfile);
         }
     }
 
