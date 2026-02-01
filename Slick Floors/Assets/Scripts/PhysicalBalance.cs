@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PhysicalBalance : MonoBehaviour
 {
+    [SerializeField] private GenericEventSO onPlayerDeath;
+
     public float targetRotation = -90f;
     public float forceStrength = 1f;
     public float damping = 0.5f;
@@ -25,5 +27,20 @@ public class PhysicalBalance : MonoBehaviour
         // Apply torque
         float torque = (angleError * currentforceStrength) - (rb.angularVelocity * damping);
         rb.AddTorque(torque);
+    }
+
+    public void DisableBalancing(GameEventPayload payload)
+    {
+        enabled = false;
+    }
+
+    private void OnEnable()
+    {
+        onPlayerDeath.RegisterListener(DisableBalancing);
+    }
+
+    private void OnDisable()
+    {
+        onPlayerDeath.RegisterListener(DisableBalancing);
     }
 }

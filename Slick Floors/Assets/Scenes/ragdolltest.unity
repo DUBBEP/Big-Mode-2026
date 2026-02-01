@@ -274,8 +274,8 @@ MonoBehaviour:
   IgnoreTimeScale: 0
   WorldUpOverride: {fileID: 0}
   ChannelMask: -1
-  UpdateMethod: 2
-  BlendUpdateMethod: 1
+  UpdateMethod: 0
+  BlendUpdateMethod: 0
   LensModeOverride:
     Enabled: 0
     DefaultMode: 2
@@ -1195,6 +1195,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 527462884588537919, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 527462884588537919, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 670233347545355997, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
       propertyPath: forceStrength
       value: 1
@@ -1206,6 +1214,14 @@ PrefabInstance:
     - target: {fileID: 1485566219328833299, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
       propertyPath: m_Mass
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1485566219328833299, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1485566219328833299, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1576680430230226321, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
       propertyPath: m_Layer
@@ -1239,6 +1255,10 @@ PrefabInstance:
       propertyPath: stepSize
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 1896310126185939512, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: onPlayerDeath
+      value: 
+      objectReference: {fileID: 11400000, guid: c230f6eba3c0609458be9264e4736eb6, type: 2}
     - target: {fileID: 1969036955575350298, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
@@ -1307,6 +1327,10 @@ PrefabInstance:
       propertyPath: forceStrength
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3463330525274229643, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: onPlayerDeath
+      value: 
+      objectReference: {fileID: 11400000, guid: c230f6eba3c0609458be9264e4736eb6, type: 2}
     - target: {fileID: 3604475016770970077, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
       propertyPath: forceStrength
       value: 1
@@ -1327,6 +1351,22 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 4198527389831262537, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4198527389831262537, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4543444296509290151, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4543444296509290151, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4668792993190790208, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -1343,6 +1383,14 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 5318581600443489054, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318581600443489054, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5662967729405359399, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
       propertyPath: m_Mass
       value: 0.1
@@ -1350,6 +1398,14 @@ PrefabInstance:
     - target: {fileID: 5662967729405359399, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
       propertyPath: m_Constraints
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662967729405359399, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662967729405359399, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5672172825441739753, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
       propertyPath: m_Layer
@@ -1367,9 +1423,21 @@ PrefabInstance:
       propertyPath: targetHeight
       value: 1.7
       objectReference: {fileID: 0}
+    - target: {fileID: 7149529104836257832, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: onPlayerDeath
+      value: 
+      objectReference: {fileID: 11400000, guid: c230f6eba3c0609458be9264e4736eb6, type: 2}
     - target: {fileID: 7163397815560914881, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
       propertyPath: m_Mass
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163397815560914881, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163397815560914881, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7264751280682390561, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
       propertyPath: m_Layer
@@ -1402,6 +1470,14 @@ PrefabInstance:
     - target: {fileID: 7490974228052976958, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
       propertyPath: walkStepSpeed
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591778448936241870, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591778448936241870, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7641203156970764695, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
       propertyPath: m_Layer
@@ -1446,6 +1522,14 @@ PrefabInstance:
     - target: {fileID: 8779990402535356200, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
       propertyPath: walkStepSpeed
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8837083048605437077, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8837083048605437077, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8855603152053821791, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
       propertyPath: m_Material
