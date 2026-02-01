@@ -42,7 +42,6 @@ public class Health : MonoBehaviour
         {
             playerHp = hp,
             playerMaxHp = maxHp,
-            player = this.gameObject,
             damageSource = src,
         });
         if (hp <= 0)

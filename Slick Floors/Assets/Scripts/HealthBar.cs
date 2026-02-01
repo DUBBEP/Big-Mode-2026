@@ -10,7 +10,7 @@ public class HealthBar : MonoBehaviour
     {
         bar.fillAmount = payload.playerHp / payload.playerMaxHp;
         Debug.Log($"damage take payload: {payload.playerHp}");
-        Debug.Log($"damage take payload: {payload.player}");
+        Debug.Log($"damage take payload: {payload.damageSource.recievingObject}");
         Debug.Log($"damage take payload: {payload.damageSource.knockBackForce}");
         Debug.Log($"damage take payload: {payload.damageSource.value}");
         Debug.Log($"damage take payload: {payload.damageSource.sourceObject}");

@@ -338,5 +338,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 117bfff341b345942ad931f4af8ed580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealthBar
-  onDamageTaken: {fileID: 0}
-  bar: {fileID: 0}
+  onDamageTaken: {fileID: 11400000, guid: afa9c1fb7fbfe52459095975e2fd5097, type: 2}
+  bar: {fileID: 6540990004632335782}

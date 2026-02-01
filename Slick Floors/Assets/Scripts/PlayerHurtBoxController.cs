@@ -13,6 +13,10 @@ public class PlayerHurtBoxController : MonoBehaviour
     public void TryTakeDamage(GameObject other)
     {
         if (other.TryGetComponent<IDamageSource>(out IDamageSource sourceObject))
-            playerHealth.TakeDamage(sourceObject.GetDamageSource());
+        {
+            DamageSource src = sourceObject.GetDamageSource();
+            src.recievingObject = gameObject;
+            playerHealth.TakeDamage(src);
+        }
     }
 }

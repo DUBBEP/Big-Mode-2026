@@ -9,7 +9,7 @@ public class PlayerDamageKnockback : MonoBehaviour
 
     private void KnockBackPlayer(DamageTakenEventPayload payload)
     {
-        Vector2 dir = ((Vector2)payload.player.transform.position - 
+        Vector2 dir = ((Vector2)payload.damageSource.recievingObject.transform.position - 
             (Vector2)payload.damageSource.sourceObject.transform.position).normalized + (Vector2.up * upwardsInfluence);
 
         playerRb.AddForce(dir.normalized * payload.damageSource.knockBackForce * 10, ForceMode2D.Impulse);
