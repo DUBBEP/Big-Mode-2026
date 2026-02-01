@@ -204,10 +204,9 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnDeath(GameEventPayload payload)
-    {
-        enabled = false;
-    }
+    public void SetMovementProfile(MovementProfileSO data) => movementData = data;
+
+    private void OnDeath(GameEventPayload payload) => enabled = false;
 
     private void OnEnable() =>
         onPlayerDeath.RegisterListener(OnDeath);

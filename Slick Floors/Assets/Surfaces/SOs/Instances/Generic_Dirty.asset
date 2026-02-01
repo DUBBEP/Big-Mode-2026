@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b61cf3aaf61516499e9a76cb63b33c3, type: 3}
+  m_Name: Generic_Dirty
+  m_EditorClassIdentifier: Assembly-CSharp::FloorTypeDefinitionSO
+  floorTypeName: Generic Dirty
+  floorSprite: {fileID: 6785183520198539289, guid: be8e89c23d241a24ba6f9c323ec953ee, type: 3}
+  material: {fileID: 6200000, guid: 27b6da9b79c5d81449296874a4be506a, type: 2}
+  playerMovementProfile: {fileID: 11400000, guid: d995cb3690de0014b8c39f3a7d93f475, type: 2}
