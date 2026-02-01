@@ -220,6 +220,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8727091967253889458, guid: b13135d480996f5488b54dc9ec29abb1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2711408164854451981}
+    - targetCorrespondingSourceObject: {fileID: 8727091967253889458, guid: b13135d480996f5488b54dc9ec29abb1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6686136291410617629}
     - targetCorrespondingSourceObject: {fileID: 7169633035708024640, guid: b13135d480996f5488b54dc9ec29abb1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2734074026237092068}
@@ -341,7 +344,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.20126498, y: -0.00000009452742}
+  m_ConnectedAnchor: {x: 0.20126498, y: -0.00000008838554}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -367,7 +370,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -403,6 +406,7 @@ MonoBehaviour:
   targetRotation: -90
   forceStrength: 1
   damping: 0
+  currentforceStrength: 0
 --- !u!4 &553209686835575002 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7552582706839291426, guid: b13135d480996f5488b54dc9ec29abb1, type: 3}
@@ -514,7 +518,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.0019312338, y: -0.03014587}
+  m_ConnectedAnchor: {x: 0.0019312338, y: -0.030145874}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -630,7 +634,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.012165943, y: 0.0010958485}
+  m_ConnectedAnchor: {x: -0.012165943, y: 0.0010958542}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -688,7 +692,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.2605487, y: 0.029686848}
+  m_ConnectedAnchor: {x: 0.2605487, y: 0.029686853}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -713,6 +717,7 @@ MonoBehaviour:
   targetRotation: -90
   forceStrength: 1
   damping: 0
+  currentforceStrength: 0
 --- !u!1 &6792626336770659065 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3546880584718756867, guid: b13135d480996f5488b54dc9ec29abb1, type: 3}
@@ -761,7 +766,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.14433166, y: -0.000000024567528}
+  m_ConnectedAnchor: {x: 0.14433166, y: -0.000000012283764}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -819,7 +824,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -855,6 +860,7 @@ MonoBehaviour:
   targetRotation: -90
   forceStrength: 1
   damping: 0
+  currentforceStrength: 0
 --- !u!114 &2711408164854451981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -873,6 +879,29 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+--- !u!114 &6686136291410617629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7610635506608701622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66e6d78fcfe727b48ad072dc9ebd9700, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  movementData: {fileID: 11400000, guid: 90e60aea790c814489dd7b11b84123f1, type: 2}
+  groundOffset: {x: 0, y: -1.46}
+  groundSize: {x: 0.45, y: 0.1}
+  wallCheckSize: {x: 0.14, y: 1.35}
+  wallCheckOffset: {x: 0.2, y: -0.27}
+  rb: {fileID: 580408746834809346}
+  walkStepSpeed: 10
+  stepSize: 15
+  legForce: 5
+  leftLegBone: {fileID: 5752719769797489144}
+  rightLegBone: {fileID: 9126907315398462039}
 --- !u!1 &7814519900246947865 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -220549670269159139, guid: b13135d480996f5488b54dc9ec29abb1, type: 3}
@@ -921,7 +950,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.20072828, y: -0.0000005033465}
+  m_ConnectedAnchor: {x: 0.20072828, y: -0.0000005187012}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -947,7 +976,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -983,6 +1012,7 @@ MonoBehaviour:
   targetRotation: -90
   forceStrength: 1
   damping: 0
+  currentforceStrength: 0
 --- !u!1 &8357858534359959108 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7169633035708024640, guid: b13135d480996f5488b54dc9ec29abb1, type: 3}
@@ -1031,7 +1061,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.26038632, y: -0.02726845}
+  m_ConnectedAnchor: {x: 0.26038632, y: -0.027268445}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -1056,3 +1086,4 @@ MonoBehaviour:
   targetRotation: -90
   forceStrength: 1
   damping: 0
+  currentforceStrength: 0
