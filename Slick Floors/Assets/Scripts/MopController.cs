@@ -12,11 +12,6 @@ public class MopController : MonoBehaviour
 
     private float currentAngleVelocity;
 
-    void Start()
-    {
-        if (rb == null) rb = GetComponent<Rigidbody2D>();
-    }
-
     void FixedUpdate()
     {
         RotateTowardsMouse();

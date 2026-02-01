@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
     private void CheckPhysics()
     {
         _isGrounded = Physics2D.OverlapBox(
-            (Vector2)transform.position + groundOffset, 
+            (Vector2)transform.position + groundOffset,
             groundSize, 0f, groundLayer);
 
         if (_isGrounded)
@@ -66,12 +66,11 @@ public class PlayerMovement : MonoBehaviour
             else
                 _canDoubleJump = false;
 
-            rb.gravityScale = 1f;
         }
         else if (rb.linearVelocity.y < 0f)
         {
             rb.gravityScale = movementData.fallingGravityScale;
-        } 
+        }
 
         // BoxCast for Left and Right sides
         Vector2 leftBoxPos = (Vector2)transform.position + new Vector2(-wallCheckOffset.x, wallCheckOffset.y);
