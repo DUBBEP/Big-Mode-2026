@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     private LayerMask groundLayer;
 
+    private LayerMask wallLayer;
+
     [Header("Walk Animation")]
     [SerializeField] private bool useWalk;
     [SerializeField] private float walkStepSpeed;
@@ -39,6 +41,7 @@ public class PlayerMovement : MonoBehaviour
         rb.mass = 3f;
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         groundLayer = LayerMask.GetMask("Ground");
+        wallLayer = LayerMask.GetMask("Wall");
     }
 
     void Update()
@@ -80,8 +83,8 @@ public class PlayerMovement : MonoBehaviour
         Vector2 leftBoxPos = (Vector2)transform.position + new Vector2(-wallCheckOffset.x, wallCheckOffset.y);
         Vector2 rightBoxPos = (Vector2)transform.position + new Vector2(wallCheckOffset.x, wallCheckOffset.y);
 
-        bool leftWall = Physics2D.OverlapBox(leftBoxPos, wallCheckSize, 0f, groundLayer);
-        bool rightWall = Physics2D.OverlapBox(rightBoxPos, wallCheckSize, 0f, groundLayer);
+        bool leftWall = Physics2D.OverlapBox(leftBoxPos, wallCheckSize, 0f, wallLayer);
+        bool rightWall = Physics2D.OverlapBox(rightBoxPos, wallCheckSize, 0f, wallLayer);
 
         if (rightWall) _wallSide = 1;
         else if (leftWall) _wallSide = -1;

@@ -15,13 +15,13 @@ MonoBehaviour:
   moveSpeed: 15
   acceleration: 25
   deceleration: 30
-  airResist: 0.3
+  airResist: 0.9
   doubleJumpEnabled: 0
-  jumpForce: 200
-  wallJumpForce: {x: 30, y: 50}
-  jumpGravityScale: 8
-  jumpCancelGravityScale: 15
-  fallingGravityScale: 12
-  coyoteTime: 0.06
-  jumpBufferTime: 0.06
+  jumpForce: 400
+  wallJumpForce: {x: 66, y: 350}
+  jumpGravityScale: 5
+  jumpCancelGravityScale: 50
+  fallingGravityScale: 3
+  coyoteTime: 0.1
+  jumpBufferTime: 0.2
   wallJumpMovementLockTime: 0.2
