@@ -17,7 +17,7 @@ MonoBehaviour:
   deceleration: 30
   airResist: 0.3
   doubleJumpEnabled: 0
-  jumpForce: 200
+  jumpForce: 100
   wallJumpForce: {x: 30, y: 50}
   jumpGravityScale: 8
   jumpCancelGravityScale: 15

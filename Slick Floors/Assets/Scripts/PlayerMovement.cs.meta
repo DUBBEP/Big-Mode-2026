@@ -1,2 +1,16 @@
 fileFormatVersion: 2
 guid: 66e6d78fcfe727b48ad072dc9ebd9700
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - onPlayerDeath: {fileID: 11400000, guid: c230f6eba3c0609458be9264e4736eb6, type: 2}
+  - movementData: {fileID: 11400000, guid: 90e60aea790c814489dd7b11b84123f1, type: 2}
+  - rb: {instanceID: 0}
+  - leftLegBone: {instanceID: 0}
+  - rightLegBone: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
