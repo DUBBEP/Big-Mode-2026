@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PhysicalBody : MonoBehaviour
 {
+    [SerializeField] private GenericEventSO onPlayerDeath;
+
     public float targetHeight = 1.7f; // Desired distance from ground
     public float springStrength = 325f;
     public float damping = 10f;
@@ -30,5 +32,20 @@ public class PhysicalBody : MonoBehaviour
                 rb.AddForce(Vector2.up * upwardForce);
             }
         }
+    }
+
+    private void DisableFloat(GameEventPayload payload)
+    {
+        enabled = false;
+    }
+
+    private void OnEnable()
+    {
+        onPlayerDeath.RegisterListener(DisableFloat);
+    }
+
+    private void OnDisable()
+    {
+        onPlayerDeath.UnregisterListener(DisableFloat);
     }
 }
