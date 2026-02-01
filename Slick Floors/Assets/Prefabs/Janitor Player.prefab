@@ -541,25 +541,8 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7610635506608701622, guid: 65b11bbcb70b93f4da0c08db640eb8e9, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8779990402535356200}
-    - targetCorrespondingSourceObject: {fileID: 7610635506608701622, guid: 65b11bbcb70b93f4da0c08db640eb8e9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 7490974228052976958}
-    - targetCorrespondingSourceObject: {fileID: 7610635506608701622, guid: 65b11bbcb70b93f4da0c08db640eb8e9, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 2559560414280060365}
   m_SourcePrefab: {fileID: 100100000, guid: 65b11bbcb70b93f4da0c08db640eb8e9, type: 3}
---- !u!114 &670233347545355997 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5752719769797489144, guid: 65b11bbcb70b93f4da0c08db640eb8e9, type: 3}
-  m_PrefabInstance: {fileID: 5087063768214185765}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf36d5ae657a4ef4b84e0a8c4fdfddf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PhysicalBalance
 --- !u!4 &1862214213323799613 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6867717296688962328, guid: 65b11bbcb70b93f4da0c08db640eb8e9, type: 3}
@@ -570,40 +553,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7610635506608701622, guid: 65b11bbcb70b93f4da0c08db640eb8e9, type: 3}
   m_PrefabInstance: {fileID: 5087063768214185765}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8779990402535356200
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3388546544071976851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66e6d78fcfe727b48ad072dc9ebd9700, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  groundOffset: {x: 0, y: -1.46}
-  groundSize: {x: 0.45, y: 0.1}
-  wallCheckSize: {x: 0.14, y: 1.35}
-  wallCheckOffset: {x: 0.2, y: -0.27}
-  rb: {fileID: 5662967729405359399}
-  movementData: {fileID: 11400000, guid: 90e60aea790c814489dd7b11b84123f1, type: 2}
---- !u!114 &7490974228052976958
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3388546544071976851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a50d31cf786a884b965bbc10b6e6806, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WalkingAnimation
-  walkStepSpeed: 4
-  stepSize: 20
-  leftLegBone: {fileID: 670233347545355997}
-  rightLegBone: {fileID: 4049202617205124466}
 --- !u!114 &2559560414280060365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -631,7 +580,7 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8779990402535356200}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
@@ -687,7 +636,7 @@ MonoBehaviour:
     m_ActionName: UI/TrackedDeviceOrientation
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8779990402535356200}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
         m_MethodName: OnJump
         m_Mode: 0
@@ -719,7 +668,7 @@ MonoBehaviour:
     m_ActionName: 'Player/Mop[/Mouse/rightButton]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8779990402535356200}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
         m_MethodName: OnJump
         m_Mode: 0
@@ -735,7 +684,7 @@ MonoBehaviour:
     m_ActionName: 'Player/WallJump[/Keyboard/w,/Keyboard/upArrow,/Keyboard/space]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8779990402535356200}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
         m_MethodName: OnJump
         m_Mode: 0
@@ -754,19 +703,3 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &4049202617205124466 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9126907315398462039, guid: 65b11bbcb70b93f4da0c08db640eb8e9, type: 3}
-  m_PrefabInstance: {fileID: 5087063768214185765}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf36d5ae657a4ef4b84e0a8c4fdfddf0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PhysicalBalance
---- !u!50 &5662967729405359399 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 580408746834809346, guid: 65b11bbcb70b93f4da0c08db640eb8e9, type: 3}
-  m_PrefabInstance: {fileID: 5087063768214185765}
-  m_PrefabAsset: {fileID: 0}

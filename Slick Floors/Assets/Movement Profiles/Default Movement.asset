@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b2bdaf1ce30c9e4ca7d2ca948c6a284, type: 3}
   m_Name: Default Movement
   m_EditorClassIdentifier: Assembly-CSharp::MovementProfileSO
-  moveSpeed: 3
+  moveSpeed: 5
   acceleration: 25
   deceleration: 30
   airResist: 0.3

@@ -3,6 +3,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private MovementProfileSO movementData;
+
     [Header("Detection Settings")]
     public Vector2 groundOffset = new Vector2();
     public Vector2 groundSize = new Vector2();
@@ -13,7 +15,13 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     private LayerMask groundLayer;
 
-    [SerializeField] private MovementProfileSO movementData;
+    [Header("Walk Animation")]
+    [SerializeField] private float walkStepSpeed;
+    [SerializeField] private float stepSize;
+    [SerializeField] private float legForce;
+    [SerializeField] private PhysicalBalance leftLegBone;
+    [SerializeField] private PhysicalBalance rightLegBone;
+
 
     private float _coyoteCounter;
     private float _jumpBufferCounter;
@@ -23,8 +31,6 @@ public class PlayerMovement : MonoBehaviour
     private int _wallSide;
     private bool _canDoubleJump;
     private float _horizontalInput;
-
-    public float HorizontalInput { get { return _horizontalInput; } private set { } }
 
     void Awake()
     {
@@ -37,6 +43,11 @@ public class PlayerMovement : MonoBehaviour
     {
         CheckPhysics();
         HandleTimers();
+
+        if (Mathf.Abs(_horizontalInput) > 0f)
+            AnimateLegs(_horizontalInput);
+        else
+            ResetLegs();
     }
 
     void FixedUpdate() => ApplyMovement();
@@ -123,7 +134,10 @@ public class PlayerMovement : MonoBehaviour
             rb.gravityScale = movementData.jumpCancelGravityScale;
     }
 
-    public void OnMove(InputAction.CallbackContext context) => _horizontalInput = context.ReadValue<Vector2>().x;
+    public void OnMove(InputAction.CallbackContext context)
+    {
+        _horizontalInput = context.ReadValue<Vector2>().x;
+    }
 
     private void ApplyMovement()
     {
@@ -150,4 +164,37 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.DrawWireCube(rightBoxPos, wallCheckSize);
     }
 
+    public void AnimateLegs(float dir)
+    {
+        // Create a cycle based on time (Sine Wave)
+        float timer = Time.time * walkStepSpeed;
+        leftLegBone.currentforceStrength = legForce;
+        rightLegBone.currentforceStrength = legForce;
+
+
+        // Calculate leg angles
+        // We add PI to the right leg so it moves opposite to the left leg
+        // Added -90f offset so legs point down instead of right (0 degrees)
+        float leftTarget = -90f + (Mathf.Sin(timer) * stepSize * dir);
+        float rightTarget = -90f + (Mathf.Sin(timer + Mathf.PI) * stepSize * dir);
+
+        // Apply to your PhysicalBalance scripts
+        if (leftLegBone) leftLegBone.targetRotation = leftTarget;
+        if (rightLegBone) rightLegBone.targetRotation = rightTarget;
+    }
+
+    public void ResetLegs()
+    {
+        // Return legs to neutral (-90 degrees) nicely
+        if (leftLegBone)
+        {
+            leftLegBone.targetRotation = Mathf.Lerp(leftLegBone.targetRotation, -90, 0.1f);
+            leftLegBone.currentforceStrength = leftLegBone.forceStrength;
+        }
+        if (rightLegBone)
+        {
+            rightLegBone.targetRotation = Mathf.Lerp(rightLegBone.targetRotation, -90, 0.1f);
+            rightLegBone.currentforceStrength = rightLegBone.forceStrength;
+        }
+    }
 }

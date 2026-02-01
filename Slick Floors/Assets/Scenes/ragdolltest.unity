@@ -677,32 +677,10 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6380502797109735300, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
   m_PrefabInstance: {fileID: 75466547691431466}
   m_PrefabAsset: {fileID: 0}
---- !u!50 &1491146345 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 5662967729405359399, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+--- !u!114 &1491146350 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1896310126185939512, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
   m_PrefabInstance: {fileID: 75466547691431466}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1491146349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1491146343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a50d31cf786a884b965bbc10b6e6806, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WalkingAnimation
-  walkStepSpeed: 2
-  stepSize: 20
-  leftLegBone: {fileID: 1917020443}
-  rightLegBone: {fileID: 2118853349}
---- !u!114 &1491146350
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1491146343}
   m_Enabled: 1
@@ -710,12 +688,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e6d78fcfe727b48ad072dc9ebd9700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  groundOffset: {x: 0, y: -1.46}
-  groundSize: {x: 0.45, y: 0.1}
-  wallCheckSize: {x: 0.14, y: 1.35}
-  wallCheckOffset: {x: 0.2, y: -0.27}
-  rb: {fileID: 1491146345}
-  movementData: {fileID: 11400000, guid: 90e60aea790c814489dd7b11b84123f1, type: 2}
 --- !u!114 &1491146351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1231,6 +1203,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 1485566219328833299, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: m_Mass
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 1576680430230226321, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -1254,6 +1230,14 @@ PrefabInstance:
     - target: {fileID: 1791482817008842204, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896310126185939512, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: legForce
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1896310126185939512, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: stepSize
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 1969036955575350298, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1339,6 +1323,10 @@ PrefabInstance:
       propertyPath: forceStrength
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4198527389831262537, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: m_Mass
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 4668792993190790208, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -1350,6 +1338,14 @@ PrefabInstance:
     - target: {fileID: 4703937544766402571, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318581600443489054, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: m_Mass
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5662967729405359399, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: m_Mass
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5662967729405359399, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
       propertyPath: m_Constraints
@@ -1367,6 +1363,14 @@ PrefabInstance:
       propertyPath: walkStepSpeed
       value: 25
       objectReference: {fileID: 0}
+    - target: {fileID: 7149529104836257832, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: targetHeight
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7163397815560914881, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: m_Mass
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 7264751280682390561, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -1383,6 +1387,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7442216053020666833, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: m_Mass
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490974228052976958, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: legForce
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490974228052976958, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: stepSize
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490974228052976958, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: walkStepSpeed
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 7641203156970764695, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -1391,6 +1411,10 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: 27b6da9b79c5d81449296874a4be506a, type: 2}
+    - target: {fileID: 7846514462105266806, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8139686258822507715, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -1403,25 +1427,44 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 8779990402535356200, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: legForce
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8779990402535356200, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: stepSize
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8779990402535356200, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: leftLegBone
+      value: 
+      objectReference: {fileID: 1917020443}
+    - target: {fileID: 8779990402535356200, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: rightLegBone
+      value: 
+      objectReference: {fileID: 2118853349}
+    - target: {fileID: 8779990402535356200, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: walkStepSpeed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8855603152053821791, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 6200000, guid: 27b6da9b79c5d81449296874a4be506a, type: 2}
+    - target: {fileID: 8855603152053821791, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 216432991405959796, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
-    - {fileID: 5920605824900792849, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
-    - {fileID: 1603928528637286996, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3388546544071976851, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1491146350}
-    - targetCorrespondingSourceObject: {fileID: 3388546544071976851, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1491146349}
-    - targetCorrespondingSourceObject: {fileID: 3388546544071976851, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
-      insertIndex: -1
+      insertIndex: 1
       addedObject: {fileID: 1491146351}
   m_SourcePrefab: {fileID: 100100000, guid: 2e4b00513b1231c4490170f2c15000bd, type: 3}
 --- !u!1 &3551916858642354419 stripped
