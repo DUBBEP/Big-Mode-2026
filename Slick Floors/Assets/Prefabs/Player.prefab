@@ -226,7 +226,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e6d78fcfe727b48ad072dc9ebd9700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  onPlayerDeath: {fileID: 11400000, guid: c230f6eba3c0609458be9264e4736eb6, type: 2}
   movementData: {fileID: 11400000, guid: 90e60aea790c814489dd7b11b84123f1, type: 2}
+  groundOffset: {x: 0, y: 0}
+  groundSize: {x: 0, y: 0}
+  wallCheckSize: {x: 0, y: 0}
+  wallCheckOffset: {x: 0, y: 0}
+  rb: {fileID: 0}
+  walkStepSpeed: 0
+  stepSize: 0
+  legForce: 0
+  leftLegBone: {fileID: 0}
+  rightLegBone: {fileID: 0}
 --- !u!1 &313081471778886440
 GameObject:
   m_ObjectHideFlags: 0

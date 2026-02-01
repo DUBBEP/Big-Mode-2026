@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private GenericEventSO onPlayerDeath;
     [SerializeField] private MovementProfileSO movementData;
 
     [Header("Detection Settings")]
@@ -16,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private LayerMask groundLayer;
 
     [Header("Walk Animation")]
+    [SerializeField] private bool useWalk;
     [SerializeField] private float walkStepSpeed;
     [SerializeField] private float stepSize;
     [SerializeField] private float legForce;
@@ -44,10 +46,13 @@ public class PlayerMovement : MonoBehaviour
         CheckPhysics();
         HandleTimers();
 
-        if (Mathf.Abs(_horizontalInput) > 0f)
-            AnimateLegs(_horizontalInput);
-        else
-            ResetLegs();
+        if (useWalk)
+        {
+            if (Mathf.Abs(_horizontalInput) > 0f)
+                AnimateLegs(_horizontalInput);
+            else
+                ResetLegs();
+        }
     }
 
     void FixedUpdate() => ApplyMovement();
@@ -65,8 +70,6 @@ public class PlayerMovement : MonoBehaviour
                 _canDoubleJump = true;
             else
                 _canDoubleJump = false;
-
-            rb.gravityScale = 1f;
         }
         else if (rb.linearVelocity.y < 0f)
         {
@@ -116,6 +119,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void ExecuteJump(Vector2 force)
     {
+        rb.gravityScale = movementData.jumpGravityScale;
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
         rb.AddForce(force, ForceMode2D.Impulse);
         _jumpBufferCounter = 0;
@@ -127,7 +131,6 @@ public class PlayerMovement : MonoBehaviour
         if (context.performed)
         {
             _jumpBufferCounter = movementData.jumpBufferTime;
-            rb.gravityScale = movementData.jumpGravityScale;
         }
 
         if (context.canceled && rb.linearVelocity.y > 0)
@@ -197,4 +200,15 @@ public class PlayerMovement : MonoBehaviour
             rightLegBone.currentforceStrength = rightLegBone.forceStrength;
         }
     }
+
+    private void OnDeath(GameEventPayload payload)
+    {
+        enabled = false;
+    }
+
+    private void OnEnable() =>
+        onPlayerDeath.RegisterListener(OnDeath);
+
+    private void OnDisable() =>
+        onPlayerDeath.UnregisterListener(OnDeath);
 }

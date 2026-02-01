@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b2bdaf1ce30c9e4ca7d2ca948c6a284, type: 3}
   m_Name: Default Movement
   m_EditorClassIdentifier: Assembly-CSharp::MovementProfileSO
-  moveSpeed: 5
-  acceleration: 25
+  moveSpeed: 16
+  acceleration: 40
   deceleration: 30
   airResist: 0.3
   doubleJumpEnabled: 0
-  jumpForce: 150
-  wallJumpForce: {x: 30, y: 50}
+  jumpForce: 110
+  wallJumpForce: {x: 45, y: 95}
   jumpGravityScale: 8
   jumpCancelGravityScale: 15
   fallingGravityScale: 12
