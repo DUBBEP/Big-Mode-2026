@@ -12,8 +12,10 @@ public class MopController : MonoBehaviour
     public float rotationSmoothTime = 0.1f;
     public float mopForce = 10f;
     public float moveSpeed = 10f;
+    public float mopCooldown = 1f;
 
     private float currentAngleVelocity;
+    private float nextMopTime;
 
     void FixedUpdate()
     {
@@ -27,11 +29,6 @@ public class MopController : MonoBehaviour
         MoveMopTip(mouseWorldPos);
         RotateTowardsMouse(mouseWorldPos);
 
-        // click to mop
-        if (Mouse.current.leftButton.isPressed)
-        {
-            Mop();
-        }
     }
 
     void MoveMopTip(Vector3 mouseWorldPos)
@@ -58,14 +55,6 @@ public class MopController : MonoBehaviour
         float smoothedAngle = Mathf.SmoothDampAngle(currentAngle, targetAngle, ref currentAngleVelocity, rotationSmoothTime);
 
         rb.MoveRotation(smoothedAngle);
-    }
-    void Mop()
-    {
-        // apply a force at the mop tip position in the direction the mop is facing
-        if (mopTip == null || rb == null) return;
-        Vector2 mopDirection = (Vector2)mopTip.position - rb.position;
-        mopDirection.Normalize();
-        rb.AddForceAtPosition(mopDirection * mopForce, mopTip.position, ForceMode2D.Impulse);
     }
 
 }
