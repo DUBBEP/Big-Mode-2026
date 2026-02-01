@@ -111,18 +111,18 @@ ScriptedImporter:
     spriteBone:
     - name: RopeEnd1
       guid: 2a73e67ea265a7f47910858ca7fb58a1
-      position: {x: 209.16872, y: 0.0018574849, z: 2}
+      position: {x: 209.16872, y: 0.0018601675, z: 2}
       rotation: {x: 0, y: 0, z: -0.0019179806, w: 0.9999982}
-      length: 236.89279
+      length: 236.8928
       parentId: 1
       color:
         serializedVersion: 2
         rgba: 4278255360
     - name: Rope1
       guid: a8892fd527566224e9d8584c3abf0879
-      position: {x: 17.94458, y: 450.20398, z: 2}
+      position: {x: 17.944641, y: 450.19934, z: 2}
       rotation: {x: 0, y: 0, z: -0.7048363, w: 0.7093701}
-      length: 209.16881
+      length: 209.16882
       parentId: -1
       color:
         serializedVersion: 2
@@ -581,8 +581,8 @@ ScriptedImporter:
     spriteBone:
     - name: RopeEnd2
       guid: 65140ba8c69824b4297c6203923ca0e0
-      position: {x: 205.83598, y: -0.000018600045, z: 2}
-      rotation: {x: 0, y: 0, z: -0.0030833338, w: 0.9999953}
+      position: {x: 205.83598, y: -0.00009980933, z: 2}
+      rotation: {x: 0, y: 0, z: -0.0030832917, w: 0.9999953}
       length: 240.14023
       parentId: 1
       color:
@@ -590,7 +590,7 @@ ScriptedImporter:
         rgba: 4294901760
     - name: Rope2
       guid: ff3c6161dba3d7d4983e6cea8f7629e8
-      position: {x: 18.171143, y: 449.23044, z: 2}
+      position: {x: 18.171387, y: 449.22577, z: 2}
       rotation: {x: 0, y: 0, z: -0.7055777, w: 0.70863265}
       length: 205.83604
       parentId: -1
@@ -1029,8 +1029,8 @@ ScriptedImporter:
     spriteBone:
     - name: RopeEnd3
       guid: 545f1b8b2683348418f6f2580ca749aa
-      position: {x: 206.7252, y: -0.01387277, z: 2}
-      rotation: {x: 0, y: 0, z: 0.0027816917, w: 0.9999961}
+      position: {x: 206.72533, y: -0.013873059, z: 2}
+      rotation: {x: 0, y: 0, z: 0.0027816922, w: 0.9999962}
       length: 236.57948
       parentId: 1
       color:
@@ -1038,7 +1038,7 @@ ScriptedImporter:
         rgba: 4278223103
     - name: Rope3
       guid: 49061bf3e45594144a788a4133e5410d
-      position: {x: 19.228058, y: 450.1217, z: 2}
+      position: {x: 19.228241, y: 450.11792, z: 2}
       rotation: {x: 0, y: 0, z: -0.7070806, w: 0.70713305}
       length: 206.72522
       parentId: -1
@@ -1488,18 +1488,18 @@ ScriptedImporter:
     spriteBone:
     - name: RopeEnd4
       guid: 729ecf81804741e4e9ee58dc1f48e482
-      position: {x: 204.051, y: -0.0068415403, z: 2}
+      position: {x: 204.05112, y: -0.0068978467, z: 2}
       rotation: {x: 0, y: 0, z: -0.0020396535, w: 0.9999979}
-      length: 239.2494
+      length: 239.24942
       parentId: 1
       color:
         serializedVersion: 2
         rgba: 4286643968
     - name: Rope4
       guid: 5d421052fd0da434cb831e7ac4b49e9f
-      position: {x: 20.176025, y: 447.00122, z: 2}
+      position: {x: 20.17633, y: 446.99658, z: 2}
       rotation: {x: 0, y: 0, z: -0.7063244, w: 0.70788836}
-      length: 204.05109
+      length: 204.0511
       parentId: -1
       color:
         serializedVersion: 2
@@ -1936,18 +1936,18 @@ ScriptedImporter:
     spriteBone:
     - name: RopeEnd5
       guid: a25c35e70f86a4c42addf0e68305fa68
-      position: {x: 207.17531, y: -0.000012112326, z: 2}
+      position: {x: 207.17531, y: -0.0000099180925, z: 2}
       rotation: {x: 0, y: 0, z: -0.0013372394, w: 0.99999917}
-      length: 237.0228
+      length: 237.02281
       parentId: 1
       color:
         serializedVersion: 2
         rgba: 4294901888
     - name: Rope5
       guid: f8de2cb0adde6b041b34389c76e14859
-      position: {x: 19.34198, y: 450.56714, z: 2}
+      position: {x: 19.342224, y: 450.56274, z: 2}
       rotation: {x: 0, y: 0, z: -0.7048248, w: 0.7093815}
-      length: 207.1752
+      length: 207.17525
       parentId: -1
       color:
         serializedVersion: 2
@@ -2362,18 +2362,18 @@ ScriptedImporter:
     spriteBone:
     - name: RopeEnd6
       guid: 27ba9e35556dde748a2363280f9cb265
-      position: {x: 202.71756, y: -0.0022795426, z: 2}
-      rotation: {x: 0, y: 0, z: 0.007768628, w: 0.9999699}
-      length: 239.7092
+      position: {x: 202.71768, y: -0.000013658466, z: 2}
+      rotation: {x: 0, y: 0, z: 0.0077742334, w: 0.99996984}
+      length: 239.70917
       parentId: 1
       color:
         serializedVersion: 2
         rgba: 4278255615
     - name: Rope6
       guid: 5ba7d8bb2da36fd4fb508be150d9a7d5
-      position: {x: 18.95337, y: 449.67615, z: 2}
-      rotation: {x: 0, y: 0, z: -0.7086552, w: 0.7055551}
-      length: 202.71748
+      position: {x: 18.95343, y: 449.67163, z: 2}
+      rotation: {x: 0, y: 0, z: -0.7086591, w: 0.70555115}
+      length: 202.71744
       parentId: -1
       color:
         serializedVersion: 2
@@ -2788,7 +2788,7 @@ ScriptedImporter:
     spriteBone:
     - name: RopeEnd7
       guid: f1fc7131af3e2db459c7a97e9950ce8b
-      position: {x: 205.8341, y: 0.000012593069, z: 2}
+      position: {x: 205.83423, y: 0.000012222548, z: 2}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       length: 234.79353
       parentId: 1
@@ -2797,7 +2797,7 @@ ScriptedImporter:
         rgba: 4294967040
     - name: Rope7
       guid: db9167c6c37e2be40a020558b162e98f
-      position: {x: 20.346863, y: 449.2306, z: 2}
+      position: {x: 20.346985, y: 449.2257, z: 2}
       rotation: {x: 0, y: 0, z: -0.7070806, w: 0.70713305}
       length: 205.83417
       parentId: -1
@@ -3226,18 +3226,18 @@ ScriptedImporter:
     spriteBone:
     - name: RopeEnd1
       guid: 2a73e67ea265a7f47910858ca7fb58a1
-      position: {x: 209.16876, y: 0.0018692056, z: 2}
+      position: {x: 209.16876, y: 0.0018699808, z: 2}
       rotation: {x: 0, y: 0, z: -0.0019179806, w: 0.9999982}
-      length: 236.89279
+      length: 236.8928
       parentId: 1
       color:
         serializedVersion: 2
         rgba: 4278255360
     - name: Rope1
       guid: a8892fd527566224e9d8584c3abf0879
-      position: {x: 17.94458, y: 252.20398, z: 2}
+      position: {x: 17.944641, y: 252.19934, z: 2}
       rotation: {x: 0, y: 0, z: -0.7048363, w: 0.7093701}
-      length: 209.16881
+      length: 209.16882
       parentId: -1
       color:
         serializedVersion: 2
@@ -3696,8 +3696,8 @@ ScriptedImporter:
     spriteBone:
     - name: RopeEnd2
       guid: 65140ba8c69824b4297c6203923ca0e0
-      position: {x: 205.83609, y: -0.00009125181, z: 2}
-      rotation: {x: 0, y: 0, z: -0.0030833338, w: 0.9999953}
+      position: {x: 205.83606, y: 0.000010643225, z: 2}
+      rotation: {x: 0, y: 0, z: -0.0030832917, w: 0.9999953}
       length: 240.14023
       parentId: 1
       color:
@@ -3705,7 +3705,7 @@ ScriptedImporter:
         rgba: 4294901760
     - name: Rope2
       guid: ff3c6161dba3d7d4983e6cea8f7629e8
-      position: {x: 18.171143, y: 251.23047, z: 2}
+      position: {x: 18.171387, y: 251.22577, z: 2}
       rotation: {x: 0, y: 0, z: -0.7055777, w: 0.70863265}
       length: 205.83604
       parentId: -1
@@ -4133,8 +4133,8 @@ ScriptedImporter:
     spriteBone:
     - name: RopeEnd3
       guid: 545f1b8b2683348418f6f2580ca749aa
-      position: {x: 206.72514, y: -0.013924027, z: 2}
-      rotation: {x: 0, y: 0, z: 0.0027816917, w: 0.9999961}
+      position: {x: 206.72527, y: -0.0139243165, z: 2}
+      rotation: {x: 0, y: 0, z: 0.0027816922, w: 0.9999962}
       length: 236.57948
       parentId: 1
       color:
@@ -4142,7 +4142,7 @@ ScriptedImporter:
         rgba: 4278223103
     - name: Rope3
       guid: 49061bf3e45594144a788a4133e5410d
-      position: {x: 19.228058, y: 252.1217, z: 2}
+      position: {x: 19.228241, y: 252.11792, z: 2}
       rotation: {x: 0, y: 0, z: -0.7070806, w: 0.70713305}
       length: 206.72522
       parentId: -1
@@ -4592,18 +4592,18 @@ ScriptedImporter:
     spriteBone:
     - name: RopeEnd4
       guid: 729ecf81804741e4e9ee58dc1f48e482
-      position: {x: 204.051, y: -0.006889801, z: 2}
+      position: {x: 204.05112, y: -0.006900331, z: 2}
       rotation: {x: 0, y: 0, z: -0.0020396535, w: 0.9999979}
-      length: 239.2494
+      length: 239.24942
       parentId: 1
       color:
         serializedVersion: 2
         rgba: 4286643968
     - name: Rope4
       guid: 5d421052fd0da434cb831e7ac4b49e9f
-      position: {x: 20.176025, y: 249.00122, z: 2}
+      position: {x: 20.17633, y: 248.99658, z: 2}
       rotation: {x: 0, y: 0, z: -0.7063244, w: 0.70788836}
-      length: 204.05109
+      length: 204.0511
       parentId: -1
       color:
         serializedVersion: 2
@@ -5040,18 +5040,18 @@ ScriptedImporter:
     spriteBone:
     - name: RopeEnd5
       guid: a25c35e70f86a4c42addf0e68305fa68
-      position: {x: 207.1751, y: -0.000020493648, z: 2}
+      position: {x: 207.1751, y: -0.000018299414, z: 2}
       rotation: {x: 0, y: 0, z: -0.0013372394, w: 0.99999917}
-      length: 237.0228
+      length: 237.02281
       parentId: 1
       color:
         serializedVersion: 2
         rgba: 4294901888
     - name: Rope5
       guid: f8de2cb0adde6b041b34389c76e14859
-      position: {x: 19.34198, y: 252.56714, z: 2}
+      position: {x: 19.342224, y: 252.56274, z: 2}
       rotation: {x: 0, y: 0, z: -0.7048248, w: 0.7093815}
-      length: 207.1752
+      length: 207.17525
       parentId: -1
       color:
         serializedVersion: 2
@@ -5466,18 +5466,18 @@ ScriptedImporter:
     spriteBone:
     - name: RopeEnd6
       guid: 27ba9e35556dde748a2363280f9cb265
-      position: {x: 202.7175, y: -0.0022268905, z: 2}
-      rotation: {x: 0, y: 0, z: 0.007768628, w: 0.9999699}
-      length: 239.7092
+      position: {x: 202.71744, y: 0.00004074898, z: 2}
+      rotation: {x: 0, y: 0, z: 0.0077742334, w: 0.99996984}
+      length: 239.70917
       parentId: 1
       color:
         serializedVersion: 2
         rgba: 4278255615
     - name: Rope6
       guid: 5ba7d8bb2da36fd4fb508be150d9a7d5
-      position: {x: 18.95337, y: 251.67615, z: 2}
-      rotation: {x: 0, y: 0, z: -0.7086552, w: 0.7055551}
-      length: 202.71748
+      position: {x: 18.95343, y: 251.67163, z: 2}
+      rotation: {x: 0, y: 0, z: -0.7086591, w: 0.70555115}
+      length: 202.71744
       parentId: -1
       color:
         serializedVersion: 2
@@ -5892,7 +5892,7 @@ ScriptedImporter:
     spriteBone:
     - name: RopeEnd7
       guid: f1fc7131af3e2db459c7a97e9950ce8b
-      position: {x: 205.83405, y: 0.000030000507, z: 2}
+      position: {x: 205.83417, y: 0.000029629986, z: 2}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       length: 234.79353
       parentId: 1
@@ -5901,7 +5901,7 @@ ScriptedImporter:
         rgba: 4294967040
     - name: Rope7
       guid: db9167c6c37e2be40a020558b162e98f
-      position: {x: 20.346863, y: 251.23059, z: 2}
+      position: {x: 20.346985, y: 251.22571, z: 2}
       rotation: {x: 0, y: 0, z: -0.7070806, w: 0.70713305}
       length: 205.83417
       parentId: -1
@@ -6330,9 +6330,9 @@ ScriptedImporter:
     spriteBone:
     - name: Mop
       guid: b9fba0b0eac7ff14982d1790a0ae7da6
-      position: {x: 278.14227, y: 1499.8188, z: 2}
-      rotation: {x: 0, y: 0, z: -0.7067815, w: 0.707432}
-      length: 1479.8699
+      position: {x: 276.37927, y: 1332.3258, z: 2}
+      rotation: {x: 0, y: 0, z: -0.7062682, w: 0.70794445}
+      length: 1312.3812
       parentId: -1
       color:
         serializedVersion: 2
@@ -7289,17 +7289,17 @@ ScriptedImporter:
     bones:
     - name: Mop
       guid: b9fba0b0eac7ff14982d1790a0ae7da6
-      position: {x: 532.1423, y: 1902.8188, z: 2}
-      rotation: {x: 0, y: 0, z: -0.7067815, w: 0.707432}
-      length: 1479.87
+      position: {x: 530.3793, y: 1735.3258, z: 2}
+      rotation: {x: 0, y: 0, z: -0.7062682, w: 0.70794445}
+      length: 1312.3811
       parentId: -1
       color:
         serializedVersion: 2
         rgba: 4278190335
     - name: Rope1
       guid: a8892fd527566224e9d8584c3abf0879
-      position: {x: 1452.4291, y: -202.53374, z: 2}
-      rotation: {x: 0, y: 0, z: 0.0027459038, w: 0.99999624}
+      position: {x: 1284.6499, y: -202.4804, z: 2}
+      rotation: {x: 0, y: 0, z: 0.0020205658, w: 0.999998}
       length: 209.16881
       parentId: 0
       color:
@@ -7316,8 +7316,8 @@ ScriptedImporter:
         rgba: 4278255360
     - name: Rope2
       guid: ff3c6161dba3d7d4983e6cea8f7629e8
-      position: {x: 1453.4663, y: -133.30814, z: 2}
-      rotation: {x: 0, y: 0, z: 0.0017002429, w: 0.99999857}
+      position: {x: 1285.7876, y: -133.25616, z: 2}
+      rotation: {x: 0, y: 0, z: 0.00097489986, w: 0.9999996}
       length: 205.83603
       parentId: 0
       color:
@@ -7334,8 +7334,8 @@ ScriptedImporter:
         rgba: 4294901760
     - name: Rope3
       guid: 49061bf3e45594144a788a4133e5410d
-      position: {x: 1452.6385, y: -64.25041, z: 2}
-      rotation: {x: 0, y: 0, z: -0.00042286405, w: 0.99999994}
+      position: {x: 1285.0592, y: -64.1974, z: 2}
+      rotation: {x: 0, y: 0, z: -0.0011482066, w: 0.9999994}
       length: 206.72522
       parentId: 0
       color:
@@ -7352,8 +7352,8 @@ ScriptedImporter:
         rgba: 4278223103
     - name: Rope4
       guid: 5d421052fd0da434cb831e7ac4b49e9f
-      position: {x: 1455.8234, y: 5.6946554, z: 2}
-      rotation: {x: 0, y: 0, z: 0.0006459355, w: 0.9999998}
+      position: {x: 1288.3463, y: 5.743108, z: 2}
+      rotation: {x: 0, y: 0, z: -0.0000794047, w: 1}
       length: 204.05109
       parentId: 0
       color:
@@ -7370,16 +7370,16 @@ ScriptedImporter:
         rgba: 4286643968
     - name: Rope5
       guid: f8de2cb0adde6b041b34389c76e14859
-      position: {x: 1452.3202, y: 73.86386, z: 2}
-      rotation: {x: 0, y: 0, z: 0.002762136, w: 0.9999962}
-      length: 207.17522
+      position: {x: 1284.9418, y: 73.91725, z: 2}
+      rotation: {x: 0, y: 0, z: 0.0020367922, w: 0.9999979}
+      length: 207.17525
       parentId: 0
       color:
         serializedVersion: 2
         rgba: 4294934528
     - name: RopeEnd5
       guid: a25c35e70f86a4c42addf0e68305fa68
-      position: {x: 207.17525, y: -0.000026296188, z: 2}
+      position: {x: 207.17528, y: -0.000026492844, z: 2}
       rotation: {x: 0, y: 0, z: -0.0013372378, w: 0.99999917}
       length: 237.02278
       parentId: 9
@@ -7388,17 +7388,17 @@ ScriptedImporter:
         rgba: 4294901888
     - name: Rope6
       guid: 5ba7d8bb2da36fd4fb508be150d9a7d5
-      position: {x: 1453.2743, y: 142.4744, z: 2}
-      rotation: {x: 0, y: 0, z: -0.0026520463, w: 0.9999965}
-      length: 202.71747
+      position: {x: 1285.9955, y: 142.52614, z: 2}
+      rotation: {x: 0, y: 0, z: -0.0033829543, w: 0.9999943}
+      length: 202.71745
       parentId: 0
       color:
         serializedVersion: 2
         rgba: 4286578943
     - name: RopeEnd6
       guid: 27ba9e35556dde748a2363280f9cb265
-      position: {x: 202.71745, y: -0.0022841124, z: 2}
-      rotation: {x: 0, y: 0, z: 0.0077686277, w: 0.9999699}
+      position: {x: 202.71747, y: -0.000009889694, z: 2}
+      rotation: {x: 0, y: 0, z: 0.007774239, w: 0.9999698}
       length: 239.7092
       parentId: 11
       color:
@@ -7406,8 +7406,8 @@ ScriptedImporter:
         rgba: 4278255615
     - name: Rope7
       guid: db9167c6c37e2be40a020558b162e98f
-      position: {x: 1453.7845, y: 212.86745, z: 2}
-      rotation: {x: 0, y: 0, z: -0.00042286405, w: 0.99999994}
+      position: {x: 1286.6083, y: 212.91843, z: 2}
+      rotation: {x: 0, y: 0, z: -0.0011482066, w: 0.9999994}
       length: 205.83417
       parentId: 0
       color:
