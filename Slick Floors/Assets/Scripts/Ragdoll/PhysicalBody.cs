@@ -41,11 +41,17 @@ public class PhysicalBody : MonoBehaviour
 
     private void OnEnable()
     {
-        onPlayerDeath.RegisterListener(DisableFloat);
+        if (onPlayerDeath != null)
+        {
+            onPlayerDeath.RegisterListener(DisableFloat);
+        }
     }
 
     private void OnDisable()
     {
-        onPlayerDeath.UnregisterListener(DisableFloat);
+        if (onPlayerDeath != null)
+        {
+            onPlayerDeath.UnregisterListener(DisableFloat);
+        }
     }
 }
