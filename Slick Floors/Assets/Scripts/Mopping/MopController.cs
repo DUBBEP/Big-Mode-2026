@@ -28,7 +28,6 @@ public class MopController : MonoBehaviour
 
         MoveMopTip(mouseWorldPos);
         RotateTowardsMouse(mouseWorldPos);
-
     }
 
     void MoveMopTip(Vector3 mouseWorldPos)

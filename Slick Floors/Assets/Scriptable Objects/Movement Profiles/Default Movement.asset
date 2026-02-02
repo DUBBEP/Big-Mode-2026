@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b2bdaf1ce30c9e4ca7d2ca948c6a284, type: 3}
   m_Name: Default Movement
   m_EditorClassIdentifier: Assembly-CSharp::MovementProfileSO
-  moveSpeed: 15
-  acceleration: 25
-  deceleration: 30
+  moveSpeed: 6
+  acceleration: 80
+  deceleration: 80
   airResist: 0.9
   doubleJumpEnabled: 0
-  jumpForce: 400
-  wallJumpForce: {x: 66, y: 350}
-  jumpGravityScale: 5
-  jumpCancelGravityScale: 50
-  fallingGravityScale: 3
+  jumpForce: 500
+  wallJumpForce: {x: 67, y: 350}
+  jumpGravityScale: 10
+  jumpCancelGravityScale: 40
+  fallingGravityScale: 25
   coyoteTime: 0.1
   jumpBufferTime: 0.2
   wallJumpMovementLockTime: 0.2
