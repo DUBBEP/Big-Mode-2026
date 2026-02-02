@@ -3,7 +3,6 @@ using UnityEngine;
 public class SmoothGravity : MonoBehaviour
 {
     [Header("Gravity Alignment")]
-    public Transform boneToRotate;
     public float rotationSpeed = 3f;
     public float rotationOffset = 0f;
 
@@ -24,7 +23,7 @@ public class SmoothGravity : MonoBehaviour
             Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
 
             // Smoothly rotate the bone around its pivot
-            boneToRotate.rotation = Quaternion.Lerp(boneToRotate.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
     }
 }
