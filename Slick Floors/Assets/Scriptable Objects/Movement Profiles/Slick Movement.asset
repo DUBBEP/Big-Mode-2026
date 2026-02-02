@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b2bdaf1ce30c9e4ca7d2ca948c6a284, type: 3}
   m_Name: Slick Movement
   m_EditorClassIdentifier: Assembly-CSharp::MovementProfileSO
-  moveSpeed: 40
-  acceleration: 20
-  deceleration: 10
-  airResist: 0.8
+  moveSpeed: 65
+  acceleration: 4
+  deceleration: 2
+  airResist: 0.9
   doubleJumpEnabled: 0
-  jumpForce: 120
-  wallJumpForce: {x: 30, y: 50}
+  jumpForce: 580
+  wallJumpForce: {x: 67, y: 350}
   jumpGravityScale: 10
-  jumpCancelGravityScale: 18
-  fallingGravityScale: 12
-  coyoteTime: 0.15
-  jumpBufferTime: 0.15
+  jumpCancelGravityScale: 40
+  fallingGravityScale: 25
+  coyoteTime: 0.1
+  jumpBufferTime: 0.1
   wallJumpMovementLockTime: 0.2

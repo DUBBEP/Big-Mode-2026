@@ -384,7 +384,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   anchor: {fileID: 0}
-  fixedObject: {fileID: 7496116212613234501}
   strength: 10
   distanceFromAnchor: 0
 --- !u!1 &1691825696299786816
@@ -479,7 +478,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   anchor: {fileID: 0}
-  fixedObject: {fileID: 3046310504206001919}
   strength: 10
   distanceFromAnchor: 0
 --- !u!1 &1893566692634284557
@@ -910,7 +908,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PhysicalBody
   onPlayerDeath: {fileID: 11400000, guid: c230f6eba3c0609458be9264e4736eb6, type: 2}
   targetHeight: 1.7
-  springStrength: 1000
+  springStrength: 4000
   damping: 50
   groundLayer:
     serializedVersion: 2
