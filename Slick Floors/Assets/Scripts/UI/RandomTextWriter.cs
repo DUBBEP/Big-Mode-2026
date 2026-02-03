@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -7,11 +8,12 @@ public class RandomTextWriter : MonoBehaviour
     [SerializeField] private List<TextMeshProUGUI> randomInitialTexts;
     [SerializeField] private List<TextMeshProUGUI> randomFollowUpTexts;
     [SerializeField] private TextMeshProUGUI aSignText;
+    [SerializeField] private TextMeshProUGUI reportedText;
 
     public void showTextInitial()
     {
         // pick a one random text mesh to show
-        int randomIndex = Random.Range(0, randomInitialTexts.Count);
+        int randomIndex = UnityEngine.Random.Range(0, randomInitialTexts.Count);
         for (int i = 0; i < randomInitialTexts.Count; i++)
         {
             randomInitialTexts[i].gameObject.SetActive(i == randomIndex);
@@ -22,7 +24,7 @@ public class RandomTextWriter : MonoBehaviour
     public void showTextFollowUp()
     {
         // pick a one random text mesh to show
-        int randomIndex = Random.Range(0, randomFollowUpTexts.Count);
+        int randomIndex = UnityEngine.Random.Range(0, randomFollowUpTexts.Count);
         for (int i = 0; i < randomFollowUpTexts.Count; i++)
         {
             randomFollowUpTexts[i].gameObject.SetActive(i == randomIndex);
@@ -34,6 +36,12 @@ public class RandomTextWriter : MonoBehaviour
     {
         aSignText.gameObject.SetActive(true);
     }
+
+    public void showReportedText()
+    {
+        reportedText.gameObject.SetActive(true);
+    }
+
 
     public void hideAllText()
     {
