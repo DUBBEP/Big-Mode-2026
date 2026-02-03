@@ -58,4 +58,9 @@ public class FloorTile : MonoBehaviour
         currentMovementProfile = data.playerMovementProfile;
         sr.sprite = data.floorSprite;
     }
+
+    public GroundType GetCurrentType()
+    {
+        return currentType;
+    }
 }

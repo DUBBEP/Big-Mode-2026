@@ -29,8 +29,13 @@ public class ChildController : MonoBehaviour
         {
             if (obj.layer == playerLayer)
             {
-                playerTransform = obj.transform;
-                break;
+                // Find the child named "body" under this object
+                Transform bodyTransform = obj.transform.Find("body");
+                if (bodyTransform != null)
+                {
+                    playerTransform = bodyTransform;
+                    break;
+                }
             }
         }
         if (playerTransform == null)
@@ -39,15 +44,18 @@ public class ChildController : MonoBehaviour
         }
     }
 
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("ChildController detected collision with: " + collision.gameObject.name);
         if (animator == null) return;
 
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Mop"))
+        // Check if we entered a Clean floor tile
+        if (collision.TryGetComponent<FloorTile>(out FloorTile tile))
         {
-            animator.SetBool("Slipped", true);
+            if (tile.GetCurrentType() == GroundType.Clean)
+            {
+                animator.SetBool("Slipped", true);
+                Debug.Log("ChildController: Stepped on slick floor!");
+            }
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Objects"))
         {
@@ -55,15 +63,17 @@ public class ChildController : MonoBehaviour
         }
     }
 
-
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (animator == null) return;
 
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Mop"))
+        // Keep checking if we're on a Clean floor tile
+        if (collision.TryGetComponent<FloorTile>(out FloorTile tile))
         {
-            if (!animator.GetBool("Slipped"))
+            if (tile.GetCurrentType() == GroundType.Clean && !animator.GetBool("Slipped"))
+            {
                 animator.SetBool("Slipped", true);
+            }
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Objects"))
         {
@@ -74,13 +84,8 @@ public class ChildController : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("ChildController detected exit from: " + collision.gameObject.name);
         if (animator == null) return;
 
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Mop"))
-        {
-            animator.SetBool("Slipped", false);
-        }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Objects"))
         {
             animator.SetBool("SignPlaced", false);
