@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     private bool _canDoubleJump;
     private float _horizontalInput;
     private bool _isHoldingSign;
+    private int signsAvailable = 0;
 
     void Awake()
     {
@@ -52,10 +53,15 @@ public class PlayerMovement : MonoBehaviour
         HandleTimers();
 
         // Right click pressed - hold the sign
-        if (Mouse.current.rightButton.wasPressedThisFrame && !_isHoldingSign)
+        if (Mouse.current.rightButton.wasPressedThisFrame && !_isHoldingSign && signsAvailable > 0)
         {
+            signsAvailable -= 1;
             _isHoldingSign = true;
-            heldItem.gameObject.SetActive(true);
+            
+            // Signal the held item to start the holding animation
+            CautionPlace cautionPlace = heldItem.GetComponent<CautionPlace>();
+            if (cautionPlace != null)
+                cautionPlace.StartHolding();
         }
         // Right click released - place the sign
         else if (Mouse.current.rightButton.wasReleasedThisFrame && _isHoldingSign)
@@ -223,6 +229,12 @@ public class PlayerMovement : MonoBehaviour
     {
         Animator anim = heldItem.GetComponent<Animator>();
         anim.SetBool("Place", true);
+    }
+
+    public void addSign()
+    {
+        signsAvailable += 1;
+        heldItem.gameObject.SetActive(true);
     }
 
     public void SetMovementProfile(MovementProfileSO data) => movementData = data;

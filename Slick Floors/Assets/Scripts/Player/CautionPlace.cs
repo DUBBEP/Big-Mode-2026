@@ -10,7 +10,10 @@ public class CautionPlace : MonoBehaviour
     [SerializeField] float spawnHeight = 1f;
     private Animator anim;
 
-
+    public void StartHolding()
+    {
+        mopHandleControls.holdSign(gameObject.transform);
+    }
 
     public void spin()
     {
@@ -68,10 +71,5 @@ public class CautionPlace : MonoBehaviour
         }
 
         gameObject.SetActive(false);
-    }
-
-    void OnEnable()
-    {
-        mopHandleControls.holdSign(gameObject.transform);
     }
 }
