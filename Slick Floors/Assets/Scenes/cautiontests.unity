@@ -24178,14 +24178,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: JusticeChild
       objectReference: {fileID: 0}
-    - target: {fileID: 7380994457401419944, guid: 903d3f08e3a8f93489d9f24f66ba9c24, type: 3}
-      propertyPath: m_Size.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7380994457401419944, guid: 903d3f08e3a8f93489d9f24f66ba9c24, type: 3}
-      propertyPath: m_Size.y
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8054979735685921840, guid: 903d3f08e3a8f93489d9f24f66ba9c24, type: 3}
       propertyPath: m_Camera
       value: 
@@ -24304,14 +24296,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5012748979807356447, guid: 6e6fa79714db4dd489bee0cbf9451408, type: 3}
-      propertyPath: m_Size.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5012748979807356447, guid: 6e6fa79714db4dd489bee0cbf9451408, type: 3}
-      propertyPath: m_Size.y
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 8629331714661327999, guid: 6e6fa79714db4dd489bee0cbf9451408, type: 3}
       propertyPath: m_Camera
       value: 
@@ -24373,14 +24357,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6143919769720864706, guid: 59f2def124830ae4ca494384ee7d8117, type: 3}
-      propertyPath: m_Size.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6143919769720864706, guid: 59f2def124830ae4ca494384ee7d8117, type: 3}
-      propertyPath: m_Size.y
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 6885394537783820586, guid: 59f2def124830ae4ca494384ee7d8117, type: 3}
       propertyPath: m_Name
       value: Hakari
@@ -24398,14 +24374,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6258079729211622027, guid: caa882d5d4a87854483b45f9ff480174, type: 3}
-      propertyPath: m_Size.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6258079729211622027, guid: caa882d5d4a87854483b45f9ff480174, type: 3}
-      propertyPath: m_Size.y
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 7726308431051120844, guid: caa882d5d4a87854483b45f9ff480174, type: 3}
       propertyPath: m_Camera
       value: 

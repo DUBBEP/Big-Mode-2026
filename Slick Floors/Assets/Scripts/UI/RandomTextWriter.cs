@@ -16,8 +16,7 @@ public class RandomTextWriter : MonoBehaviour
         int randomIndex = UnityEngine.Random.Range(0, randomInitialTexts.Count);
         for (int i = 0; i < randomInitialTexts.Count; i++)
         {
-            randomInitialTexts[i].gameObject.SetActive(i == randomIndex);
-            Debug.Log("Showing text: " + randomInitialTexts[i].text);
+            randomInitialTexts[i].alpha = (i == randomIndex) ? 1f : 0f;
         }
     }
 
@@ -27,32 +26,37 @@ public class RandomTextWriter : MonoBehaviour
         int randomIndex = UnityEngine.Random.Range(0, randomFollowUpTexts.Count);
         for (int i = 0; i < randomFollowUpTexts.Count; i++)
         {
-            randomFollowUpTexts[i].gameObject.SetActive(i == randomIndex);
-            Debug.Log("Showing text: " + randomFollowUpTexts[i].text);
+            randomFollowUpTexts[i].alpha = (i == randomIndex) ? 1f : 0f;
         }
     }
 
     public void showSignText()
     {
-        aSignText.gameObject.SetActive(true);
+        aSignText.alpha = 1f;
     }
 
     public void showReportedText()
     {
-        reportedText.gameObject.SetActive(true);
+        reportedText.alpha = 1f;
     }
 
 
     public void hideAllText()
     {
-        aSignText.gameObject.SetActive(false);
+        aSignText.alpha = 0f;
+        reportedText.alpha = 0f;
         foreach (var textMesh in randomInitialTexts)
         {
-            textMesh.gameObject.SetActive(false);
+            textMesh.alpha = 0f;
         }
         foreach (var textMesh in randomFollowUpTexts)
         {
-            textMesh.gameObject.SetActive(false);
+            textMesh.alpha = 0f;
         }
+    }
+
+    private void Start()
+    {
+        hideAllText();
     }
 }

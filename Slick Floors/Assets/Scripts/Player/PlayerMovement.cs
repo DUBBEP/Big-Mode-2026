@@ -36,8 +36,8 @@ public class PlayerMovement : MonoBehaviour
     private int _wallSide;
     private bool _canDoubleJump;
     private float _horizontalInput;
-    private bool _isHoldingSign;
-    private int signsAvailable = 0;
+    
+    private CautionPlace _cautionPlace;
 
     void Awake()
     {
@@ -45,6 +45,9 @@ public class PlayerMovement : MonoBehaviour
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         groundLayer = LayerMask.GetMask("Ground");
         wallLayer = LayerMask.GetMask("Wall");
+        
+        if (heldItem != null)
+            _cautionPlace = heldItem.GetComponent<CautionPlace>();
     }
 
     void Update()
@@ -52,23 +55,10 @@ public class PlayerMovement : MonoBehaviour
         CheckPhysics();
         HandleTimers();
 
-        // Right click pressed - hold the sign
-        if (Mouse.current.rightButton.wasPressedThisFrame && !_isHoldingSign && signsAvailable > 0)
+        // Pass input to the CautionPlace component
+        if (_cautionPlace != null)
         {
-            // Debug.Log("Allowed to hold sign because: " + signsAvailable + " signs available.");
-            signsAvailable -= 1;
-            _isHoldingSign = true;
-
-            // Signal the held item to start the holding animation
-            CautionPlace cautionPlace = heldItem.GetComponent<CautionPlace>();
-            if (cautionPlace != null)
-                cautionPlace.StartHolding();
-        }
-        // Right click released - place the sign
-        else if (Mouse.current.rightButton.wasReleasedThisFrame && _isHoldingSign)
-        {
-            _isHoldingSign = false;
-            placeSign();
+             _cautionPlace.HandleInput(Mouse.current.rightButton.isPressed);
         }
 
         if (useWalk)
@@ -226,17 +216,13 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void placeSign()
-    {
-        Animator anim = heldItem.GetComponent<Animator>();
-        anim.SetBool("Place", false);
-    }
-
     public void addSign()
     {
         Debug.Log("Added a sign");
-        signsAvailable += 1;
-        heldItem.gameObject.SetActive(true);
+        if (_cautionPlace != null)
+        {
+            _cautionPlace.AddSign();
+        }
     }
 
     public void SetMovementProfile(MovementProfileSO data) => movementData = data;
