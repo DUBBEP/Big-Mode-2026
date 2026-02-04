@@ -36,11 +36,17 @@ public class PhysicalBalance : MonoBehaviour
 
     private void OnEnable()
     {
-        onPlayerDeath.RegisterListener(DisableBalancing);
+        if (onPlayerDeath != null)
+        {
+            onPlayerDeath.RegisterListener(DisableBalancing);
+        }
     }
 
     private void OnDisable()
     {
-        onPlayerDeath.RegisterListener(DisableBalancing);
+        if (onPlayerDeath != null)
+        {
+            onPlayerDeath.RegisterListener(DisableBalancing);
+        }
     }
 }

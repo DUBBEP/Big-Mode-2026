@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Components")]
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private Transform heldItem;
     private LayerMask groundLayer;
 
     private LayerMask wallLayer;
@@ -35,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     private int _wallSide;
     private bool _canDoubleJump;
     private float _horizontalInput;
+    private bool _isHoldingSign;
 
     void Awake()
     {
@@ -48,6 +50,19 @@ public class PlayerMovement : MonoBehaviour
     {
         CheckPhysics();
         HandleTimers();
+
+        // Right click pressed - hold the sign
+        if (Mouse.current.rightButton.wasPressedThisFrame && !_isHoldingSign)
+        {
+            _isHoldingSign = true;
+            heldItem.gameObject.SetActive(true);
+        }
+        // Right click released - place the sign
+        else if (Mouse.current.rightButton.wasReleasedThisFrame && _isHoldingSign)
+        {
+            _isHoldingSign = false;
+            placeSign();
+        }
 
         if (useWalk)
         {
@@ -202,6 +217,12 @@ public class PlayerMovement : MonoBehaviour
             rightLegBone.targetRotation = Mathf.Lerp(rightLegBone.targetRotation, -90, 0.1f);
             rightLegBone.currentforceStrength = rightLegBone.forceStrength;
         }
+    }
+
+    void placeSign()
+    {
+        Animator anim = heldItem.GetComponent<Animator>();
+        anim.SetBool("Place", true);
     }
 
     public void SetMovementProfile(MovementProfileSO data) => movementData = data;
