@@ -15,10 +15,14 @@ public class PlayerMovement : MonoBehaviour
     [Header("Components")]
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform heldItem;
+    [SerializeField] private PhysicalBody physicalBody;
+
     private LayerMask groundLayer;
 
     private LayerMask wallLayer;
 
+    [Header("Crouch/Fast Fall")]
+    [SerializeField] private float fastFallForce = 20f;
     [Header("Walk Animation")]
     [SerializeField] private bool useWalk;
     [SerializeField] private float walkStepSpeed;
@@ -36,7 +40,8 @@ public class PlayerMovement : MonoBehaviour
     private int _wallSide;
     private bool _canDoubleJump;
     private float _horizontalInput;
-    
+    private bool _isCrouching = false;
+
     private CautionPlace _cautionPlace;
 
     void Awake()
@@ -45,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         groundLayer = LayerMask.GetMask("Ground");
         wallLayer = LayerMask.GetMask("Wall");
-        
+
         if (heldItem != null)
             _cautionPlace = heldItem.GetComponent<CautionPlace>();
     }
@@ -58,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
         // Pass input to the CautionPlace component
         if (_cautionPlace != null)
         {
-             _cautionPlace.HandleInput(Mouse.current.rightButton.isPressed);
+            _cautionPlace.HandleInput(Mouse.current.rightButton.isPressed);
         }
 
         if (useWalk)
@@ -157,6 +162,19 @@ public class PlayerMovement : MonoBehaviour
         _horizontalInput = context.ReadValue<Vector2>().x;
     }
 
+    public void OnCrouch(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            if (!_isCrouching)
+                StartCrouch();
+        }
+        else if (context.canceled)
+        {
+            if (_isCrouching)
+                StopCrouch();
+        }
+    }
     private void ApplyMovement()
     {
         if (_wallJumpLockCounter > 0) return;
@@ -225,6 +243,19 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void StartCrouch()
+    {
+        _isCrouching = true;
+        physicalBody.enabled = false;
+
+        rb.AddForce(Vector2.down * fastFallForce, ForceMode2D.Impulse);
+    }
+
+    private void StopCrouch()
+    {
+        _isCrouching = false;
+        physicalBody.enabled = true;
+    }
     public void SetMovementProfile(MovementProfileSO data) => movementData = data;
 
     private void OnDeath(GameEventPayload payload) => enabled = false;
