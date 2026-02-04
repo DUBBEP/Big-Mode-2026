@@ -10,31 +10,30 @@ public class CautionPlace : MonoBehaviour
     [SerializeField] float spawnHeight = 1f;
     private Animator anim;
 
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     public void StartHolding()
     {
         mopHandleControls.holdSign(gameObject.transform);
+        anim.SetBool("Place", true);
     }
 
     public void spin()
     {
-        anim = GetComponent<Animator>();
-        if (anim.GetBool("Place"))
+        if (mopHandleControls.handsInversed)
         {
-            if (mopHandleControls.handsInversed)
-            {
-                anim.SetBool("PlaceLeft", true);
-                anim.SetBool("Place", false);
-            }
-            else
-            {
-                anim.SetBool("PlaceRight", true);
-                anim.SetBool("Place", false);
-            }
+            anim.SetBool("PlaceLeft", true);
+        }
+        else
+        {
+            anim.SetBool("PlaceRight", true);
         }
     }
     public void placeSign()
     {
-        anim = GetComponent<Animator>();
         mopHandleControls.releaseSign();
 
         if (cautionSign == null) return;
