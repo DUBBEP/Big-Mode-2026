@@ -21,8 +21,6 @@ public class PlayerMovement : MonoBehaviour
 
     private LayerMask wallLayer;
 
-    [Header("Crouch/Fast Fall")]
-    [SerializeField] private float fastFallForce = 20f;
     [Header("Walk Animation")]
     [SerializeField] private bool useWalk;
     [SerializeField] private float walkStepSpeed;
@@ -248,7 +246,8 @@ public class PlayerMovement : MonoBehaviour
         _isCrouching = true;
         physicalBody.enabled = false;
 
-        rb.AddForce(Vector2.down * fastFallForce, ForceMode2D.Impulse);
+        rb.linearVelocity = new Vector2 (rb.linearVelocity.x, 0f);
+        rb.AddForce(Vector2.down * movementData.fastFallForce, ForceMode2D.Impulse);
     }
 
     private void StopCrouch()

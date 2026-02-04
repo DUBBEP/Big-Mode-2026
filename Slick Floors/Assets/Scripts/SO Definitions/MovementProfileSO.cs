@@ -17,6 +17,10 @@ public class MovementProfileSO : ScriptableObject
     public float jumpCancelGravityScale = 2;
     public float fallingGravityScale = 3;
 
+    [Header("Crouch/Fast Fall")]
+    [SerializeField] public float fastFallForce = 80f;
+
+
     [Header("Feel Improvements")]
     public float coyoteTime = 0.15f;
     public float jumpBufferTime = 0.15f;
