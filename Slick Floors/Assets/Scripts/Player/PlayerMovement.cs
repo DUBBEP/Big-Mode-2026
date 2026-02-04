@@ -55,9 +55,10 @@ public class PlayerMovement : MonoBehaviour
         // Right click pressed - hold the sign
         if (Mouse.current.rightButton.wasPressedThisFrame && !_isHoldingSign && signsAvailable > 0)
         {
+            Debug.Log("Allowed to hold sign because: " + signsAvailable + " signs available.");
             signsAvailable -= 1;
             _isHoldingSign = true;
-            
+
             // Signal the held item to start the holding animation
             CautionPlace cautionPlace = heldItem.GetComponent<CautionPlace>();
             if (cautionPlace != null)
@@ -233,6 +234,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void addSign()
     {
+        Debug.Log("Added a sign");
         signsAvailable += 1;
         heldItem.gameObject.SetActive(true);
     }

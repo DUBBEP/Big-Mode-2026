@@ -30,7 +30,7 @@ public class MopHandle : MonoBehaviour
             RightHandSolver_Target.anchor = LeftHandSolver_Target.anchor;
             LeftHandSolver_Target.anchor = tempAnchor;
             handsInversed = true;
-            Debug.Log("Mop hands inversed");
+            // Debug.Log("Mop hands inversed");
         }
         else if ((mopRotationZ <= 90f || mopRotationZ >= 270f) && handsInversed)
         {
@@ -39,7 +39,7 @@ public class MopHandle : MonoBehaviour
             RightHandSolver_Target.anchor = LeftHandSolver_Target.anchor;
             LeftHandSolver_Target.anchor = tempAnchor;
             handsInversed = false;
-            Debug.Log("Mop hands un-inversed");
+            // Debug.Log("Mop hands un-inversed");
         }
     }
 

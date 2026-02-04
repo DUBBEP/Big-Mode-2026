@@ -19,10 +19,10 @@ public class MopCleaningController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log($"Mop has entered trigger");
+        // Debug.Log($"Mop has entered trigger");
         if (collision.TryGetComponent<FloorTile>(out FloorTile tile))
         {
-            Debug.Log($"Mop has found tile");
+            // Debug.Log($"Mop has found tile");
             tile.ChangeTyle(GroundType.Clean);
         }
     }

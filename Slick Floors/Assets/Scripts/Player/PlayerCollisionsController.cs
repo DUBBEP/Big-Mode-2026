@@ -19,12 +19,19 @@ public class PlayerCollisionsController : MonoBehaviour
 
         if (other.layer == LayerMask.NameToLayer("Pickup"))
         {
-            // Prevent double-processing if both trigger and collision events fire
-            if (processedPickups.Contains(other))
+            GameObject rootObject = other.transform.root.gameObject;
+            // Prevent double-processing
+            if (rootObject == null || rootObject.activeSelf == false)
+                return;
+            int instanceId = rootObject.GetInstanceID();
+            if (processedPickups.Contains(rootObject))
                 return;
 
-            processedPickups.Add(other);
-            Destroy(other.gameObject);
+            processedPickups.Add(rootObject);
+
+            // Deactivate immediately to prevent further collisions
+            rootObject.SetActive(false);
+            Destroy(rootObject);
             movement.addSign();
         }
     }
