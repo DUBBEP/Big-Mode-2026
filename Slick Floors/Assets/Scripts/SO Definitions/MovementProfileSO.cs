@@ -8,7 +8,6 @@ public class MovementProfileSO : ScriptableObject
     public float acceleration = 20f;
     public float deceleration = 10f;
     public float airResist = 0.8f;
-    public bool doubleJumpEnabled;
 
     [Header("Jumping")]
     public float jumpForce = 66f;
@@ -22,7 +21,6 @@ public class MovementProfileSO : ScriptableObject
 
 
     [Header("Feel Improvements")]
-    public float coyoteTime = 0.15f;
     public float jumpBufferTime = 0.15f;
     public float wallJumpMovementLockTime = 0.2f;
 }
