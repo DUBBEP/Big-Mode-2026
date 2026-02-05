@@ -7,14 +7,19 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private MovementProfileSO movementData;
 
     [Header("Detection Settings")]
-    public Vector2 groundOffset = new Vector2();
-    public Vector2 groundSize = new Vector2();
-    public Vector2 wallCheckSize = new Vector2(); // Height should match player
-    public Vector2 wallCheckOffset = new Vector2(); // Horizontal distance from center
+    [SerializeField] private Vector2 groundOffset = new Vector2();
+    [SerializeField] private Vector2 groundSize = new Vector2();
+    [SerializeField] private Vector2 wallCheckSize = new Vector2(); // Height should match player
+    [SerializeField] private Vector2 wallCheckOffset = new Vector2(); // Horizontal distance from center
+    [SerializeField] private float groundCheckRadius;
 
     [Header("Components")]
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform heldItem;
+    [SerializeField] private PhysicalBody physicalBody;
+    [SerializeField] private Transform leftFootGroundedCheck;
+    [SerializeField] private Transform rightFootGroundedCheck;
+
     private LayerMask groundLayer;
 
     private LayerMask wallLayer;
@@ -28,15 +33,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PhysicalBalance rightLegBone;
 
 
-    private float _coyoteCounter;
     private float _jumpBufferCounter;
     private float _wallJumpLockCounter;
 
     private bool _isGrounded;
     private int _wallSide;
-    private bool _canDoubleJump;
     private float _horizontalInput;
-    
+    private bool _isCrouching = false;
+
     private CautionPlace _cautionPlace;
 
     void Awake()
@@ -45,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
         rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous;
         groundLayer = LayerMask.GetMask("Ground");
         wallLayer = LayerMask.GetMask("Wall");
-        
+
         if (heldItem != null)
             _cautionPlace = heldItem.GetComponent<CautionPlace>();
     }
@@ -57,9 +61,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Pass input to the CautionPlace component
         if (_cautionPlace != null)
-        {
-             _cautionPlace.HandleInput(Mouse.current.rightButton.isPressed);
-        }
+            _cautionPlace.HandleInput(Mouse.current.rightButton.isPressed);
 
         if (useWalk)
         {
@@ -74,22 +76,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckPhysics()
     {
-        _isGrounded = Physics2D.OverlapBox(
-            (Vector2)transform.position + groundOffset,
-            groundSize, 0f, groundLayer);
+        _isGrounded = Physics2D.OverlapCircle(leftFootGroundedCheck.position, groundCheckRadius, groundLayer) ||
+                      Physics2D.OverlapCircle(leftFootGroundedCheck.position, groundCheckRadius, groundLayer);
 
-        if (_isGrounded)
-        {
-            _coyoteCounter = movementData.coyoteTime;
-            if (movementData.doubleJumpEnabled)
-                _canDoubleJump = true;
-            else
-                _canDoubleJump = false;
-        }
-        else if (rb.linearVelocity.y < 0f)
-        {
+        if (!_isGrounded && rb.linearVelocity.y < 0f)
             rb.gravityScale = movementData.fallingGravityScale;
-        }
 
         // BoxCast for Left and Right sides
         Vector2 leftBoxPos = (Vector2)transform.position + new Vector2(-wallCheckOffset.x, wallCheckOffset.y);
@@ -105,29 +96,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void HandleTimers()
     {
-        _coyoteCounter -= Time.deltaTime;
         _jumpBufferCounter -= Time.deltaTime;
         _wallJumpLockCounter -= Time.deltaTime;
 
         if (_jumpBufferCounter > 0)
         {
-
-            if (_wallSide != 0 && !_isGrounded)
+            if (_isGrounded)
             {
-                _wallJumpLockCounter = movementData.wallJumpMovementLockTime;
+                ExecuteJump(Vector2.up * movementData.jumpForce);
+                Debug.Log("Did grounded jump");
+            }
+            else if (_wallSide !=  0)
+            {
                 ExecuteJump(new Vector2(movementData.wallJumpForce.x * -_wallSide, movementData.wallJumpForce.y));
                 Debug.Log("Did wall jump");
-            }
-            else if (_coyoteCounter > 0)
-            {
-                ExecuteJump(Vector2.up * movementData.jumpForce);
-                Debug.Log("Did normal jump");
-            }
-            else if (_canDoubleJump)
-            {
-                ExecuteJump(Vector2.up * movementData.jumpForce);
-                _canDoubleJump = false;
-                Debug.Log("Did double jump");
             }
         }
     }
@@ -138,25 +120,27 @@ public class PlayerMovement : MonoBehaviour
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
         rb.AddForce(force, ForceMode2D.Impulse);
         _jumpBufferCounter = 0;
-        _coyoteCounter = 0;
     }
 
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.performed)
-        {
             _jumpBufferCounter = movementData.jumpBufferTime;
-        }
 
         if (context.canceled && rb.linearVelocity.y > 0)
             rb.gravityScale = movementData.jumpCancelGravityScale;
     }
 
-    public void OnMove(InputAction.CallbackContext context)
-    {
+    public void OnMove(InputAction.CallbackContext context) =>
         _horizontalInput = context.ReadValue<Vector2>().x;
-    }
 
+    public void OnCrouch(InputAction.CallbackContext context)
+    {
+        if (context.performed && !_isCrouching)
+                StartCrouch();
+        else if (context.canceled && _isCrouching)
+                StopCrouch();
+    }
     private void ApplyMovement()
     {
         if (_wallJumpLockCounter > 0) return;
@@ -170,16 +154,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        // Ground
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube((Vector2)transform.position + groundOffset, groundSize);
-
         // Walls
         Gizmos.color = Color.blue;
         Vector2 leftBoxPos = (Vector2)transform.position + new Vector2(-wallCheckOffset.x, wallCheckOffset.y);
         Vector2 rightBoxPos = (Vector2)transform.position + new Vector2(wallCheckOffset.x, wallCheckOffset.y);
         Gizmos.DrawWireCube(leftBoxPos, wallCheckSize);
         Gizmos.DrawWireCube(rightBoxPos, wallCheckSize);
+
+        // ground
+        Gizmos.DrawWireSphere(leftFootGroundedCheck.position, groundCheckRadius);
+        Gizmos.DrawWireSphere(rightFootGroundedCheck.position, groundCheckRadius);
     }
 
     public void AnimateLegs(float dir)
@@ -219,19 +203,28 @@ public class PlayerMovement : MonoBehaviour
     public void addSign()
     {
         Debug.Log("Added a sign");
-        if (_cautionPlace != null)
-        {
-            _cautionPlace.AddSign();
-        }
+        if (_cautionPlace != null) _cautionPlace.AddSign();
     }
 
+    private void StartCrouch()
+    {
+        _isCrouching = true;
+        physicalBody.enabled = false;
+
+        rb.linearVelocity = new Vector2 (rb.linearVelocity.x, 0f);
+        rb.AddForce(Vector2.down * movementData.fastFallForce, ForceMode2D.Impulse);
+    }
+
+    private void StopCrouch()
+    {
+        _isCrouching = false;
+        physicalBody.enabled = true;
+    }
     public void SetMovementProfile(MovementProfileSO data) => movementData = data;
 
     private void OnDeath(GameEventPayload payload) => enabled = false;
 
-    private void OnEnable() =>
-        onPlayerDeath.RegisterListener(OnDeath);
+    private void OnEnable() => onPlayerDeath.RegisterListener(OnDeath);
 
-    private void OnDisable() =>
-        onPlayerDeath.UnregisterListener(OnDeath);
+    private void OnDisable() => onPlayerDeath.UnregisterListener(OnDeath);
 }

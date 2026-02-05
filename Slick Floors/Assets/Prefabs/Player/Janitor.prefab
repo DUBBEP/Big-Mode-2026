@@ -433,6 +433,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RopeController
   rotationSpeed: 3
   rotationOffset: 0
+--- !u!1 &1771435668957780197
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2610364547870094674}
+  m_Layer: 6
+  m_Name: Right Foot Ground Check
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2610364547870094674
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771435668957780197}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.12, y: -0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7729655396351721608}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1832284257664155693
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,6 +839,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 61ddcebd-d5c6-4cda-bc67-a6420790e636
     m_ActionName: 'Player/DoubleJump[/Keyboard/w,/Keyboard/upArrow,/Keyboard/space]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 24954e59-5d29-4032-a044-c61959344bb4
+    m_ActionName: 'Player/Crouch[/Keyboard/downArrow,/Keyboard/s]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -931,7 +966,12 @@ MonoBehaviour:
   groundSize: {x: 0.5, y: 0.2}
   wallCheckSize: {x: 0.2, y: 1.75}
   wallCheckOffset: {x: 0.2, y: -0.5}
+  groundCheckRadius: 0.25
   rb: {fileID: 1029703960252987834}
+  heldItem: {fileID: 0}
+  physicalBody: {fileID: 3128058257502673095}
+  leftFootGroundedCheck: {fileID: 9075380038858090248}
+  rightFootGroundedCheck: {fileID: 2610364547870094674}
   useWalk: 1
   walkStepSpeed: 10
   stepSize: 15
@@ -953,6 +993,7 @@ MonoBehaviour:
   RightHandSolver_Target: {fileID: 1895578176297183621}
   LeftHandSolver_Target: {fileID: 7156443955029376818}
   mopAngle: {fileID: 0}
+  handsInversed: 0
 --- !u!114 &8923103678683189333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1007,7 +1048,8 @@ Transform:
   m_LocalPosition: {x: 0.20072828, y: -0.0000004893062, z: -0.001953125}
   m_LocalScale: {x: 0.9999999, y: 0.9999999, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2610364547870094674}
   m_Father: {fileID: 4912746710961806404}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &9048750452013222068
@@ -1560,6 +1602,37 @@ MonoBehaviour:
     m_Extent: {x: 0.05126953, y: 0.1508789, z: 0}
   m_AlwaysUpdate: 1
   m_AutoRebind: 0
+--- !u!1 &5518977156431328626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9075380038858090248}
+  m_Layer: 6
+  m_Name: Left Foot Ground Check
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9075380038858090248
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5518977156431328626}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.12, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1510216660223255430}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5723178874090345436
 GameObject:
   m_ObjectHideFlags: 0
@@ -1592,7 +1665,8 @@ Transform:
   m_LocalPosition: {x: 0.20126495, y: -0.00000009736713, z: 0.001953125}
   m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 9075380038858090248}
   m_Father: {fileID: 7294153042087684072}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &3805352946433277561
