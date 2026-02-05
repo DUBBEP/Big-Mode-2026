@@ -51,7 +51,7 @@ public class ChildController : MonoBehaviour
         // Check if we entered a Clean floor tile
         if (collision.TryGetComponent<FloorTile>(out FloorTile tile))
         {
-            if (tile.GetCurrentType() == GroundType.Clean)
+            if (tile.CurrentType == GroundType.Clean)
             {
                 animator.SetBool("Slipped", true);
                 Debug.Log("ChildController: Stepped on slick floor!");
@@ -71,7 +71,7 @@ public class ChildController : MonoBehaviour
         // Keep checking if we're on a Clean floor tile
         if (collision.TryGetComponent<FloorTile>(out FloorTile tile))
         {
-            if (tile.GetCurrentType() == GroundType.Clean && !animator.GetBool("Slipped"))
+            if (tile.CurrentType == GroundType.Clean && !animator.GetBool("Slipped"))
             {
                 animator.SetBool("Slipped", true);
             }
