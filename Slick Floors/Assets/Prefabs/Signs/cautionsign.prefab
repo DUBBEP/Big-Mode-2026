@@ -79,7 +79,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 19
   m_MaskInteraction: 0
   m_Sprite: {fileID: -5211131251252338990, guid: 7c2c9278244f02844bae498e48abd63a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -109,7 +109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8085200713687915234, guid: 6de2617384108034baaf6b48f5cc23b7, type: 3}
       propertyPath: m_SortingOrder
-      value: 0
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: -7552582706839291426, guid: 6de2617384108034baaf6b48f5cc23b7, type: 3}
       propertyPath: m_LocalScale.x
