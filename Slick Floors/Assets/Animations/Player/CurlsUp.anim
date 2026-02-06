@@ -1069,7 +1069,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 3.3333333
+  - time: 3.5
     functionName: hideAllText
     data: 
     objectReferenceParameter: {fileID: 0}

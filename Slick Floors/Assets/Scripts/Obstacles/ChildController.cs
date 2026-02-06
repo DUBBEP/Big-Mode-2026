@@ -3,10 +3,14 @@ using UnityEngine;
 
 public class ChildController : MonoBehaviour
 {
+    [SerializeField] private AudioClip slipSoundFXClip;
+    [SerializeField] private AudioClip reportSoundFXClip;
+    [SerializeField] private AudioClip dial911SoundFXClip;
+    [SerializeField] private AudioClip nopeSoundFXClip;
+    [SerializeField] private AudioClip evilLaughSoundFXClip;
     private CinemachineCamera cinemachineCamera;
     private Transform playerTransform;
     private Animator animator;
-
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -46,25 +50,27 @@ public class ChildController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (animator == null) return;
-
-        // Check if we entered a Clean floor tile
-        if (collision.TryGetComponent<FloorTile>(out FloorTile tile))
-        {
-            if (tile.CurrentType == GroundType.Clean)
-            {
-                animator.SetBool("Slipped", true);
-                Debug.Log("ChildController: Stepped on slick floor!");
-            }
-        }
-        else if (collision.gameObject.layer == LayerMask.NameToLayer("Objects"))
+        checkSlipped(collision);
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Objects"))
         {
             Debug.Log("ChildController: Sign placed!");
-            animator.SetBool("SignPlaced", true);
+            if (!animator.GetBool("SignPlaced"))
+            {
+                animator.SetBool("SignPlaced", true);
+                if (animator.GetBool("Slipped"))
+                {
+                    playNopeSound();
+                }
+            }
         }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
+    {
+        checkSlipped(collision);
+    }
+
+    private void checkSlipped(Collider2D collision)
     {
         if (animator == null) return;
 
@@ -76,12 +82,7 @@ public class ChildController : MonoBehaviour
                 animator.SetBool("Slipped", true);
             }
         }
-        else if (collision.gameObject.layer == LayerMask.NameToLayer("Objects"))
-        {
-            Debug.Log("ChildController: Sign placed!");
-            if (!animator.GetBool("SignPlaced"))
-                animator.SetBool("SignPlaced", true);
-        }
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -109,5 +110,35 @@ public class ChildController : MonoBehaviour
         if (cinemachineCamera != null && playerTransform != null)
             cinemachineCamera.Follow = playerTransform;
         // Enter end game sequence
+    }
+
+    private void dial911()
+    {
+        if (animator.GetBool("SignPlaced"))
+        {
+            return;
+        }
+        SoundFXManager.Instance.playSoundFXClip(dial911SoundFXClip, this.transform);
+    }
+
+    private void playSlipSound()
+    {
+        SoundFXManager.Instance.playSoundFXClip(slipSoundFXClip, this.transform);
+    }
+
+    private void playReportSound()
+    {
+        SoundFXManager.Instance.playSoundFXClip(reportSoundFXClip, this.transform);
+        playEvilLaughSound();
+    }
+
+    private void playNopeSound()
+    {
+        SoundFXManager.Instance.playSoundFXClip(nopeSoundFXClip, this.transform);
+    }
+
+    private void playEvilLaughSound()
+    {
+        SoundFXManager.Instance.playSoundFXClip(evilLaughSoundFXClip, this.transform);
     }
 }
