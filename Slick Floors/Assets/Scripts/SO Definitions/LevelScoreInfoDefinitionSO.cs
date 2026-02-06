@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class LevelScoreWeightsDefinitionSO : ScriptableObject
+public class LevelScoreInfoDefinitionSO : ScriptableObject
 {
     [Header("Category Point Weights")]
     public float TimeScore = 100f;
