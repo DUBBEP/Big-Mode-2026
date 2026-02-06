@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "NewScoreWeights", menuName = "ScoreWeights")]
 public class LevelScoreWeightsDefinitionSO : ScriptableObject
 {
     [Header("Category Point Weights")]

@@ -11,12 +11,9 @@ public class DamageSource
 
 public class LevelResults
 {
-    public float finalTime;
-    public float tileTotal;
-    public float cleanTitles;
-    public float neutralTiles;
-    public float dirtyTiles;
-    public float studentCount;
+    public string finalTime;
+    public string tilePercentage;
+    public string studentCount;
     public string grade;
 }
 
