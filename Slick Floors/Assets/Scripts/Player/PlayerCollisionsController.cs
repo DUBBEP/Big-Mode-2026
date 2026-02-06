@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class PlayerCollisionsController : MonoBehaviour
 {
-    [SerializeField] private Health playerHealth;
     [SerializeField] private PlayerMovement movement;
     private MovementProfileSO previousMovementProfile;
     private System.Collections.Generic.HashSet<GameObject> processedPickups = new System.Collections.Generic.HashSet<GameObject>();
@@ -13,9 +12,7 @@ public class PlayerCollisionsController : MonoBehaviour
 
     private void RunChecks(GameObject other)
     {
-        if (other.TryGetComponent<IDamageSource>(out IDamageSource sourceObject))
-            TakeDamage(sourceObject);
-        else if (other.TryGetComponent<FloorTile>(out FloorTile tileObject))
+        if (other.TryGetComponent<FloorTile>(out FloorTile tileObject))
             UpdateMovementProfile(tileObject.currentMovementProfile);
 
         if (other.layer == LayerMask.NameToLayer("Pickup"))
@@ -35,13 +32,6 @@ public class PlayerCollisionsController : MonoBehaviour
             Destroy(rootObject);
             movement.addSign();
         }
-    }
-
-    private void TakeDamage(IDamageSource sourceObject)
-    {
-        DamageSource src = sourceObject.GetDamageSource();
-        src.recievingObject = gameObject;
-        playerHealth.TakeDamage(src);
     }
 
     private void UpdateMovementProfile(MovementProfileSO profile)

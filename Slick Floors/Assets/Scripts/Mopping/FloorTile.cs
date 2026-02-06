@@ -8,13 +8,12 @@ public class FloorTile : MonoBehaviour
     [SerializeField] private FloorTypeDefinitionSO cleanData;
     [SerializeField] private FloorTypeDefinitionSO neutralData;
 
-
     [SerializeField] private GroundType currentType;
-    private GroundType previousType;
+    [SerializeField] private float dirtyTileDamageValue;
     [HideInInspector] public MovementProfileSO currentMovementProfile;
 
-    public GroundType CurrentType { get { return currentType; } private set { } }
-
+    private DirtyTileDamage damageComponent;
+    private GroundType previousType;
 
     private void Start()
     {
@@ -52,10 +51,28 @@ public class FloorTile : MonoBehaviour
                 Debug.LogError($"Unsupported Ground Type Passed Into Change Tyle Method on {name}");
                 break;
         }
-
         if (previousType != currentType && currentMovementProfile != null && currentMovementProfile.moppedSoundFXs != null)
         {
             SoundFXManager.Instance.PlayMopSounds(currentMovementProfile.moppedSoundFXs[Random.Range(0, currentMovementProfile.moppedSoundFXs.Count)], transform);
+        }
+
+        UpdateDamageComponent();
+    }
+
+    private void UpdateDamageComponent()
+    {
+        if (currentType == GroundType.Dirty && damageComponent == null)
+        {
+            damageComponent = gameObject.AddComponent<DirtyTileDamage>();
+            damageComponent.damageValue = dirtyTileDamageValue;
+        }
+        else
+        {
+            UnityEditor.EditorApplication.delayCall += () =>
+            {
+                if (damageComponent != null)
+                    DestroyImmediate(damageComponent);
+            };
         }
     }
 

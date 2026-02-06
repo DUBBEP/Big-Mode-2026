@@ -6,6 +6,7 @@ public class DamageSource
     public float knockBackForce = 0;
     public GameObject sourceObject = null;
     public GameObject recievingObject = null;
+    public bool giveInvulnerability = true;
 
 }
 

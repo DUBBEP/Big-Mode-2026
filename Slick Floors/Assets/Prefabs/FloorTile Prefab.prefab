@@ -111,6 +111,7 @@ MonoBehaviour:
   cleanData: {fileID: 11400000, guid: 816ee712275c5d742920921210cae6b0, type: 2}
   neutralData: {fileID: 11400000, guid: bb18bb5bb36fa0f4eb5f1682b975ed5e, type: 2}
   currentType: 1
+  dirtyTileDamageValue: 8
   currentMovementProfile: {fileID: 11400000, guid: 90e60aea790c814489dd7b11b84123f1, type: 2}
 --- !u!61 &5672023947354514174
 BoxCollider2D:
