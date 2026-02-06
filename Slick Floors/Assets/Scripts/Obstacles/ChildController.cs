@@ -59,6 +59,7 @@ public class ChildController : MonoBehaviour
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Objects"))
         {
+            Debug.Log("ChildController: Sign placed!");
             animator.SetBool("SignPlaced", true);
         }
     }
@@ -77,6 +78,7 @@ public class ChildController : MonoBehaviour
         }
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Objects"))
         {
+            Debug.Log("ChildController: Sign placed!");
             if (!animator.GetBool("SignPlaced"))
                 animator.SetBool("SignPlaced", true);
         }
@@ -88,6 +90,7 @@ public class ChildController : MonoBehaviour
 
         else if (collision.gameObject.layer == LayerMask.NameToLayer("Objects"))
         {
+            Debug.Log("ChildController: Sign UN-placed!");
             animator.SetBool("SignPlaced", false);
         }
     }
