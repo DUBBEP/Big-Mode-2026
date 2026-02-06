@@ -14,6 +14,7 @@ public class FloorTile : MonoBehaviour
 
     private DirtyTileDamage damageComponent;
     private GroundType previousType;
+    [HideInInspector] public GroundType CurrentType { get { return currentType; } private set { } }
 
     private void Start()
     {

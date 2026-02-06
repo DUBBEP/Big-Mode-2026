@@ -10,7 +10,7 @@ public class MopController : MonoBehaviour
     [Header("Settings")]
     public float deadZoneRadius = 0.5f;
     public float rotationSmoothTime = 0.1f;
-    public float moveSpeed = 10f;
+    public float moveSpeed = 15f;
 
     private float currentAngleVelocity;
 
@@ -52,5 +52,4 @@ public class MopController : MonoBehaviour
 
         rb.MoveRotation(smoothedAngle);
     }
-
 }

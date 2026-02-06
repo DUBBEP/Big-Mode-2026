@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerCollisionsController : MonoBehaviour
 {
     [SerializeField] private PlayerMovement movement;
+    [SerializeField] private MopController mop;
     private MovementProfileSO previousMovementProfile;
     private System.Collections.Generic.HashSet<GameObject> processedPickups = new System.Collections.Generic.HashSet<GameObject>();
 
@@ -40,6 +41,7 @@ public class PlayerCollisionsController : MonoBehaviour
             Debug.LogError("Missing profile in collisions controller");
 
         movement.SetMovementProfile(profile);
+        mop.moveSpeed = profile.MopMoveSpeed;
 
         if (previousMovementProfile != profile && profile.splashSoundFX != null)
         {
