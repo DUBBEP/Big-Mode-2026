@@ -16,12 +16,11 @@ MonoBehaviour:
   acceleration: 4
   deceleration: 2
   airResist: 0.9
-  doubleJumpEnabled: 0
   jumpForce: 580
   wallJumpForce: {x: 67, y: 350}
   jumpGravityScale: 10
   jumpCancelGravityScale: 40
   fallingGravityScale: 25
-  coyoteTime: 0.1
-  jumpBufferTime: 0.1
+  fastFallForce: 300
+  jumpBufferTime: 0.2
   wallJumpMovementLockTime: 0.2

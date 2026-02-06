@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FloorTile : MonoBehaviour
@@ -13,11 +12,15 @@ public class FloorTile : MonoBehaviour
     [SerializeField] private GroundType currentType;
     [HideInInspector] public MovementProfileSO currentMovementProfile;
 
+    public GroundType CurrentType { get { return currentType; } private set { } }
+
 
     private void Start()
     {
         if (!TryGetComponent<SpriteRenderer>(out sr))
             sr = gameObject.AddComponent<SpriteRenderer>();
+
+        TileHandler.AddTile(this);
 
         ChangeTyle(currentType);
     }
@@ -29,6 +32,8 @@ public class FloorTile : MonoBehaviour
 
     public void ChangeTyle(GroundType type)
     {
+        TileHandler.UpdateTileTypeCount(currentType, type);
+
         currentType = type;
         switch (type)
         {
@@ -57,10 +62,5 @@ public class FloorTile : MonoBehaviour
 
         currentMovementProfile = data.playerMovementProfile;
         sr.sprite = data.floorSprite;
-    }
-
-    public GroundType GetCurrentType()
-    {
-        return currentType;
     }
 }

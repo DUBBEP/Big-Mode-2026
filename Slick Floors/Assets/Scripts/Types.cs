@@ -9,6 +9,14 @@ public class DamageSource
 
 }
 
+public class LevelResults
+{
+    public string finalTime;
+    public string tilePercentage;
+    public string studentCount;
+    public string grade;
+}
+
 public enum GroundType
 {
     Dirty,
