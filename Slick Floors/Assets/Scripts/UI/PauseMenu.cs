@@ -1,9 +1,15 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject hud;
+
+    [SerializeField] private Slider masterVolumeSlider;
+    [SerializeField] private Slider musicVolumeSlider;
+    [SerializeField] private Slider sfxVolumeSlider;
+    [SerializeField] private SoundMixerManager soundMixerManager;
 
     void Start()
     {
@@ -20,6 +26,9 @@ public class PauseMenu : MonoBehaviour
         }
         else
         {
+            masterVolumeSlider.value = soundMixerManager.GetMasterVolume();
+            musicVolumeSlider.value = soundMixerManager.GetMusicVolume();
+            sfxVolumeSlider.value = soundMixerManager.GetSFXVolume();
             hud.SetActive(false);
             pauseMenu.SetActive(true);
             Time.timeScale = 0f; // Pause the game

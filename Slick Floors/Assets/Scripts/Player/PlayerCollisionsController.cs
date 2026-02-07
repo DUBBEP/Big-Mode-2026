@@ -42,11 +42,6 @@ public class PlayerCollisionsController : MonoBehaviour
 
         movement.SetMovementProfile(profile);
         mop.moveSpeed = profile.MopMoveSpeed;
-
-        if (previousMovementProfile != profile && profile.splashSoundFX != null)
-        {
-            SoundFXManager.Instance.playSoundFXClip(profile.splashSoundFX, this.transform);
-        }
         previousMovementProfile = profile;
     }
 }

@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -131,6 +132,11 @@ public class ChildController : MonoBehaviour
 
     private void playNopeSound()
     {
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        if (stateInfo.IsName("phone") || stateInfo.IsName("phoneloop"))
+        {
+            return;
+        }
         SoundFXManager.Instance.playSoundFXClip(nopeSoundFXClip, this.transform, volume: 2.5f);
     }
 
