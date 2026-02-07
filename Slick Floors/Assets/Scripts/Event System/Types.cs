@@ -11,3 +11,8 @@ public class DamageTakenEventPayload
     public float playerMaxHp = 0;
     public DamageSource damageSource = null;
 }
+
+public class StudentSlippedEventPayload
+{
+    public ChildController childController = null;
+}

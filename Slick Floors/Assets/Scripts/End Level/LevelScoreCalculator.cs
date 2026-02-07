@@ -6,6 +6,7 @@ public class LevelScoreCalculator : MonoBehaviour
     public static LevelScoreCalculator Instance { get; private set; }
 
     [SerializeField] protected LevelScoreWeightsDefinitionSO weights;
+    [SerializeField] private StudentSlippedEventSO studentSlippedEvent;
     [SerializeField] private float startTimerScore = 600;
     [SerializeField] private float timerScorePercentBonus = 20;
     [Tooltip("How much percent each dirty tile takes off the score")]
@@ -15,7 +16,13 @@ public class LevelScoreCalculator : MonoBehaviour
     private float levelTimer;
     private float timerScore;
 
+    // Cached student counts
+    private int totalStudents = 0;
+    private int slippedStudents = 0;
+
     public LevelResults Results { get { return results; } private set { } }
+    public int TotalStudents => totalStudents;
+    public int SlippedStudents => slippedStudents;
 
     private void Awake()
     {
@@ -28,6 +35,23 @@ public class LevelScoreCalculator : MonoBehaviour
         }
 
         DontDestroyOnLoad(this);
+        ChildController[] childObjects = FindObjectsByType<ChildController>(FindObjectsSortMode.None);
+        totalStudents = childObjects.Length;
+        slippedStudents = 0;
+        
+        Debug.Log($"LevelScoreCalculator: Total students cached: {totalStudents}");
+    }
+
+    private void OnEnable()
+    {
+        if (studentSlippedEvent != null)
+            studentSlippedEvent.RegisterListener(OnStudentSlipped);
+    }
+
+    private void OnDisable()
+    {
+        if (studentSlippedEvent != null)
+            studentSlippedEvent.UnregisterListener(OnStudentSlipped);
     }
 
     private void Start()
@@ -36,6 +60,12 @@ public class LevelScoreCalculator : MonoBehaviour
 
         levelTimer = 0f;
         timerScore = startTimerScore;
+    }
+
+    private void OnStudentSlipped(StudentSlippedEventPayload payload)
+    {
+        slippedStudents++;
+        Debug.Log($"Student slipped! Total slipped: {slippedStudents}/{totalStudents}");
     }
 
     private void Update()
@@ -76,52 +106,29 @@ public class LevelScoreCalculator : MonoBehaviour
 
 
         TimeSpan time = TimeSpan.FromSeconds(levelTimer);
-        
+
         results = new LevelResults()
         {
             finalTime = GetFinalString(timerScorePercent, time.ToString(@"mm\:ss\:ff")),
             tilePercentage = GetFinalString(tilePercent, tilePercentInt.ToString() + '%'),
-            studentCount = GetFinalString(slippedStudentPercentage, getSlippedStudentTotal().ToString()),
+            studentCount = GetFinalString(slippedStudentPercentage, slippedStudents.ToString()),
             grade = grade,
         };
     }
 
     private float GetStudentSlipPercent()
     {
-        return getSlippedStudentTotal() / getStudentTotal();
+        if (totalStudents == 0) return 0;
+        return (float)slippedStudents / totalStudents;
     }
 
     public float getStudentTotal()
     {
-        ChildController[] childObjects = FindObjectsByType<ChildController>(FindObjectsSortMode.None);
-        Debug.Log($"Child gotten {childObjects.Length}");
-        return childObjects.Length;
+        return totalStudents;
     }
 
     public float getSlippedStudentTotal()
     {
-        ChildController[] childObjects = FindObjectsByType<ChildController>(FindObjectsSortMode.None);
-
-        float slippedStudents = 0;
-
-        foreach (ChildController obj in childObjects)
-        {
-            Animator animator = obj.GetComponent<Animator>();
-            if (animator == null)
-            {
-                Debug.LogWarning($"getSlippedStudentTotal: {obj.name} has no Animator component.");
-                continue;
-            }
-
-            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-            if (stateInfo.IsName("CurlLoop") || stateInfo.IsName("CurlsUp"))
-            {
-                slippedStudents++;
-                Debug.Log($"Child gotten slip {slippedStudents}");
-            }
-        }
-        // Debug.Log($"Calculating student slip percentage. Slipped students: {slippedStudents}");
-        Debug.Log($"Finald Slipped Gus {slippedStudents}");
         return slippedStudents;
     }
 

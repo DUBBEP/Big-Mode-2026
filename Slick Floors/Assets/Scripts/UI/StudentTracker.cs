@@ -4,18 +4,54 @@ using UnityEngine.UI;
 public class StudentTracker : MonoBehaviour
 {
     [SerializeField] private Image studentIcon;
+    [SerializeField] private StudentSlippedEventSO studentSlippedEvent;
     [SerializeField] private float iconSpacing = 1f;
     [SerializeField] private float lowOpacity = 0.3f;
     [SerializeField] private float fullOpacity = 1f;
 
-    private float totalStudents;
-    private float slippedStudents;
+    private int totalStudents;
+    private int slippedStudents = 0;  // Track our own counter
     private Image[] studentIconImages;
+
+    private void OnEnable()
+    {
+        if (studentSlippedEvent != null)
+        {
+            studentSlippedEvent.RegisterListener(OnStudentSlipped);
+            Debug.Log("StudentTracker: Registered listener for student slipped event");
+        }
+        else
+        {
+            Debug.LogError("StudentTracker: studentSlippedEvent is NULL! Cannot register listener.");
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (studentSlippedEvent != null)
+        {
+            studentSlippedEvent.UnregisterListener(OnStudentSlipped);
+            Debug.Log("StudentTracker: Unregistered listener for student slipped event");
+        }
+    }
 
     private void Start()
     {
-        totalStudents = LevelScoreCalculator.Instance.getStudentTotal();
+        // Wait for LevelScoreCalculator to initialize
+        if (LevelScoreCalculator.Instance == null)
+        {
+            Debug.LogError("StudentTracker: LevelScoreCalculator.Instance is null!");
+            return;
+        }
+
+        totalStudents = LevelScoreCalculator.Instance.TotalStudents;
         Debug.Log($"Total students: {totalStudents}");
+
+        if (totalStudents == 0)
+        {
+            Debug.LogWarning("StudentTracker: No students found in level. Skipping UI setup.");
+            return;
+        }
 
         if (studentIcon == null)
         {
@@ -36,9 +72,32 @@ public class StudentTracker : MonoBehaviour
         CreateStudentIconRow();
     }
 
-    private void FixedUpdate()
+    private void OnStudentSlipped(StudentSlippedEventPayload payload)
     {
-        updateCompletion();
+
+        if (studentIconImages == null || studentIconImages.Length == 0)
+        {
+            Debug.LogWarning("StudentTracker: studentIconImages is null or empty, cannot update UI");
+            return;
+        }
+
+        slippedStudents++;
+        // Debug.Log($"StudentTracker: slippedCount={slippedStudents}, iconArrayLength={studentIconImages.Length}");
+
+        // Update the icon for the newly slipped student
+        if (slippedStudents > 0 && slippedStudents <= studentIconImages.Length)
+        {
+            int iconIndex = slippedStudents - 1; // Convert to 0-based index
+            Debug.Log($"StudentTracker: Updating icon at index {iconIndex}");
+            Color color = studentIconImages[iconIndex].color;
+            color.a = fullOpacity;
+            studentIconImages[iconIndex].color = color;
+            Debug.Log($"Student {iconIndex} has slipped. Setting icon to full opacity. Total slipped: {slippedStudents}");
+        }
+        else
+        {
+            Debug.LogWarning($"StudentTracker: Condition failed! slippedCount={slippedStudents}, needs to be > 0 and <= {studentIconImages.Length}");
+        }
     }
 
     private void CreateStudentIconRow()
@@ -68,30 +127,6 @@ public class StudentTracker : MonoBehaviour
             else
             {
                 Debug.LogError($"Failed to get Image component on duplicated icon {i}");
-            }
-        }
-    }
-
-    public void updateCompletion()
-    {
-        slippedStudents = LevelScoreCalculator.Instance.getSlippedStudentTotal();
-
-        for (int i = 0; i < studentIconImages.Length; i++)
-        {
-            if (i < slippedStudents)
-            {
-                Debug.Log($"Student {i} has slipped. Setting icon to full opacity.");
-                // Student has slipped - show at full opacity
-                Color color = studentIconImages[i].color;
-                color.a = fullOpacity;
-                studentIconImages[i].color = color;
-            }
-            else
-            {
-                // Student hasn't slipped - show at low opacity
-                Color color = studentIconImages[i].color;
-                color.a = lowOpacity;
-                studentIconImages[i].color = color;
             }
         }
     }

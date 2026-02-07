@@ -10,9 +10,12 @@ public class ChildController : MonoBehaviour
     [SerializeField] private AudioClip nopeSoundFXClip;
     [SerializeField] private AudioClip evilLaughSoundFXClip;
     [SerializeField] private AudioClip pissedOffSoundFXClip;
+    [SerializeField] private StudentSlippedEventSO studentSlippedEvent;
+
     private CinemachineCamera cinemachineCamera;
     private Transform playerTransform;
     private Animator animator;
+    private bool hasSlipped = false;
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -77,6 +80,13 @@ public class ChildController : MonoBehaviour
             if (tile.CurrentType == GroundType.Clean && !animator.GetBool("Slipped"))
             {
                 animator.SetBool("Slipped", true);
+
+                // Raise event only once per child
+                if (!hasSlipped && studentSlippedEvent != null)
+                {
+                    hasSlipped = true;
+                    studentSlippedEvent.Raise(new StudentSlippedEventPayload { childController = this });
+                }
             }
         }
 
