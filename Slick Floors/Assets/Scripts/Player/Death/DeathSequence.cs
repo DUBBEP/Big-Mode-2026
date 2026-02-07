@@ -11,8 +11,8 @@ public class DeathSequence : MonoBehaviour
     [SerializeField] private Image yellowFade;
 
     [Header("Sequence Properties")]
-    [SerializeField] private float launchForce;
-    [SerializeField] private float slowdownLength;
+    [SerializeField] private float launchForce = 600;
+    [SerializeField] private float slowdownLength = 0.4f;
 
     [Header("Capture")]
     [SerializeField] private CautionImage capture;
@@ -53,7 +53,7 @@ public class DeathSequence : MonoBehaviour
             Time.timeScale = slowdownRate > 0 ? slowdownRate : 0; 
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
 
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
 
         capture.CapturePose();

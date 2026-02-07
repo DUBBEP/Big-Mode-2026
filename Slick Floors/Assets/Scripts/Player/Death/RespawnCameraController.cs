@@ -9,13 +9,13 @@ public class RespawnCameraController : MonoBehaviour
 
     [SerializeField] private float zoomInTime = 3f;
     [SerializeField] private float zoomOutTime = 3f;
-    [SerializeField] private float maxZoomOrthoZoom = 4f;
+    [SerializeField] private float maxZoomOrthoZoom = 1.5f;
     [SerializeField] private float minZoomOrthoZoom = 8f;
     [SerializeField] private float maxDampening = 6f;
-    [SerializeField] private float minDampening = 1.5f;
-    [SerializeField] private float orthoInRate = 0.2f;
-    [SerializeField] private float orthoOutRate = 0.2f;
-    [SerializeField] private float dampenChangeRate = 0.2f;
+    [SerializeField] private float minDampening = 0.2f;
+    [SerializeField] private float orthoInRate = 0.25f;
+    [SerializeField] private float orthoOutRate = 0.1f;
+    [SerializeField] private float dampenChangeRate = 0.05f;
 
     private CinemachineCamera vCam;
     private CinemachinePositionComposer posComp;
@@ -94,7 +94,7 @@ public class RespawnCameraController : MonoBehaviour
             targetOrtho = minZoomOrthoZoom;
             targetDampening = 0;
             targetOrthoRate = orthoOutRate;
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSecondsRealtime(0.7f);
         }
 
         while (timer < endZoomTime)
@@ -107,7 +107,7 @@ public class RespawnCameraController : MonoBehaviour
             posComp.Damping = posComp.Damping + Vector3.one * distToDampen * dampenChangeRate;
 
             timer += Time.unscaledDeltaTime;
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
 
         if (zType == ZoomType.Out)

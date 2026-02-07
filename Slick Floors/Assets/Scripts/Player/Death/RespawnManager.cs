@@ -8,8 +8,8 @@ public class RespawnManager : MonoBehaviour
     public static RespawnManager Instance;
 
     [SerializeField] public GameObject CautionSignPrefab;
-    [SerializeField] private float startUpLength;
-    [SerializeField] private float startCamZoom;
+    [SerializeField] private float startUpLength = 0.3f;
+    [SerializeField] private float startCamZoom = 0.16f;
     [HideInInspector] public Sprite PlayerDeathSprite = null;
 
     Rigidbody2D signRb;
@@ -74,7 +74,7 @@ public class RespawnManager : MonoBehaviour
             Time.timeScale = SpeedUpRate;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
 
-            yield return new WaitForFixedUpdate();
+            yield return null;
         }
 
         Time.timeScale = 1f;
