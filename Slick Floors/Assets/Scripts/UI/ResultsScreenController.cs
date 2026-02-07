@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,58 +12,71 @@ public class ResultsScreenController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI studentsText;
 
     [Header("Messages")]
-    [SerializeField] private string gradeMessage; 
+    [SerializeField] private string gradeMessage;
     [SerializeField] private string timeMessage;
-    [SerializeField] private string slicknessMessage; 
+    [SerializeField] private string slicknessMessage;
     [SerializeField] private string studentsMessage;
 
-    [Header("Display Sequence Parameters")]
-    [SerializeField] private float timeBetweenTextPopups;
-    [SerializeField] private float startDelayTime;
-    [SerializeField] private float endDelayTime;
+    [Header("Audio")]
+    [SerializeField] private AudioClip normalTextClip;
+
+    [SerializeField] private AudioClip thudClip;
+
+    private int currentStep = 0;
+
+    private float minimumSkipTimer = 0f;
+    private float minimumSkipDuration = 0.5f;
 
     private void Start()
     {
-        hideResultText(); 
+        hideResultText();
         AddResultsToMessages();
         SetMessages();
-        StartCoroutine(DisplayResultsSequence());
+        minimumSkipTimer = minimumSkipDuration;
     }
 
-    public IEnumerator DisplayResultsSequence()
+    private void Update()
     {
-        yield return new WaitForSecondsRealtime(startDelayTime);
+        if (minimumSkipTimer < minimumSkipDuration)
+            minimumSkipTimer += Time.unscaledDeltaTime;
+    }
 
-        for (int i = 0; i < 4;  i++)
+    // Call this method to progress through each result screen step
+    public void ProgressScreen()
+    {
+        if (minimumSkipTimer < minimumSkipDuration)
+            return;
+
+        switch (currentStep)
         {
-            switch (i)
-            {
-                case 0:
-                    DisplayText(timeText);
-                    break;
-                case 1:
-                    DisplayText(slicknessText);
-                    break;
-                case 2:
-                    DisplayText(studentsText);
-                    break;
-                case 3:
-                    yield return new WaitForSecondsRealtime(timeBetweenTextPopups * 2);
-                    DisplayText(gradeText);
-                    break;
-            }
-            yield return new WaitForSecondsRealtime(timeBetweenTextPopups);
+            case 0:
+                SoundFXManager.Instance.playSoundFXClip(normalTextClip, transform, volume: 0.8f);
+                DisplayText(timeText);
+                break;
+            case 1:
+                SoundFXManager.Instance.playSoundFXClip(normalTextClip, transform, volume: 0.8f);
+                DisplayText(slicknessText);
+                break;
+            case 2:
+                SoundFXManager.Instance.playSoundFXClip(normalTextClip, transform, volume: 0.8f);
+                DisplayText(studentsText);
+                break;
+            case 3:
+                SoundFXManager.Instance.playSoundFXClip(thudClip, transform, volume: 0.8f);
+                DisplayText(gradeText);
+                break;
+            case 4:
+                LoadHub();
+                return;
         }
 
-        yield return new WaitForSecondsRealtime(endDelayTime);
-        endLevel();
+        currentStep++;
+        minimumSkipTimer = 0f;
     }
 
     public void DisplayText(TextMeshProUGUI text)
     {
         text.alpha = 1f;
-        // possible also play sound effect or visual effect
-        // could add arguements to method for audio clip or visual
     }
 
     private void SetMessages()
@@ -105,7 +117,7 @@ public class ResultsScreenController : MonoBehaviour
         studentsText.alpha = 0f;
     }
 
-    public void endLevel()
+    private void LoadHub()
     {
         SceneManager.LoadScene("Hub");
     }
