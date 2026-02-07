@@ -7,8 +7,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private MovementProfileSO movementData;
 
     [Header("Detection Settings")]
-    [SerializeField] private Vector2 groundOffset = new Vector2();
-    [SerializeField] private Vector2 groundSize = new Vector2();
     [SerializeField] private Vector2 wallCheckSize = new Vector2(); // Height should match player
     [SerializeField] private Vector2 wallCheckOffset = new Vector2(); // Horizontal distance from center
     [SerializeField] private float groundCheckRadius;
@@ -174,7 +172,7 @@ public class PlayerMovement : MonoBehaviour
         rb.AddForce(Vector2.right * speedDif * accelRate);
 
         // Play speedy sound effect once when speed exceeds threshold
-        float speedThreshold = movementData.moveSpeed * 0.6f;
+        float speedThreshold = movementData.MoveSpeed * 0.6f;
         if (Mathf.Abs(rb.linearVelocity.x) > speedThreshold && !_hasPlayedSpeedySound && movementData.speedySoundFX != null)
         {
             SoundFXManager.Instance.playSoundFXClip(movementData.speedySoundFX, this.transform, volume: 1f);
