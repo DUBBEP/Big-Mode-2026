@@ -49,6 +49,10 @@ public class FloorTile : MonoBehaviour
         {
             SoundFXManager.Instance.PlayMopSounds(currentMovementProfile.moppedSoundFXs[Random.Range(0, currentMovementProfile.moppedSoundFXs.Count)], transform);
         }
+        if(ParticlePooler.Instance != null && previousType != type)
+        {
+            ParticlePooler.Instance.SpawnParticle(transform.position, Quaternion.identity);
+        }
     }
 
     private void UpdateTileData(GroundType type)
