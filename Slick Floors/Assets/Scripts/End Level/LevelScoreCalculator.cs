@@ -15,8 +15,6 @@ public class LevelScoreCalculator : MonoBehaviour
     private float levelTimer;
     private float timerScore;
 
-    private int slippedStudents = 0;
-
     public LevelResults Results { get { return results; } private set { } }
 
     private void Awake()
@@ -25,7 +23,7 @@ public class LevelScoreCalculator : MonoBehaviour
             Instance = this;
         else
         {
-            Destroy(Instance);
+            Destroy(Instance.gameObject);
             Instance = this;
         }
 
@@ -57,7 +55,8 @@ public class LevelScoreCalculator : MonoBehaviour
 
         float tilePercent = cleanTitles / tileTotal * 100;
         float timerScorePercent = timerScore / startTimerScore * 100;
-        float slippedStudentPercentage = GetStudentSlipPercent();
+        float slippedStudentPercentage = GetStudentSlipPercent() * 100;
+        Debug.Log($"slip guy {slippedStudentPercentage}");
 
         // calculate any modifiers to percentages
         tilePercent = Mathf.Max(0, tilePercent - (dirtyTiles * dirtyTilePenaltyWeight));
@@ -68,6 +67,8 @@ public class LevelScoreCalculator : MonoBehaviour
                            timerScorePercent / 100 * weights.TimeWeigth +
                            tilePercent / 100 * weights.MopWeight;
 
+        int tilePercentInt = (int)tilePercent;
+
         // divide down to 100
         finalScore /= 3;
 
@@ -75,12 +76,12 @@ public class LevelScoreCalculator : MonoBehaviour
 
 
         TimeSpan time = TimeSpan.FromSeconds(levelTimer);
-
+        
         results = new LevelResults()
         {
             finalTime = GetFinalString(timerScorePercent, time.ToString(@"mm\:ss\:ff")),
-            tilePercentage = GetFinalString(tilePercent, tilePercent.ToString() + '%'),
-            studentCount = GetFinalString(slippedStudentPercentage, slippedStudents.ToString()),
+            tilePercentage = GetFinalString(tilePercent, tilePercentInt.ToString() + '%'),
+            studentCount = GetFinalString(slippedStudentPercentage, getSlippedStudentTotal().ToString()),
             grade = grade,
         };
     }
@@ -93,12 +94,14 @@ public class LevelScoreCalculator : MonoBehaviour
     public float getStudentTotal()
     {
         ChildController[] childObjects = FindObjectsByType<ChildController>(FindObjectsSortMode.None);
+        Debug.Log($"Child gotten {childObjects.Length}");
         return childObjects.Length;
     }
 
     public float getSlippedStudentTotal()
     {
         ChildController[] childObjects = FindObjectsByType<ChildController>(FindObjectsSortMode.None);
+
         float slippedStudents = 0;
 
         foreach (ChildController obj in childObjects)
@@ -112,10 +115,13 @@ public class LevelScoreCalculator : MonoBehaviour
 
             AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
             if (stateInfo.IsName("CurlLoop") || stateInfo.IsName("CurlsUp"))
+            {
                 slippedStudents++;
+                Debug.Log($"Child gotten slip {slippedStudents}");
+            }
         }
         // Debug.Log($"Calculating student slip percentage. Slipped students: {slippedStudents}");
-
+        Debug.Log($"Finald Slipped Gus {slippedStudents}");
         return slippedStudents;
     }
 
@@ -126,7 +132,7 @@ public class LevelScoreCalculator : MonoBehaviour
             case >= 95:
                 return "<palette> A+";
             case >= 90:
-                return "<color=#FFD700> A";
+                return "<color=#DDD700> A";
             case >= 80:
                 return "<color=#C0C0C0> B";
             case >= 70:
@@ -145,7 +151,7 @@ public class LevelScoreCalculator : MonoBehaviour
             case >= 95:
                 return $"<palette> {finalvalue}";
             case >= 90:
-                return $"<color=#FFD700> {finalvalue}";
+                return $"<color=#DDD700> {finalvalue}";
             case >= 80:
                 return $"<color=#909090> {finalvalue}";
             case >= 70:

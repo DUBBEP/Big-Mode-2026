@@ -655,6 +655,7 @@ Transform:
   m_Children:
   - {fileID: 1689588100}
   - {fileID: 1590502481}
+  - {fileID: 737349269}
   m_Father: {fileID: 1694113281}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &345359059
@@ -1525,6 +1526,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7383dadae56bca24298f0cb7bd97ae6b, type: 3}
+--- !u!4 &737349269 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2777359586295088518, guid: a80fe04f1d0975247958e65d71ccee01, type: 3}
+  m_PrefabInstance: {fileID: 2097019144}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &764315471 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4365562101048810373, guid: 7383dadae56bca24298f0cb7bd97ae6b, type: 3}
@@ -4182,7 +4188,8 @@ GameObject:
   - component: {fileID: 1757275933}
   - component: {fileID: 1757275935}
   - component: {fileID: 1757275934}
-  m_Layer: 0
+  - component: {fileID: 1757275936}
+  m_Layer: 12
   m_Name: EndLevelTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4198,7 +4205,7 @@ Transform:
   m_GameObject: {fileID: 1757275931}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.97118, y: -6.43497, z: 0}
+  m_LocalPosition: {x: 16.97118, y: -6.43497, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4262,6 +4269,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e92f8ad0756a1c24190c3694032f6ec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EndLevelTrigger
+--- !u!50 &1757275936
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1757275931}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 234687
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!4 &1914812502 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3851938418074100331, guid: 88cfdb7db7e13b041bcedd74dba1fa82, type: 3}
@@ -4750,6 +4784,63 @@ Transform:
   - {fileID: 330299894}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2097019144
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 332109872}
+    m_Modifications:
+    - target: {fileID: 2777359586295088518, guid: a80fe04f1d0975247958e65d71ccee01, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.45866
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777359586295088518, guid: a80fe04f1d0975247958e65d71ccee01, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.5947695
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777359586295088518, guid: a80fe04f1d0975247958e65d71ccee01, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777359586295088518, guid: a80fe04f1d0975247958e65d71ccee01, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777359586295088518, guid: a80fe04f1d0975247958e65d71ccee01, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777359586295088518, guid: a80fe04f1d0975247958e65d71ccee01, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777359586295088518, guid: a80fe04f1d0975247958e65d71ccee01, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777359586295088518, guid: a80fe04f1d0975247958e65d71ccee01, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777359586295088518, guid: a80fe04f1d0975247958e65d71ccee01, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777359586295088518, guid: a80fe04f1d0975247958e65d71ccee01, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5624756085437536202, guid: a80fe04f1d0975247958e65d71ccee01, type: 3}
+      propertyPath: m_Name
+      value: ParticleManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a80fe04f1d0975247958e65d71ccee01, type: 3}
 --- !u!114 &2097506827 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8088479572358396508, guid: 985b7f94c7d409e46907b0b121d6e774, type: 3}
@@ -5398,6 +5489,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 3281455664411894352, guid: 88cfdb7db7e13b041bcedd74dba1fa82, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 4096
+      objectReference: {fileID: 0}
     - target: {fileID: 3357637114107892612, guid: 88cfdb7db7e13b041bcedd74dba1fa82, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -5585,6 +5680,10 @@ PrefabInstance:
     - target: {fileID: 7632144280309777094, guid: 88cfdb7db7e13b041bcedd74dba1fa82, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7788060775847142345, guid: 88cfdb7db7e13b041bcedd74dba1fa82, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 4096
       objectReference: {fileID: 0}
     - target: {fileID: 7836081220226356622, guid: 88cfdb7db7e13b041bcedd74dba1fa82, type: 3}
       propertyPath: m_Layer

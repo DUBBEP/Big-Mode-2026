@@ -37,6 +37,12 @@ public class RespawnManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (SceneManager.GetActiveScene().name == "Level Finished")
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         if (PlayerDeathSprite == null)
         {
             Debug.LogWarning("No PlayerDeathSprite in Respawn Manager. This Should Be first Load of Scene.");

@@ -41,6 +41,12 @@ public class RespawnCameraController : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (SceneManager.GetActiveScene().name == "Level Finished")
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         if (FindFirstObjectByType<CinemachineCamera>() != null)
             vCam = FindFirstObjectByType<CinemachineCamera>();
         else
