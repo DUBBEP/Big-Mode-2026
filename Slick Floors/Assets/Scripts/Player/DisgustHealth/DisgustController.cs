@@ -55,7 +55,7 @@ public class DisgustController : MonoBehaviour
         }
     }
 
-    private void Die()
+    public void Die()
     {
         playerDeathEvent.Raise(new GameEventPayload());
     }

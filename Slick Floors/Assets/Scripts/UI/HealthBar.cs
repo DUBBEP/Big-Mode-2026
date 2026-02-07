@@ -15,12 +15,6 @@ public class HealthBar : MonoBehaviour
         {
             bar.sprite = completedBarSprite;
         }
-
-        // Debug.Log($"damage take payload: {payload.playerHp}");
-        // Debug.Log($"damage take payload: {payload.damageSource.recievingObject}");
-        // Debug.Log($"damage take payload: {payload.damageSource.knockBackForce}");
-        // Debug.Log($"damage take payload: {payload.damageSource.value}");
-        // Debug.Log($"damage take payload: {payload.damageSource.sourceObject}");
     }
 
     private void OnEnable() =>
