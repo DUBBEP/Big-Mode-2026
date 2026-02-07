@@ -18,38 +18,35 @@ public class FloorTile : MonoBehaviour
 
     private DirtyTileDamage damageComponent;
     private GroundType previousType;
-    [HideInInspector] public GroundType CurrentType { get { return currentType; } private set { } }
+    public GroundType CurrentType { get { return currentType; } }
 
     private void Start()
     {
         TileHandler.AddTile(this);
-
-        ChangeTile(currentType);
-    }
-
-    private void OnValidate()
-    {
-#if UNITY_EDITOR
-        if (!Application.isPlaying)
-            return;
-#endif
         UpdateTileData(currentType);
-
+        UpdateDamageComponent();
     }
 
     public void ChangeTile(GroundType type)
     {
         previousType = currentType;
-        TileHandler.UpdateTileTypeCount(currentType, type);
+        
+        if (previousType != type)
+        {
+            TileHandler.UpdateTileTypeCount(currentType, type);
+        }
+        
         UpdateTileData(type);
         UpdateDamageComponent();
+        
         tileUpdatedEvent.Raise(new GameEventPayload());
 
-        if (previousType != currentType && currentMovementProfile != null && currentMovementProfile.moppedSoundFXs != null)
+        if (currentMovementProfile != null && currentMovementProfile.moppedSoundFXs != null && currentMovementProfile.moppedSoundFXs.Count > 0)
         {
             SoundFXManager.Instance.PlayMopSounds(currentMovementProfile.moppedSoundFXs[Random.Range(0, currentMovementProfile.moppedSoundFXs.Count)], transform);
         }
-        if (ParticlePooler.Instance != null && previousType != type)
+
+        if (ParticlePooler.Instance != null)
         {
             ParticlePooler.Instance.SpawnParticle(transform.position, Quaternion.identity);
         }
@@ -60,45 +57,35 @@ public class FloorTile : MonoBehaviour
         currentType = type;
         switch (type)
         {
-            case GroundType.Dirty:
-                SetFloorType(dirtyData);
-                break;
-            case GroundType.Clean:
-                SetFloorType(cleanData);
-                break;
-            case GroundType.Neutral:
-                SetFloorType(neutralData);
-                break;
-            default:
-                Debug.LogError($"Unsupported Ground Type Passed Into Change Tyle Method on {name}");
-                break;
+            case GroundType.Dirty:   SetFloorType(dirtyData); break;
+            case GroundType.Clean:   SetFloorType(cleanData); break;
+            case GroundType.Neutral: SetFloorType(neutralData); break;
         }
     }
 
     private void UpdateDamageComponent()
     {
-        if (currentType == GroundType.Dirty && damageComponent == null)
+        if (currentType == GroundType.Dirty)
         {
-            damageComponent = gameObject.AddComponent<DirtyTileDamage>();
-            damageComponent.damageValue = dirtyTileDamageValue;
+            if (damageComponent == null)
+            {
+                damageComponent = gameObject.AddComponent<DirtyTileDamage>();
+                damageComponent.damageValue = dirtyTileDamageValue;
+            }
         }
         else
         {
-            UnityEditor.EditorApplication.delayCall += () =>
+            if (damageComponent != null)
             {
-                if (damageComponent != null)
-                    DestroyImmediate(damageComponent);
-            };
+                Destroy(damageComponent);
+                damageComponent = null; 
+            }
         }
     }
 
     private void SetFloorType(FloorTypeDefinitionSO data)
     {
-        if (data == null)
-        {
-            Debug.LogError($"Floor Data is missing on floor tile {name}");
-            return;
-        }
+        if (data == null) return;
 
         currentMovementProfile = data.playerMovementProfile;
         floorRenderer = data.GetRandomRenderer();
@@ -109,15 +96,11 @@ public class FloorTile : MonoBehaviour
             ApplySpriteData(foregroundSprite, floorRenderer.Foreground);
             ApplySpriteData(backgroundSprite, floorRenderer.Background);
         }
-        else
-        {
-            Debug.LogError($"FloorTile '{name}': GetRandomRenderer() returned null for floor type '{data.name}'. Check that the FloorTypeDefinitionSO has renderers assigned.");
-        }
     }
+
     private void ApplySpriteData(SpriteRenderer target, SpriteRenderer source)
     {
         if (target == null || source == null) return;
-
         target.sprite = source.sprite;
         target.transform.localPosition = source.transform.localPosition;
         target.transform.localRotation = source.transform.localRotation;
