@@ -103,6 +103,9 @@ public class FloorTile : MonoBehaviour
             if (floorRenderer.Floor != null && floorSprite != null)
             {
                 floorSprite.sprite = floorRenderer.Floor.sprite;
+                floorSprite.transform.localPosition = floorRenderer.Floor.transform.localPosition;
+                floorSprite.transform.localRotation = floorRenderer.Floor.transform.localRotation;
+                floorSprite.transform.localScale = floorRenderer.Floor.transform.localScale;
                 floorSprite.color = floorRenderer.Floor.color;
                 floorSprite.flipX = floorRenderer.Floor.flipX;
                 floorSprite.flipY = floorRenderer.Floor.flipY;
@@ -114,6 +117,9 @@ public class FloorTile : MonoBehaviour
             if (floorRenderer.Foreground != null && foregroundSprite != null)
             {
                 foregroundSprite.sprite = floorRenderer.Foreground.sprite;
+                foregroundSprite.transform.localPosition = floorRenderer.Foreground.transform.localPosition;
+                foregroundSprite.transform.localRotation = floorRenderer.Foreground.transform.localRotation;
+                foregroundSprite.transform.localScale = floorRenderer.Foreground.transform.localScale;
                 foregroundSprite.color = floorRenderer.Foreground.color;
                 foregroundSprite.flipX = floorRenderer.Foreground.flipX;
                 foregroundSprite.flipY = floorRenderer.Foreground.flipY;
@@ -125,6 +131,9 @@ public class FloorTile : MonoBehaviour
             if (floorRenderer.Background != null && backgroundSprite != null)
             {
                 backgroundSprite.sprite = floorRenderer.Background.sprite;
+                backgroundSprite.transform.localPosition = floorRenderer.Background.transform.localPosition;
+                backgroundSprite.transform.localRotation = floorRenderer.Background.transform.localRotation;
+                backgroundSprite.transform.localScale = floorRenderer.Background.transform.localScale;
                 backgroundSprite.color = floorRenderer.Background.color;
                 backgroundSprite.flipX = floorRenderer.Background.flipX;
                 backgroundSprite.flipY = floorRenderer.Background.flipY;
