@@ -49,6 +49,10 @@ public class FloorTile : MonoBehaviour
         {
             SoundFXManager.Instance.PlayMopSounds(currentMovementProfile.moppedSoundFXs[Random.Range(0, currentMovementProfile.moppedSoundFXs.Count)], transform);
         }
+        if(ParticlePooler.Instance != null && previousType != type)
+        {
+            ParticlePooler.Instance.SpawnParticle(transform.position, Quaternion.identity);
+        }
     }
 
     private void UpdateTileData(GroundType type)
@@ -89,49 +93,36 @@ public class FloorTile : MonoBehaviour
     }
 
     private void SetFloorType(FloorTypeDefinitionSO data)
+{
+    if (data == null)
     {
-        if (data == null)
-        {
-            Debug.LogError($"Floor Data is missing on floor tile {name}");
-            return;
-        }
+        Debug.LogError($"Floor Data is missing on floor tile {name}");
+        return;
+    }
 
-        currentMovementProfile = data.playerMovementProfile;
-        floorRenderer = data.floorRenderer;
-        if (floorRenderer != null)
-        {
-            if (floorRenderer.Floor != null && floorSprite != null)
-            {
-                floorSprite.sprite = floorRenderer.Floor.sprite;
-                floorSprite.color = floorRenderer.Floor.color;
-                floorSprite.flipX = floorRenderer.Floor.flipX;
-                floorSprite.flipY = floorRenderer.Floor.flipY;
-                floorSprite.sortingLayerID = floorRenderer.Floor.sortingLayerID;
-                floorSprite.sortingOrder = floorRenderer.Floor.sortingOrder;
-                floorSprite.sharedMaterial = floorRenderer.Floor.sharedMaterial;
-            }
+    currentMovementProfile = data.playerMovementProfile;
+    floorRenderer = data.GetRandomRenderer();
 
-            if (floorRenderer.Foreground != null && foregroundSprite != null)
-            {
-                foregroundSprite.sprite = floorRenderer.Foreground.sprite;
-                foregroundSprite.color = floorRenderer.Foreground.color;
-                foregroundSprite.flipX = floorRenderer.Foreground.flipX;
-                foregroundSprite.flipY = floorRenderer.Foreground.flipY;
-                foregroundSprite.sortingLayerID = floorRenderer.Foreground.sortingLayerID;
-                foregroundSprite.sortingOrder = floorRenderer.Foreground.sortingOrder;
-                foregroundSprite.sharedMaterial = floorRenderer.Foreground.sharedMaterial;
-            }
+    if (floorRenderer != null)
+    {
+        ApplySpriteData(floorSprite, floorRenderer.Floor);
+        ApplySpriteData(foregroundSprite, floorRenderer.Foreground);
+        ApplySpriteData(backgroundSprite, floorRenderer.Background);
+    }
+}
+    private void ApplySpriteData(SpriteRenderer target, SpriteRenderer source)
+    {
+        if (target == null || source == null) return;
 
-            if (floorRenderer.Background != null && backgroundSprite != null)
-            {
-                backgroundSprite.sprite = floorRenderer.Background.sprite;
-                backgroundSprite.color = floorRenderer.Background.color;
-                backgroundSprite.flipX = floorRenderer.Background.flipX;
-                backgroundSprite.flipY = floorRenderer.Background.flipY;
-                backgroundSprite.sortingLayerID = floorRenderer.Background.sortingLayerID;
-                backgroundSprite.sortingOrder = floorRenderer.Background.sortingOrder;
-                backgroundSprite.sharedMaterial = floorRenderer.Background.sharedMaterial;
-            }
-        }
+        target.sprite = source.sprite;
+        target.transform.localPosition = source.transform.localPosition;
+        target.transform.localRotation = source.transform.localRotation;
+        target.transform.localScale = source.transform.localScale;
+        target.color = source.color;
+        target.flipX = source.flipX;
+        target.flipY = source.flipY;
+        target.sortingLayerID = source.sortingLayerID;
+        target.sortingOrder = source.sortingOrder;
+        target.sharedMaterial = source.sharedMaterial;
     }
 }
