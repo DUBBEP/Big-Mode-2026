@@ -290,6 +290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   studentIcon: {fileID: 1148595634375152554}
+  studentSlippedEvent: {fileID: 11400000, guid: 17f5fc7830663ab4d88f6606cc930d02, type: 2}
   iconSpacing: 110
   lowOpacity: 0.1
   fullOpacity: 1
@@ -711,6 +712,7 @@ MonoBehaviour:
   onDamageTaken: {fileID: 11400000, guid: afa9c1fb7fbfe52459095975e2fd5097, type: 2}
   bar: {fileID: 6540990004632335782}
   completedBarSprite: {fileID: 21300000, guid: 56955a2e060d79046b59c8db6ed3b6da, type: 3}
+  vomitClip: {fileID: 8300000, guid: 948cd5849e837da49994720f3d007f80, type: 3}
 --- !u!1 &8357096766259037242
 GameObject:
   m_ObjectHideFlags: 0

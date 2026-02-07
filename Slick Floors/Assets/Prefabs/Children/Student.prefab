@@ -436,7 +436,6 @@ GameObject:
   - component: {fileID: 5427265874201911321}
   - component: {fileID: 5654265753491821022}
   - component: {fileID: 2509479020209993045}
-  - component: {fileID: 4835760335756516000}
   m_Layer: 16
   m_Name: Student
   m_TagString: Untagged
@@ -617,6 +616,7 @@ MonoBehaviour:
   nopeSoundFXClip: {fileID: 8300000, guid: 276be594f6202d54692d70ce8a9d6d16, type: 3}
   evilLaughSoundFXClip: {fileID: 8300000, guid: 2e3002e4c5653374f9f4f2d454b8677c, type: 3}
   pissedOffSoundFXClip: {fileID: 8300000, guid: 0d3c759633eacd4488ccced2ae8d0652, type: 3}
+  studentSlippedEvent: {fileID: 11400000, guid: 17f5fc7830663ab4d88f6606cc930d02, type: 2}
 --- !u!61 &5654265753491821022
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -683,31 +683,6 @@ MonoBehaviour:
   - Thats it! <!wait=0.2> Im calling ... <!wait=0.35> <palette><!delay=0.3><shake>911
   randomFollowUpTexts:
   - <shake> WAIT! </shake>  A<wave> <palette> Slick </palette></wave> Sign ???
-  - I guess the <dangle> insurance </dangle> should cover it...
-  - Damn. My fault.
-  - He's <palette>slick </palette>for that one :(
-  - You <palette> slick </palette> motherfucker...
---- !u!114 &4835760335756516000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 999246689507449389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b36884e9f8f4c4e47896ad9d85563736, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RandomTextWriter
-  displayText: {fileID: 8235869215224259344}
-  reportedText: L get <wave>Reported.
-  randomInitialTexts:
-  - My <palette> lawyers </palette>shall be hearing about this one<jump>...
-  - Shitty ass Janitor...
-  - Thats it! <!wait=0.2> Im calling ... <!wait=0.35> <palette><!delay=0.3><shake>911
-  randomFollowUpTexts:
-  - <shake> WAIT! </shake> <!wait = 0.5> A<wave> <palette> Slick </palette></wave>
-    Sign ???
   - I guess the <dangle> insurance </dangle> should cover it...
   - Damn. My fault.
   - He's <palette>slick </palette>for that one :(

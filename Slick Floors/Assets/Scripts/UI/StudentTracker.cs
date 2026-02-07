@@ -31,7 +31,6 @@ public class StudentTracker : MonoBehaviour
         if (studentSlippedEvent != null)
         {
             studentSlippedEvent.UnregisterListener(OnStudentSlipped);
-            Debug.Log("StudentTracker: Unregistered listener for student slipped event");
         }
     }
 

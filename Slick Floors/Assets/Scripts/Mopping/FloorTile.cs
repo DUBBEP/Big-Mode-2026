@@ -49,7 +49,7 @@ public class FloorTile : MonoBehaviour
         {
             SoundFXManager.Instance.PlayMopSounds(currentMovementProfile.moppedSoundFXs[Random.Range(0, currentMovementProfile.moppedSoundFXs.Count)], transform);
         }
-        if(ParticlePooler.Instance != null && previousType != type)
+        if (ParticlePooler.Instance != null && previousType != type)
         {
             ParticlePooler.Instance.SpawnParticle(transform.position, Quaternion.identity);
         }
@@ -93,23 +93,27 @@ public class FloorTile : MonoBehaviour
     }
 
     private void SetFloorType(FloorTypeDefinitionSO data)
-{
-    if (data == null)
     {
-        Debug.LogError($"Floor Data is missing on floor tile {name}");
-        return;
-    }
+        if (data == null)
+        {
+            Debug.LogError($"Floor Data is missing on floor tile {name}");
+            return;
+        }
 
-    currentMovementProfile = data.playerMovementProfile;
-    floorRenderer = data.GetRandomRenderer();
+        currentMovementProfile = data.playerMovementProfile;
+        floorRenderer = data.GetRandomRenderer();
 
-    if (floorRenderer != null)
-    {
-        ApplySpriteData(floorSprite, floorRenderer.Floor);
-        ApplySpriteData(foregroundSprite, floorRenderer.Foreground);
-        ApplySpriteData(backgroundSprite, floorRenderer.Background);
+        if (floorRenderer != null)
+        {
+            ApplySpriteData(floorSprite, floorRenderer.Floor);
+            ApplySpriteData(foregroundSprite, floorRenderer.Foreground);
+            ApplySpriteData(backgroundSprite, floorRenderer.Background);
+        }
+        else
+        {
+            Debug.LogError($"FloorTile '{name}': GetRandomRenderer() returned null for floor type '{data.name}'. Check that the FloorTypeDefinitionSO has renderers assigned.");
+        }
     }
-}
     private void ApplySpriteData(SpriteRenderer target, SpriteRenderer source)
     {
         if (target == null || source == null) return;
