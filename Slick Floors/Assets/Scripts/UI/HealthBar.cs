@@ -6,6 +6,7 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private DamageTakenEventSO onDamageTaken;
     [SerializeField] private Image bar;
     [SerializeField] private Sprite completedBarSprite;
+    [SerializeField] private AudioClip vomitClip;
 
     private void UpdateHealthBar(DamageTakenEventPayload payload)
     {
@@ -13,6 +14,7 @@ public class HealthBar : MonoBehaviour
 
         if (bar.fillAmount == 1)
         {
+            SoundFXManager.Instance.playSoundFXClip(vomitClip, transform, volume: 1.5f);
             bar.sprite = completedBarSprite;
         }
     }

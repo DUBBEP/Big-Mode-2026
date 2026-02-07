@@ -11,6 +11,8 @@ public class DeathSequence : MonoBehaviour
     [SerializeField] private Image yellowFade;
     [SerializeField] private float fadeSpeed;
 
+    [SerializeField] private AudioClip deathClip;
+
     [Header("Sequence Properties")]
     [SerializeField] private float launchForce = 600;
     [SerializeField] private float slowdownLength = 0.4f;
@@ -32,6 +34,7 @@ public class DeathSequence : MonoBehaviour
 
     private IEnumerator OnStartDeathSequence()
     {
+        SoundFXManager.Instance.playSoundFXClip(deathClip, transform);
         playerRb.AddForce(Vector2.up * launchForce, ForceMode2D.Impulse);
         playerRb.AddTorque(launchForce, ForceMode2D.Impulse);
 
@@ -51,7 +54,7 @@ public class DeathSequence : MonoBehaviour
             slowdownTimer -= Time.unscaledDeltaTime;
 
             float slowdownRate = (slowdownTimer / slowdownLength) / 3;
-            Time.timeScale = slowdownRate > 0 ? slowdownRate : 0; 
+            Time.timeScale = slowdownRate > 0 ? slowdownRate : 0;
             Time.fixedDeltaTime = 0.02f * Time.timeScale;
 
             yield return null;
