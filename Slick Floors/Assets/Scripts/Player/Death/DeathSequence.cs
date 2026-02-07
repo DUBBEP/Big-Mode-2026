@@ -25,7 +25,6 @@ public class DeathSequence : MonoBehaviour
 
     private void StartDeathSequence(GameEventPayload payload)
     {
-        TileHandler.ClearTiles();
         StartCoroutine(OnStartDeathSequence());
         StartCoroutine(RespawnCameraController.Instance.ZoomSequence());
     }
@@ -60,6 +59,7 @@ public class DeathSequence : MonoBehaviour
         capture.CapturePose();
         Time.timeScale = 1f;
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
+        TileHandler.ClearTiles();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
