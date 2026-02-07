@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Generic_Neutral
   m_EditorClassIdentifier: Assembly-CSharp::FloorTypeDefinitionSO
   floorTypeName: Generic_Neutral
-  floorSprite: {fileID: 5509073189812503122, guid: fe5feda316a3bff43be49f352eb0fd63, type: 3}
+  floorRenderer: {fileID: 701540611837486335, guid: 3ab8866d09705b84eba23980d2740f2b, type: 3}
   material: {fileID: 6200000, guid: 27b6da9b79c5d81449296874a4be506a, type: 2}
   playerMovementProfile: {fileID: 11400000, guid: 90e60aea790c814489dd7b11b84123f1, type: 2}
