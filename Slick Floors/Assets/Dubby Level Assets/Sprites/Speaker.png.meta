@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 1fa0a19c91fb29f48802f9ff1e5ba3a6
+guid: 2febe6b324337284f9b0d160ddada0ff
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3707653252590819006
-    second: OpenStall_0
-  - first:
-      213: -4380259389762616071
-    second: OpenStall_1
+      213: -1043527906562012101
+    second: Speaker_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -54,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 300
+  spritePixelsToUnits: 400
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -116,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: OpenStall_0
+      name: Speaker_0
       rect:
         serializedVersion: 2
-        x: 245
-        y: 56
-        width: 392
-        height: 888
+        x: 271
+        y: 271
+        width: 458
+        height: 458
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,30 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 249a001c205cb8cc0800000000000000
-      internalID: -3707653252590819006
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: OpenStall_1
-      rect:
-        serializedVersion: 2
-        x: 653
-        y: 69
-        width: 102
-        height: 875
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 9f44129ea413633c0800000000000000
-      internalID: -4380259389762616071
+      spriteID: b3c0a28d5e4a481f0800000000000000
+      internalID: -1043527906562012101
       vertices: []
       indices: 
       edges: []
@@ -173,8 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      OpenStall_0: -3707653252590819006
-      OpenStall_1: -4380259389762616071
+      Speaker_0: -1043527906562012101
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

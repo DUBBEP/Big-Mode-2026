@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4e466c685c37b24792717a4c7e666ac, type: 3}
   m_Name: EvenWeights
   m_EditorClassIdentifier: Assembly-CSharp::LevelScoreWeightsDefinitionSO
-  TimeWeigth: 100
-  MopWeight: 100
+  TimeWeigth: 150
+  MopWeight: 150
   StudentWeight: 100
