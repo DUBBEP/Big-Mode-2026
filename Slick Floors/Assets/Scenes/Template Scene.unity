@@ -15507,7 +15507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RespawnManager
   CautionSignPrefab: {fileID: 8125261445437968767, guid: 157f37cba433c0747a3ceb830c6de31f, type: 3}
-  startUpLength: 0.3
+  startUpLength: 3
   startCamZoom: 0.16
   PlayerDeathSprite: {fileID: 0}
 --- !u!4 &1361797351
@@ -15541,11 +15541,9 @@ MonoBehaviour:
   zoomOutTime: 3
   maxZoomOrthoZoom: 1.5
   minZoomOrthoZoom: 8
-  maxDampening: 6
-  minDampening: 0.2
-  orthoInRate: 0.25
-  orthoOutRate: 0.1
-  dampenChangeRate: 0.05
+  zoomDampening: 0.2
+  orthoInRate: 30
+  orthoOutRate: 30
 --- !u!4 &1362876498 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4365562101048810373, guid: 7383dadae56bca24298f0cb7bd97ae6b, type: 3}
@@ -18838,8 +18836,9 @@ MonoBehaviour:
   onPlayerDeath: {fileID: 11400000, guid: c230f6eba3c0609458be9264e4736eb6, type: 2}
   playerRb: {fileID: 1914812504}
   yellowFade: {fileID: 882836655}
+  fadeSpeed: 25
   launchForce: 600
-  slowdownLength: 0.4
+  slowdownLength: 3
   capture: {fileID: 1395781714}
 --- !u!4 &1590502481
 Transform:
