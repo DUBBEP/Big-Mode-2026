@@ -35,7 +35,7 @@ public class LevelScoreCalculator : MonoBehaviour
     private void Start()
     {
         if (results != null) return;
-        
+
         levelTimer = 0f;
         timerScore = startTimerScore;
     }
@@ -67,7 +67,7 @@ public class LevelScoreCalculator : MonoBehaviour
         float finalScore = slippedStudentPercentage / 100 * weights.StudentWeight +
                            timerScorePercent / 100 * weights.TimeWeigth +
                            tilePercent / 100 * weights.MopWeight;
-        
+
         // divide down to 100
         finalScore /= 3;
 
@@ -87,19 +87,36 @@ public class LevelScoreCalculator : MonoBehaviour
 
     private float GetStudentSlipPercent()
     {
+        return getSlippedStudentTotal() / getStudentTotal();
+    }
+
+    public float getStudentTotal()
+    {
         ChildController[] childObjects = FindObjectsByType<ChildController>(FindObjectsSortMode.None);
-        slippedStudents = 0;
-        float totalStudent = 0;
+        return childObjects.Length;
+    }
+
+    public float getSlippedStudentTotal()
+    {
+        ChildController[] childObjects = FindObjectsByType<ChildController>(FindObjectsSortMode.None);
+        float slippedStudents = 0;
 
         foreach (ChildController obj in childObjects)
         {
-            totalStudent++;
+            Animator animator = obj.GetComponent<Animator>();
+            if (animator == null)
+            {
+                Debug.LogWarning($"getSlippedStudentTotal: {obj.name} has no Animator component.");
+                continue;
+            }
 
-            if (obj.GetComponent<Animator>().GetBool("CurlLoop"))
+            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            if (stateInfo.IsName("CurlLoop") || stateInfo.IsName("CurlsUp"))
                 slippedStudents++;
         }
+        Debug.Log($"Calculating student slip percentage. Slipped students: {slippedStudents}");
 
-        return slippedStudents / totalStudent;
+        return slippedStudents;
     }
 
     protected string GetGrade(float finalScore)
