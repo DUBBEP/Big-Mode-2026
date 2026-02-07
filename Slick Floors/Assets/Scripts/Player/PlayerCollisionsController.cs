@@ -4,6 +4,7 @@ public class PlayerCollisionsController : MonoBehaviour
 {
     [SerializeField] private Health playerHealth;
     [SerializeField] private PlayerMovement movement;
+    private MovementProfileSO previousMovementProfile;
     private System.Collections.Generic.HashSet<GameObject> processedPickups = new System.Collections.Generic.HashSet<GameObject>();
 
     private void OnTriggerEnter2D(Collider2D collision) => RunChecks(collision.gameObject);
@@ -49,5 +50,11 @@ public class PlayerCollisionsController : MonoBehaviour
             Debug.LogError("Missing profile in collisions controller");
 
         movement.SetMovementProfile(profile);
+
+        if (previousMovementProfile != profile && profile.splashSoundFX != null)
+        {
+            SoundFXManager.Instance.playSoundFXClip(profile.splashSoundFX, this.transform);
+        }
+        previousMovementProfile = profile;
     }
 }

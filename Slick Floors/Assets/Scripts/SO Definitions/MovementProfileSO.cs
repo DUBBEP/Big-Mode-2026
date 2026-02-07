@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NewMovementProfile", menuName = "MovementProfile")]
@@ -23,4 +24,16 @@ public class MovementProfileSO : ScriptableObject
     [Header("Feel Improvements")]
     public float jumpBufferTime = 0.15f;
     public float wallJumpMovementLockTime = 0.2f;
+
+    [Header("Sound Effects")]
+    public List<AudioClip> jumpSoundFXs;
+    public AudioClip landSoundFX;
+    public AudioClip walkSoundFX;
+    public AudioClip splashSoundFX;
+
+    public AudioClip speedySoundFX;
+
+    public List<AudioClip> moppedSoundFXs;
+    public float walkSoundTiming = 0.22f;
+
 }

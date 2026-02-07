@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundFXManager : MonoBehaviour
@@ -6,12 +7,20 @@ public class SoundFXManager : MonoBehaviour
 
     [SerializeField] private AudioSource audioSourcePrefab;
 
+    private float moppingTimer = 0f;
+    public float moppingInterval = 0.3f;
+
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
         }
+    }
+
+    private void Update()
+    {
+        moppingTimer += Time.deltaTime;
     }
 
     public void playSoundFXClip(AudioClip clip, Transform sourceTransform, float volume = 1f, float playPortion = -1f)
@@ -25,8 +34,23 @@ public class SoundFXManager : MonoBehaviour
         float clipLength = audioSource.clip.length;
         if (playPortion > 0f)
             clipLength = clip.length * playPortion;
-
         Destroy(audioSource.gameObject, clipLength);
 
+    }
+
+    public void PlayMopSounds(AudioClip clip, Transform sourceTransform, float volume = 1f)
+    {
+
+        if (moppingTimer >= moppingInterval)
+        {
+            AudioSource audioSource = Instantiate(audioSourcePrefab, sourceTransform.position, Quaternion.identity);
+
+            audioSource.clip = clip;
+            audioSource.volume = volume;
+            audioSource.Play();
+            Destroy(audioSource.gameObject, audioSource.clip.length);
+
+            moppingTimer = 0f;
+        }
     }
 }

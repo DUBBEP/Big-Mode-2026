@@ -24,3 +24,11 @@ MonoBehaviour:
   fastFallForce: 300
   jumpBufferTime: 0.2
   wallJumpMovementLockTime: 0.2
+  jumpSoundFXs:
+  - {fileID: 8300000, guid: 503023e02e4d8ed419052a9b939d3f34, type: 3}
+  - {fileID: 8300000, guid: 6e8ef8cd1e4a1d1499d9ca846e1c9d69, type: 3}
+  - {fileID: 8300000, guid: d4b15d4f63a0bd64dad558666c339345, type: 3}
+  landSoundFX: {fileID: 8300000, guid: 2d95f7580f4e8954a94c93f396a550aa, type: 3}
+  walkSoundFX: {fileID: 8300000, guid: 0b9c1a068a0fa814fa61f5c19c0b222a, type: 3}
+  splashSoundFX: {fileID: 0}
+  walkSoundTiming: 0.28

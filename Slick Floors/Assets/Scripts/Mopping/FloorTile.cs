@@ -10,6 +10,7 @@ public class FloorTile : MonoBehaviour
 
 
     [SerializeField] private GroundType currentType;
+    private GroundType previousType;
     [HideInInspector] public MovementProfileSO currentMovementProfile;
 
     public GroundType CurrentType { get { return currentType; } private set { } }
@@ -32,6 +33,7 @@ public class FloorTile : MonoBehaviour
 
     public void ChangeTyle(GroundType type)
     {
+        previousType = currentType;
         TileHandler.UpdateTileTypeCount(currentType, type);
 
         currentType = type;
@@ -49,6 +51,11 @@ public class FloorTile : MonoBehaviour
             default:
                 Debug.LogError($"Unsupported Ground Type Passed Into Change Tyle Method on {name}");
                 break;
+        }
+
+        if (previousType != currentType && currentMovementProfile != null && currentMovementProfile.moppedSoundFXs != null)
+        {
+            SoundFXManager.Instance.PlayMopSounds(currentMovementProfile.moppedSoundFXs[Random.Range(0, currentMovementProfile.moppedSoundFXs.Count)], transform);
         }
     }
 

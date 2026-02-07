@@ -8,6 +8,7 @@ public class ChildController : MonoBehaviour
     [SerializeField] private AudioClip dial911SoundFXClip;
     [SerializeField] private AudioClip nopeSoundFXClip;
     [SerializeField] private AudioClip evilLaughSoundFXClip;
+    [SerializeField] private AudioClip pissedOffSoundFXClip;
     private CinemachineCamera cinemachineCamera;
     private Transform playerTransform;
     private Animator animator;
@@ -50,7 +51,7 @@ public class ChildController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        checkSlipped(collision);
+        // checkSlipped(collision);
         if (collision.gameObject.layer == LayerMask.NameToLayer("Objects"))
         {
             Debug.Log("ChildController: Sign placed!");
@@ -65,12 +66,7 @@ public class ChildController : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        checkSlipped(collision);
-    }
-
-    private void checkSlipped(Collider2D collision)
+    public void checkSlipped(Collider2D collision)
     {
         if (animator == null) return;
 
@@ -134,11 +130,16 @@ public class ChildController : MonoBehaviour
 
     private void playNopeSound()
     {
-        SoundFXManager.Instance.playSoundFXClip(nopeSoundFXClip, this.transform);
+        SoundFXManager.Instance.playSoundFXClip(nopeSoundFXClip, this.transform, volume: 2.5f);
     }
 
     private void playEvilLaughSound()
     {
         SoundFXManager.Instance.playSoundFXClip(evilLaughSoundFXClip, this.transform);
+    }
+
+    private void playPissedOffSound()
+    {
+        SoundFXManager.Instance.playSoundFXClip(pissedOffSoundFXClip, this.transform);
     }
 }
