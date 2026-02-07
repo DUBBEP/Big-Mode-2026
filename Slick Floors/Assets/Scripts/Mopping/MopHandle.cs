@@ -1,7 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D.IK;
 
 public class MopHandle : MonoBehaviour
 {
+    public List<LimbSolver2D> ropes;
     public FixedObject RightHandSolver_Target;
     public FixedObject LeftHandSolver_Target;
     public Transform mopAngle;
@@ -19,8 +22,7 @@ public class MopHandle : MonoBehaviour
     }
 
     void swapHands()
-    {
-        // euler angle 270 -> 90 is default, rest needs inversed hands
+    {        // euler angle 270 -> 90 is default, rest needs inversed hands
         float mopRotationZ = mopAngle.eulerAngles.z;
         // Debug.Log("Mop Z Rotation: " + mopRotationZ);
         if (mopRotationZ > 90f && mopRotationZ < 270f && !handsInversed)
@@ -30,6 +32,13 @@ public class MopHandle : MonoBehaviour
             RightHandSolver_Target.anchor = LeftHandSolver_Target.anchor;
             LeftHandSolver_Target.anchor = tempAnchor;
             handsInversed = true;
+            for (int i = 0; i < ropes.Count; i++)
+            {
+                if (ropes[i] != null)
+                {
+                    ropes[i].flip = !ropes[i].flip;
+                }
+            }
             // Debug.Log("Mop hands inversed");
         }
         else if ((mopRotationZ <= 90f || mopRotationZ >= 270f) && handsInversed)
@@ -39,6 +48,13 @@ public class MopHandle : MonoBehaviour
             RightHandSolver_Target.anchor = LeftHandSolver_Target.anchor;
             LeftHandSolver_Target.anchor = tempAnchor;
             handsInversed = false;
+            for (int i = 0; i < ropes.Count; i++)
+            {
+                if (ropes[i] != null)
+                {
+                    ropes[i].flip = !ropes[i].flip;
+                }
+            }
             // Debug.Log("Mop hands un-inversed");
         }
     }

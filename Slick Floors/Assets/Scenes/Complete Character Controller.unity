@@ -24384,10 +24384,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8135089037182250393, guid: 88cfdb7db7e13b041bcedd74dba1fa82, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.55001295
-      objectReference: {fileID: 0}
     - target: {fileID: 9122532727786991307, guid: 88cfdb7db7e13b041bcedd74dba1fa82, type: 3}
       propertyPath: m_Name
       value: JanitorPlayer
@@ -24639,7 +24635,6 @@ SceneRoots:
   - {fileID: 6486677285890436747}
   - {fileID: 8566808304084970140}
   - {fileID: 7282788141166408875}
-  - {fileID: 1757275933}
   - {fileID: 1757275933}
   - {fileID: 1116395857}
   - {fileID: 1708279722}
