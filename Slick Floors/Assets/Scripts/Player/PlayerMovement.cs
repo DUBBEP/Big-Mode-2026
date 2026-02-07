@@ -178,7 +178,7 @@ public class PlayerMovement : MonoBehaviour
             SoundFXManager.Instance.playSoundFXClip(movementData.speedySoundFX, this.transform, volume: 1f);
             _hasPlayedSpeedySound = true;
         }
-        else if (Mathf.Abs(rb.linearVelocity.x) <= speedThreshold)
+        else if (Mathf.Abs(rb.linearVelocity.x) <= speedThreshold - 5f)
         {
             _hasPlayedSpeedySound = false;
         }
