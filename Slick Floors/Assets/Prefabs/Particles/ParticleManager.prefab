@@ -44,6 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7816454315ca84242a57059167b007fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ParticlePooler
-  bubbleParticlePrefab: {fileID: 0}
+  bubbleParticlePrefab: {fileID: 6732142956882006150, guid: 015ee6847e18f4a43ac5fb28304ee5b6, type: 3}
   initialPoolSize: 10
   maxPoolSize: 50
