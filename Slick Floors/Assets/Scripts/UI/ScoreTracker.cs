@@ -20,8 +20,6 @@ public class ScoreTracker : MonoBehaviour
     {
         float score = TileHandler.GetTileTypeCount(GroundType.Clean) / (float)TileHandler.TotalTileCount;
 
-        Debug.Log($"score: {score}");
-
         if (scoreBar == null ) return;
         
         scoreBar.fillAmount = score;

@@ -107,7 +107,7 @@ public class RespawnCameraController : MonoBehaviour
             posComp.Damping = posComp.Damping + Vector3.one * distToDampen * dampenChangeRate;
 
             timer += Time.unscaledDeltaTime;
-            yield return null;
+            yield return new WaitForFixedUpdate();
         }
 
         if (zType == ZoomType.Out)
