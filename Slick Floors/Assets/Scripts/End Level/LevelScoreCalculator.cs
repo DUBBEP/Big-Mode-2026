@@ -114,7 +114,7 @@ public class LevelScoreCalculator : MonoBehaviour
             if (stateInfo.IsName("CurlLoop") || stateInfo.IsName("CurlsUp"))
                 slippedStudents++;
         }
-        Debug.Log($"Calculating student slip percentage. Slipped students: {slippedStudents}");
+        // Debug.Log($"Calculating student slip percentage. Slipped students: {slippedStudents}");
 
         return slippedStudents;
     }
