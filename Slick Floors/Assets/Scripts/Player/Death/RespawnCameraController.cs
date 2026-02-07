@@ -102,7 +102,6 @@ public class RespawnCameraController : MonoBehaviour
             // apply dampening and ortho size change
             float distToOrtho = targetOrtho - vCam.Lens.OrthographicSize;
             float distToDampen = targetDampening - posComp.Damping.magnitude;
-            Debug.Log($"ortho {vCam.Lens.OrthographicSize}");
 
             vCam.Lens.OrthographicSize += distToOrtho * targetOrthoRate * 0.1f;
             posComp.Damping = posComp.Damping + Vector3.one * distToDampen * dampenChangeRate;

@@ -19,6 +19,11 @@ public class ScoreTracker : MonoBehaviour
     public void UpdateScore(GameEventPayload payload)
     {
         float score = TileHandler.GetTileTypeCount(GroundType.Clean) / (float)TileHandler.TotalTileCount;
+
+        Debug.Log($"score: {score}");
+
+        if (scoreBar == null ) return;
+        
         scoreBar.fillAmount = score;
 
         if (score >= 1.0f)

@@ -25,6 +25,7 @@ public class DeathSequence : MonoBehaviour
 
     private void StartDeathSequence(GameEventPayload payload)
     {
+        TileHandler.ClearTiles();
         StartCoroutine(OnStartDeathSequence());
         StartCoroutine(RespawnCameraController.Instance.ZoomSequence());
     }

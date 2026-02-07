@@ -294,7 +294,18 @@
                 {
                     "name": "",
                     "id": "d2943803-a873-47fb-b84c-e6983a54becd",
-                    "path": "<Keyboard>/escape",
+                    "path": "<Keyboard>/backquote",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dfc5d4fa-165e-47a6-b040-f158c74f8d4d",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
