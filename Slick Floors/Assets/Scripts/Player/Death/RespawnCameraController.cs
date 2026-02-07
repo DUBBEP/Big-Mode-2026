@@ -11,11 +11,9 @@ public class RespawnCameraController : MonoBehaviour
     [SerializeField] private float zoomOutTime = 3f;
     [SerializeField] private float maxZoomOrthoZoom = 1.5f;
     [SerializeField] private float minZoomOrthoZoom = 8f;
-    [SerializeField] private float maxDampening = 6f;
-    [SerializeField] private float minDampening = 0.2f;
-    [SerializeField] private float orthoInRate = 0.25f;
-    [SerializeField] private float orthoOutRate = 0.1f;
-    [SerializeField] private float dampenChangeRate = 0.05f;
+    [SerializeField] private float zoomDampening = 0.2f;
+    [SerializeField] private float orthoInRate = 30f;
+    [SerializeField] private float orthoOutRate = 30f;
 
     private CinemachineCamera vCam;
     private CinemachinePositionComposer posComp;
@@ -70,6 +68,7 @@ public class RespawnCameraController : MonoBehaviour
     {
         Vector2 dzSize = posComp.Composition.DeadZone.Size;
         posComp.Composition.DeadZone.Size = Vector2.zero;
+        posComp.Damping = Vector3.one * zoomDampening;
         float timer = 0;
 
         if (followTarget != null)
@@ -77,22 +76,18 @@ public class RespawnCameraController : MonoBehaviour
 
         float targetOrtho;
         float endZoomTime;
-        float targetDampening;
         float targetOrthoRate;
         if (zType == ZoomType.In)
         {
-            posComp.Damping = Vector3.one * minDampening / 10;
             endZoomTime = zoomInTime;
             targetOrtho = maxZoomOrthoZoom;
-            targetDampening = minDampening;
             targetOrthoRate = orthoInRate;
         }
         else
         {
-            posComp.Damping = Vector3.one * maxDampening;
+            posComp.Damping = Vector3.one * zoomDampening;
             endZoomTime = zoomOutTime;
             targetOrtho = minZoomOrthoZoom;
-            targetDampening = 0;
             targetOrthoRate = orthoOutRate;
             yield return new WaitForSecondsRealtime(0.7f);
         }
@@ -100,11 +95,11 @@ public class RespawnCameraController : MonoBehaviour
         while (timer < endZoomTime)
         {
             // apply dampening and ortho size change
-            float distToOrtho = targetOrtho - vCam.Lens.OrthographicSize;
-            float distToDampen = targetDampening - posComp.Damping.magnitude;
-
-            vCam.Lens.OrthographicSize += distToOrtho * targetOrthoRate * 0.1f;
-            posComp.Damping = posComp.Damping + Vector3.one * distToDampen * dampenChangeRate;
+            vCam.Lens.OrthographicSize = Mathf.MoveTowards(
+                vCam.Lens.OrthographicSize,
+                targetOrtho,
+                targetOrthoRate * 0.1f * Time.unscaledDeltaTime
+            );
 
             timer += Time.unscaledDeltaTime;
             yield return null;
@@ -113,6 +108,7 @@ public class RespawnCameraController : MonoBehaviour
         if (zType == ZoomType.Out)
             vCam.Follow = FindFirstObjectByType<PlayerMovement>().transform;
 
+        posComp.Damping = Vector3.zero;
         posComp.Composition.DeadZone.Size = dzSize;
     }
 

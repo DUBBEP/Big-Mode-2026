@@ -54,7 +54,7 @@ public class RespawnManager : MonoBehaviour
         
         sr.sprite = PlayerDeathSprite;
         signRb.gravityScale = 0f;
-        Invoke(nameof(SetSignGrav), 0.5f);
+        Invoke(nameof(SetSignGrav), 2f);
 
         StartCoroutine(StartUpSequence());
         RespawnCameraController.Instance.MoveCamera(sr.transform, startCamZoom);
@@ -68,7 +68,7 @@ public class RespawnManager : MonoBehaviour
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
         while (timer <= 1f)
         {
-            timer += Time.deltaTime;
+            timer += Time.unscaledDeltaTime;
             float SpeedUpRate = (timer / startUpLength) / 3;
             
             Time.timeScale = SpeedUpRate;
