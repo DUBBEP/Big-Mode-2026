@@ -9,6 +9,7 @@ public class DeathSequence : MonoBehaviour
     [SerializeField] private GenericEventSO onPlayerDeath;
     [SerializeField] private Rigidbody2D playerRb;
     [SerializeField] private Image yellowFade;
+    [SerializeField] private float fadeSpeed;
 
     [Header("Sequence Properties")]
     [SerializeField] private float launchForce = 600;
@@ -35,19 +36,19 @@ public class DeathSequence : MonoBehaviour
         playerRb.AddTorque(launchForce, ForceMode2D.Impulse);
 
         float yellowTimer = slowdownLength / 1.5f;
-        float fadeValue = 0f;
 
         float slowdownTimer = slowdownLength;
-        while (slowdownTimer > 0.05f)
+        while (slowdownTimer > 0.5f)
         {
             if (yellowTimer > 0)
-                yellowTimer -= Time.deltaTime;
+                yellowTimer -= Time.unscaledDeltaTime;
             else
             {
-                Mathf.Min(1f, fadeValue += Time.deltaTime);
-                yellowFade.color = yellowFade.color + new Color(0,0,0,fadeValue);
+                Color c = yellowFade.color;
+                c.a = Mathf.MoveTowards(c.a, 1f, Time.unscaledDeltaTime * fadeSpeed);
+                yellowFade.color = c;
             }
-            slowdownTimer -= Time.deltaTime;
+            slowdownTimer -= Time.unscaledDeltaTime;
 
             float slowdownRate = (slowdownTimer / slowdownLength) / 3;
             Time.timeScale = slowdownRate > 0 ? slowdownRate : 0; 

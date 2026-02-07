@@ -860,6 +860,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   pauseMenu: {fileID: 849993931184371859}
   hud: {fileID: 0}
+  masterVolumeSlider: {fileID: 6983648392036148530}
+  musicVolumeSlider: {fileID: 3322844668962529042}
+  sfxVolumeSlider: {fileID: 1369215835822841680}
+  soundMixerManager: {fileID: 0}
 --- !u!1 &1932279699204285644
 GameObject:
   m_ObjectHideFlags: 0

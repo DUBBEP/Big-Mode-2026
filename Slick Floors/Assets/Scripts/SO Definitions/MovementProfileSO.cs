@@ -32,8 +32,6 @@ public class MovementProfileSO : ScriptableObject
     public List<AudioClip> jumpSoundFXs;
     public AudioClip landSoundFX;
     public AudioClip walkSoundFX;
-    public AudioClip splashSoundFX;
-
     public AudioClip speedySoundFX;
 
     public List<AudioClip> moppedSoundFXs;
