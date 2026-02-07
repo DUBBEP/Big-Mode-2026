@@ -25,13 +25,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2300486151151106881}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0.070005216, w: 0.9975467}
-  m_LocalPosition: {x: -0.4, y: 0.27, z: 0}
-  m_LocalScale: {x: 0.09960546, y: 0.09960546, z: 0.09960546}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.46, y: 0.25, z: 0}
+  m_LocalScale: {x: 0.47905248, y: 0.47905248, z: 0.47905248}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 9001621320553160837}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -8.029}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7253444963908820260
 SpriteRenderer:
   serializedVersion: 2
@@ -180,7 +180,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 6de2617384108034baaf6b48f5cc23b7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2530489685341768832}
+      addedObject: {fileID: 1045893801006826931}
     - targetCorrespondingSourceObject: {fileID: 4117055231794170526, guid: 6de2617384108034baaf6b48f5cc23b7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5108794603659659052}
@@ -388,7 +388,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: -8653719598885068355, guid: 6de2617384108034baaf6b48f5cc23b7, type: 3}
   m_PrefabInstance: {fileID: 8585397886632554690}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2530489685341768832
+--- !u!114 &1045893801006826931
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -397,18 +397,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8125261445437968767}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99d3e5b4a0c871d4994395e97435d220, type: 3}
+  m_Script: {fileID: 11500000, guid: 588d6b4432b5cf044898a1e5966ec034, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: '::'
-  targetRenderer: {fileID: 7253444963908820260}
-  playerRoot: {fileID: 0}
-  captureLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  padding: 0.5
-  pixelsPerUnit: 720
-  imageScale: 4.5
-  captureNow: 0
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerImageHolder
+  PlayerImageRenderer: {fileID: 7253444963908820260}
 --- !u!4 &9001621320553160837 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8374061950686457785, guid: 6de2617384108034baaf6b48f5cc23b7, type: 3}

@@ -36,4 +36,4 @@ MonoBehaviour:
   moppedSoundFXs:
   - {fileID: 8300000, guid: baa299d493af5b947a6ddfd405a3c8d7, type: 3}
   - {fileID: 8300000, guid: 30230d402539d534e888b14a43b22924, type: 3}
-  walkSoundTiming: 0.22
+  walkSoundTiming: 1

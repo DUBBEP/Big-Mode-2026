@@ -16,62 +16,13 @@ public class CautionImage : MonoBehaviour
     [SerializeField] private float pixelsPerUnit = 100f;
     [Tooltip("Scale multiplier for the generated sprite size.")]
     [SerializeField] private float imageScale = 1f;
-    [SerializeField] private bool captureNow = false;
-
-    private void Start()
-    {
-        if (targetRenderer == null)
-        {
-            targetRenderer = GetComponent<SpriteRenderer>();
-        }
-
-        if (playerRoot == null)
-        {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (player != null)
-            {
-                playerRoot = player.transform;
-            }
-        }
-    }
-
-    private void Update()
-    {
-        if (captureNow)
-        {
-            captureNow = false;
-            CapturePose();
-        }
-    }
 
     [ContextMenu("Capture Pose")]
     public void CapturePose()
     {
-        if (playerRoot == null)
-        {
-            // Try to find player if not assigned
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (player != null) playerRoot = player.transform;
+        if (!CheckComponents())
+            return;
 
-            if (playerRoot == null)
-            {
-                Debug.LogError("[CautionImage] Player Root not assigned and no object with tag 'Player' found!");
-                return;
-            }
-        }
-
-        if (targetRenderer == null)
-        {
-            targetRenderer = GetComponent<SpriteRenderer>();
-            if (targetRenderer == null)
-            {
-                Debug.LogError("[CautionImage] Target SpriteRenderer not assigned!");
-                return;
-            }
-        }
-
-        // 1. Calculate Bounds of the player visual parts
-        // We look for Renderers (SpriteRenderer, MeshRenderer, etc.)
         var renderers = playerRoot.GetComponentsInChildren<Renderer>();
         if (renderers.Length == 0)
         {
@@ -133,6 +84,7 @@ public class CautionImage : MonoBehaviour
             // 4. Read pixels into Texture2D
             RenderTexture.active = rt;
             Texture2D tex = new Texture2D(width, height, TextureFormat.RGBA32, false);
+            tex.hideFlags = HideFlags.DontSave;
             tex.ReadPixels(new Rect(0, 0, width, height), 0, 0);
             tex.Apply();
 
@@ -143,8 +95,17 @@ public class CautionImage : MonoBehaviour
 
             Sprite newSprite = Sprite.Create(tex, new Rect(0, 0, width, height), new Vector2(0.5f, 0.5f), finalPPU);
             newSprite.name = "PlayerParams_Capture";
+            newSprite.hideFlags = HideFlags.DontSave;
 
             targetRenderer.sprite = newSprite;
+
+            if (RespawnManager.Instance.PlayerDeathSprite != null)
+            {
+                Destroy(RespawnManager.Instance.PlayerDeathSprite.texture);
+                Destroy(RespawnManager.Instance.PlayerDeathSprite);
+            }
+
+            RespawnManager.Instance.PlayerDeathSprite = newSprite;
 
             Debug.Log($"[CautionImage] Captured player pose to sprite. Size: {width}x{height}");
         }
@@ -161,5 +122,21 @@ public class CautionImage : MonoBehaviour
                 DestroyImmediate(camObj);
             }
         }
+    }
+
+    private bool CheckComponents()
+    {
+        if (playerRoot == null)
+        {
+            Debug.LogError("No Player Object");
+            return false;
+        }
+        else if (targetRenderer == null && !TryGetComponent<SpriteRenderer>(out targetRenderer))
+        {
+            Debug.LogError("No Sprite Renderer");
+            return false;
+        }
+
+        return true;
     }
 }
