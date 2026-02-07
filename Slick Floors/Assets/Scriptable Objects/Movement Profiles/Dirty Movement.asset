@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b2bdaf1ce30c9e4ca7d2ca948c6a284, type: 3}
   m_Name: Dirty Movement
   m_EditorClassIdentifier: Assembly-CSharp::MovementProfileSO
-  moveSpeed: 8
-  acceleration: 2
-  deceleration: 150
-  airResist: 0.8
-  jumpForce: 30
-  wallJumpForce: {x: 30, y: 50}
-  jumpGravityScale: 4
-  jumpCancelGravityScale: 12
-  fallingGravityScale: 4
-  fastFallForce: 300
-  jumpBufferTime: 0.2
-  wallJumpMovementLockTime: 0.2
+  MoveSpeed: 5
+  Acceleration: 2
+  Deceleration: 150
+  AirResist: 0.9
+  JumpForce: 20
+  WallJumpForce: {x: 30, y: 50}
+  JumpGravityScale: 30
+  JumpCancelGravityScale: 30
+  FallingGravityScale: 30
+  FastFallForce: 300
+  JumpBufferTime: 0.2
+  WallJumpMovementLockTime: 0.2
+  MopMoveSpeed: 2

@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using UnityEngine;
 
 public class PlayerDamageKnockback : MonoBehaviour
@@ -12,14 +11,9 @@ public class PlayerDamageKnockback : MonoBehaviour
         if (payload.damageSource.knockBackForce <= 0) return;
 
         if (payload.damageSource.sourceObject == null)
-        {
             KnockPlayerUpward(payload);
-        }
         else
-        {
             KnockAwayFromObject(payload);
-        }
-
     }
 
     private void KnockAwayFromObject(DamageTakenEventPayload payload)

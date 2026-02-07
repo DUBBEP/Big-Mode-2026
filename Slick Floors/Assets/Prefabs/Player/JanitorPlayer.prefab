@@ -430,6 +430,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2351085165404303375, guid: 17076d264a44a074fa6389ddea63be7a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8705665692224240468}
+    - targetCorrespondingSourceObject: {fileID: 2351085165404303375, guid: 17076d264a44a074fa6389ddea63be7a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7040397822815336893}
     - targetCorrespondingSourceObject: {fileID: 5723178874090345436, guid: 17076d264a44a074fa6389ddea63be7a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1175269820328501994}
@@ -476,9 +479,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5e06155c756e194c92e7506d8088935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DisgustTrigger
-  disgustController: {fileID: 0}
+  disgustController: {fileID: 7040397822815336893}
   movement: {fileID: 7404875567441621208}
-  disgustTickRate: 0.5
+  disgustTickRate: 0.1
 --- !u!4 &3851938418074100331 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6280880861307484184, guid: 17076d264a44a074fa6389ddea63be7a, type: 3}
@@ -519,6 +522,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerCollisionsController
   movement: {fileID: 7404875567441621208}
   mop: {fileID: 2951505552612783047}
+--- !u!114 &7040397822815336893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4827372579367529084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4afae7382dc6c1643879958b6c716e56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DisgustController
+  playerDeathEvent: {fileID: 11400000, guid: c230f6eba3c0609458be9264e4736eb6, type: 2}
+  disgustRecievedEvent: {fileID: 11400000, guid: afa9c1fb7fbfe52459095975e2fd5097, type: 2}
+  disgustResistance: 200
+  invulnerabilityLength: 0
+  deathKnockback: 400
 --- !u!1 &5121416385317704403 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2687544354877114528, guid: 17076d264a44a074fa6389ddea63be7a, type: 3}

@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 public class DeathSequence : MonoBehaviour
 {
     [SerializeField] private GenericEventSO onPlayerDeath;
+    [SerializeField] private Rigidbody2D playerRb;
+    [SerializeField] private float launchForce;
     [SerializeField] private float slowdownLength;
     private float slowdownTimer;
     private void StartDeathSequence(GameEventPayload payload)
@@ -14,6 +16,8 @@ public class DeathSequence : MonoBehaviour
 
     private IEnumerator OnStartDeathSequence()
     {
+        playerRb.AddForce(Vector2.up * launchForce, ForceMode2D.Impulse);
+        playerRb.AddTorque(launchForce, ForceMode2D.Impulse);
         slowdownTimer = slowdownLength;
         while (slowdownTimer > 0.05f)
         {
@@ -23,12 +27,14 @@ public class DeathSequence : MonoBehaviour
             Debug.Log($"slowdownRate: {slowdownRate}");
             Debug.Log($"Slowdown Timer: {slowdownTimer}");
             Time.timeScale = slowdownRate > 0 ? slowdownRate : 0; 
-             
+            Time.fixedDeltaTime = 0.02f * Time.timeScale;
+
             yield return new WaitForFixedUpdate();
         }
 
         Debug.Log("Restarting Scene");
         Time.timeScale = 1f;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

@@ -106,6 +106,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de8659912027faa40900d3c527709b98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FloorTile
+  tileUpdatedEvent: {fileID: 11400000, guid: af96f2880ab540f47a664851eea6e3b1, type: 2}
   sr: {fileID: 4382753504580133163}
   dirtyData: {fileID: 11400000, guid: 4b2a16830c19afd4c9603b1030397f05, type: 2}
   cleanData: {fileID: 11400000, guid: 816ee712275c5d742920921210cae6b0, type: 2}

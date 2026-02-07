@@ -4,10 +4,9 @@ public class DisgustController : MonoBehaviour
 {
     [SerializeField] private GenericEventSO playerDeathEvent;
     [SerializeField] private DamageTakenEventSO disgustRecievedEvent;
-
     [SerializeField] private float disgustResistance;
     [SerializeField] private float invulnerabilityLength;
-    [SerializeField] private float deathKnockback;
+
     private float digustValue;
     private float invulnerabilityTimer;
     private bool invulnerable;
@@ -24,7 +23,6 @@ public class DisgustController : MonoBehaviour
         if (invulnerable)
         {
             invulnerabilityTimer -= Time.deltaTime;
-
             if (invulnerabilityTimer < 0) invulnerable = false;
         }
     }
@@ -60,15 +58,5 @@ public class DisgustController : MonoBehaviour
     private void Die()
     {
         playerDeathEvent.Raise(new GameEventPayload());
-        disgustRecievedEvent.Raise(new DamageTakenEventPayload
-        {
-            playerHp = DisgustResistance,
-            playerMaxHp = disgustResistance,
-            damageSource = new DamageSource
-            {
-                value = 0,
-                knockBackForce = deathKnockback,
-            }
-        });
     }
 }
