@@ -106,6 +106,7 @@ public class ChildController : MonoBehaviour
         if (cinemachineCamera != null && playerTransform != null)
             cinemachineCamera.Follow = playerTransform;
         // Enter end game sequence
+        RemoteDeath.Instance.RemoteDie(1f);
     }
 
     private void dial911()

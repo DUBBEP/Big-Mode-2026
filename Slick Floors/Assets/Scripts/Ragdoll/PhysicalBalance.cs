@@ -34,19 +34,9 @@ public class PhysicalBalance : MonoBehaviour
         enabled = false;
     }
 
-    private void OnEnable()
-    {
-        if (onPlayerDeath != null)
-        {
+    private void OnEnable() =>
             onPlayerDeath.RegisterListener(DisableBalancing);
-        }
-    }
 
-    private void OnDisable()
-    {
-        if (onPlayerDeath != null)
-        {
-            onPlayerDeath.RegisterListener(DisableBalancing);
-        }
-    }
+    private void OnDisable() =>
+            onPlayerDeath.UnregisterListener(DisableBalancing);
 }

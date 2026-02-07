@@ -121,15 +121,9 @@ public class PlayerMovement : MonoBehaviour
         if (_jumpBufferCounter > 0)
         {
             if (_isGrounded)
-            {
                 ExecuteJump(Vector2.up * movementData.JumpForce);
-                Debug.Log("Did grounded jump");
-            }
             else if (_wallSide != 0)
-            {
                 ExecuteJump(new Vector2(movementData.WallJumpForce.x * -_wallSide, movementData.WallJumpForce.y));
-                Debug.Log("Did wall jump");
-            }
         }
     }
 

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 
 public static class TileHandler
 {
@@ -24,6 +25,7 @@ public static class TileHandler
         DirtyCount = 0;
         CleanCount = 0;
         NeutralCount = 0;
+        TotalTileCount = 0;
 
         foreach (FloorTile tile in TilesInScene)
             ChangeTileTypeCount(tile.CurrentType, IncrementType.add);
@@ -66,6 +68,16 @@ public static class TileHandler
                 NeutralCount += incrementType == IncrementType.add ? 1 : -1;
                 break;
         }
+    }
+
+    public static void ClearTiles()
+    {
+        DirtyCount = 0;
+        CleanCount = 0;
+        NeutralCount = 0;
+        TotalTileCount = 0;
+
+        TilesInScene.Clear();
     }
 
     enum IncrementType
