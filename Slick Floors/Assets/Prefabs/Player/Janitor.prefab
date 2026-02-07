@@ -962,8 +962,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   onPlayerDeath: {fileID: 11400000, guid: c230f6eba3c0609458be9264e4736eb6, type: 2}
   movementData: {fileID: 11400000, guid: 90e60aea790c814489dd7b11b84123f1, type: 2}
-  groundOffset: {x: 0, y: -1.5}
-  groundSize: {x: 0.5, y: 0.2}
   wallCheckSize: {x: 0.2, y: 1.75}
   wallCheckOffset: {x: 0.2, y: -0.5}
   groundCheckRadius: 0.25
@@ -978,6 +976,7 @@ MonoBehaviour:
   legForce: 7
   leftLegBone: {fileID: 1629087226515708210}
   rightLegBone: {fileID: 7881735532345719220}
+  pickUpItemSoundFXClip: {fileID: 0}
 --- !u!114 &2056810835689287984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -990,6 +989,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4cc66ac3fd8bcc43ac993677906575e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  ropes:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   RightHandSolver_Target: {fileID: 1895578176297183621}
   LeftHandSolver_Target: {fileID: 7156443955029376818}
   mopAngle: {fileID: 0}
