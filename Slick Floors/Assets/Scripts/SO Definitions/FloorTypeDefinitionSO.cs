@@ -4,7 +4,7 @@ using UnityEngine;
 public class FloorTypeDefinitionSO : ScriptableObject
 {
     public string floorTypeName;
-    public Sprite floorSprite;
+    public FloorRenderer floorRenderer;
     public PhysicsMaterial2D material;
     public MovementProfileSO playerMovementProfile;
 }

@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class FloorTile : MonoBehaviour
 {
+    [SerializeField] private FloorRenderer floorRenderer;
+    [SerializeField] private SpriteRenderer floorSprite;
+    [SerializeField] private SpriteRenderer foregroundSprite;
     [SerializeField] private GenericEventSO tileUpdatedEvent;
-    [SerializeField] private SpriteRenderer sr;
+    [SerializeField] private SpriteRenderer backgroundSprite;
 
     [SerializeField] private FloorTypeDefinitionSO dirtyData;
     [SerializeField] private FloorTypeDefinitionSO cleanData;
@@ -19,9 +22,6 @@ public class FloorTile : MonoBehaviour
 
     private void Start()
     {
-        if (!TryGetComponent<SpriteRenderer>(out sr))
-            sr = gameObject.AddComponent<SpriteRenderer>();
-
         TileHandler.AddTile(this);
 
         ChangeTile(currentType);
@@ -29,6 +29,10 @@ public class FloorTile : MonoBehaviour
 
     private void OnValidate()
     {
+#if UNITY_EDITOR
+        if (!Application.isPlaying)
+            return;
+#endif
         UpdateTileData(currentType);
 
     }
@@ -93,6 +97,41 @@ public class FloorTile : MonoBehaviour
         }
 
         currentMovementProfile = data.playerMovementProfile;
-        sr.sprite = data.floorSprite;
+        floorRenderer = data.floorRenderer;
+        if (floorRenderer != null)
+        {
+            if (floorRenderer.Floor != null && floorSprite != null)
+            {
+                floorSprite.sprite = floorRenderer.Floor.sprite;
+                floorSprite.color = floorRenderer.Floor.color;
+                floorSprite.flipX = floorRenderer.Floor.flipX;
+                floorSprite.flipY = floorRenderer.Floor.flipY;
+                floorSprite.sortingLayerID = floorRenderer.Floor.sortingLayerID;
+                floorSprite.sortingOrder = floorRenderer.Floor.sortingOrder;
+                floorSprite.sharedMaterial = floorRenderer.Floor.sharedMaterial;
+            }
+
+            if (floorRenderer.Foreground != null && foregroundSprite != null)
+            {
+                foregroundSprite.sprite = floorRenderer.Foreground.sprite;
+                foregroundSprite.color = floorRenderer.Foreground.color;
+                foregroundSprite.flipX = floorRenderer.Foreground.flipX;
+                foregroundSprite.flipY = floorRenderer.Foreground.flipY;
+                foregroundSprite.sortingLayerID = floorRenderer.Foreground.sortingLayerID;
+                foregroundSprite.sortingOrder = floorRenderer.Foreground.sortingOrder;
+                foregroundSprite.sharedMaterial = floorRenderer.Foreground.sharedMaterial;
+            }
+
+            if (floorRenderer.Background != null && backgroundSprite != null)
+            {
+                backgroundSprite.sprite = floorRenderer.Background.sprite;
+                backgroundSprite.color = floorRenderer.Background.color;
+                backgroundSprite.flipX = floorRenderer.Background.flipX;
+                backgroundSprite.flipY = floorRenderer.Background.flipY;
+                backgroundSprite.sortingLayerID = floorRenderer.Background.sortingLayerID;
+                backgroundSprite.sortingOrder = floorRenderer.Background.sortingOrder;
+                backgroundSprite.sharedMaterial = floorRenderer.Background.sharedMaterial;
+            }
+        }
     }
 }
