@@ -13,9 +13,14 @@ public class DisgustController : MonoBehaviour
     public float DisgustResistance { get { return disgustResistance; } private set { } }
     public float DigustValue { get { return digustValue; } private set { } }
 
+    private bool dead;
+    public bool Dead { get { return dead; } private set { } }
+
+
     void Start()
     {
         digustValue = 0;
+        dead = false;
     }
 
     private void Update()
@@ -57,6 +62,10 @@ public class DisgustController : MonoBehaviour
 
     public void Die()
     {
-        playerDeathEvent.Raise(new GameEventPayload());
+        if (!dead)
+        {
+            dead = true;
+            playerDeathEvent.Raise(new GameEventPayload());
+        }
     }
 }
