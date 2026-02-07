@@ -23,7 +23,7 @@ public class MopCleaningController : MonoBehaviour
         if (collision.TryGetComponent<FloorTile>(out FloorTile tile))
         {
             // Debug.Log($"Mop has found tile");
-            tile.ChangeTyle(GroundType.Clean);
+            tile.ChangeTile(GroundType.Clean);
         }
     }
 }

@@ -205,7 +205,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 7.96, y: 7.2}
+  m_Size: {x: 4.66, y: 3.33}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -494,6 +494,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1970035260}
     m_Modifications:
     - target: {fileID: 626962140616861114, guid: 133c7fca55adc1344a0772b2eb5e8a39, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6540005
+      objectReference: {fileID: 0}
+    - target: {fileID: 626962140616861114, guid: 133c7fca55adc1344a0772b2eb5e8a39, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0.75649416
       objectReference: {fileID: 0}
@@ -576,6 +580,14 @@ PrefabInstance:
     - target: {fileID: 7541084247515072732, guid: 133c7fca55adc1344a0772b2eb5e8a39, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0.32863444
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992011433360317616, guid: 133c7fca55adc1344a0772b2eb5e8a39, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.51292974
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992011433360317616, guid: 133c7fca55adc1344a0772b2eb5e8a39, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.8584306
       objectReference: {fileID: 0}
     - target: {fileID: 8768867322401414019, guid: 133c7fca55adc1344a0772b2eb5e8a39, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2082,8 +2094,8 @@ MonoBehaviour:
   timeMessage: '<funky squeezefactor=1.1 amplitude=3>Time: '
   slicknessMessage: '<funky squeezefactor=1.1 amplitude=3>Slickness: '
   studentsMessage: '<funky squeezefactor=1.1 amplitude=3>Pissed Students: '
-  timeBetweenTextPopups: 0.2
-  startDelayTime: 0
+  timeBetweenTextPopups: 0.7
+  startDelayTime: 5
   endDelayTime: 10
 --- !u!4 &1678689149
 Transform:

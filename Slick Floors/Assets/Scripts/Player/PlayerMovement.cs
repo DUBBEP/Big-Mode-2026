@@ -7,8 +7,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private MovementProfileSO movementData;
 
     [Header("Detection Settings")]
-    [SerializeField] private Vector2 groundOffset = new Vector2();
-    [SerializeField] private Vector2 groundSize = new Vector2();
     [SerializeField] private Vector2 wallCheckSize = new Vector2(); // Height should match player
     [SerializeField] private Vector2 wallCheckOffset = new Vector2(); // Horizontal distance from center
     [SerializeField] private float groundCheckRadius;
@@ -88,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
                       Physics2D.OverlapCircle(leftFootGroundedCheck.position, groundCheckRadius, groundLayer);
 
         if (!_isGrounded && rb.linearVelocity.y < 0f)
-            rb.gravityScale = movementData.fallingGravityScale;
+            rb.gravityScale = movementData.FallingGravityScale;
 
         // Debounce: Only play land sound if ungrounded for > 0.4
         if (!_isGrounded && _wasGrounded)
@@ -124,12 +122,12 @@ public class PlayerMovement : MonoBehaviour
         {
             if (_isGrounded)
             {
-                ExecuteJump(Vector2.up * movementData.jumpForce);
+                ExecuteJump(Vector2.up * movementData.JumpForce);
                 Debug.Log("Did grounded jump");
             }
             else if (_wallSide != 0)
             {
-                ExecuteJump(new Vector2(movementData.wallJumpForce.x * -_wallSide, movementData.wallJumpForce.y));
+                ExecuteJump(new Vector2(movementData.WallJumpForce.x * -_wallSide, movementData.WallJumpForce.y));
                 Debug.Log("Did wall jump");
             }
         }
@@ -137,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void ExecuteJump(Vector2 force)
     {
-        rb.gravityScale = movementData.jumpGravityScale;
+        rb.gravityScale = movementData.JumpGravityScale;
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
         SoundFXManager.Instance.playSoundFXClip(movementData.jumpSoundFXs[Random.Range(0, movementData.jumpSoundFXs.Count)], transform, volume: 0.25f);
         rb.AddForce(force, ForceMode2D.Impulse);
@@ -147,10 +145,10 @@ public class PlayerMovement : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.performed)
-            _jumpBufferCounter = movementData.jumpBufferTime;
+            _jumpBufferCounter = movementData.JumpBufferTime;
 
         if (context.canceled && rb.linearVelocity.y > 0)
-            rb.gravityScale = movementData.jumpCancelGravityScale;
+            rb.gravityScale = movementData.JumpCancelGravityScale;
     }
 
     public void OnMove(InputAction.CallbackContext context) =>
@@ -167,14 +165,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_wallJumpLockCounter > 0) return;
 
-        float targetSpeed = _horizontalInput * movementData.moveSpeed;
+        float targetSpeed = _horizontalInput * movementData.MoveSpeed;
         float speedDif = targetSpeed - rb.linearVelocity.x;
-        float accelType = (Mathf.Abs(targetSpeed) > 0.01f) ? movementData.acceleration : movementData.deceleration;
-        float accelRate = _isGrounded ? accelType : accelType * movementData.airResist;
+        float accelType = (Mathf.Abs(targetSpeed) > 0.01f) ? movementData.Acceleration : movementData.Deceleration;
+        float accelRate = _isGrounded ? accelType : accelType * movementData.AirResist;
         rb.AddForce(Vector2.right * speedDif * accelRate);
 
         // Play speedy sound effect once when speed exceeds threshold
-        float speedThreshold = movementData.moveSpeed * 0.6f;
+        float speedThreshold = movementData.MoveSpeed * 0.6f;
         if (Mathf.Abs(rb.linearVelocity.x) > speedThreshold && !_hasPlayedSpeedySound && movementData.speedySoundFX != null)
         {
             SoundFXManager.Instance.playSoundFXClip(movementData.speedySoundFX, this.transform, volume: 1f);
@@ -256,7 +254,7 @@ public class PlayerMovement : MonoBehaviour
         physicalBody.enabled = false;
 
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
-        rb.AddForce(Vector2.down * movementData.fastFallForce, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.down * movementData.FastFallForce, ForceMode2D.Impulse);
     }
 
     private void StopCrouch()

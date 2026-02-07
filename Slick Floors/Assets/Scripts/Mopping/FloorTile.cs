@@ -2,19 +2,20 @@ using UnityEngine;
 
 public class FloorTile : MonoBehaviour
 {
+    [SerializeField] private GenericEventSO tileUpdatedEvent;
     [SerializeField] private SpriteRenderer sr;
 
     [SerializeField] private FloorTypeDefinitionSO dirtyData;
     [SerializeField] private FloorTypeDefinitionSO cleanData;
     [SerializeField] private FloorTypeDefinitionSO neutralData;
 
-
     [SerializeField] private GroundType currentType;
-    private GroundType previousType;
+    [SerializeField] private float dirtyTileDamageValue;
     [HideInInspector] public MovementProfileSO currentMovementProfile;
 
-    public GroundType CurrentType { get { return currentType; } private set { } }
-
+    private DirtyTileDamage damageComponent;
+    private GroundType previousType;
+    [HideInInspector] public GroundType CurrentType { get { return currentType; } private set { } }
 
     private void Start()
     {
@@ -23,19 +24,31 @@ public class FloorTile : MonoBehaviour
 
         TileHandler.AddTile(this);
 
-        ChangeTyle(currentType);
+        ChangeTile(currentType);
     }
 
     private void OnValidate()
     {
-        ChangeTyle(currentType);
+        UpdateTileData(currentType);
+
     }
 
-    public void ChangeTyle(GroundType type)
+    public void ChangeTile(GroundType type)
     {
         previousType = currentType;
         TileHandler.UpdateTileTypeCount(currentType, type);
+        UpdateTileData(type);
+        UpdateDamageComponent();
+        tileUpdatedEvent.Raise(new GameEventPayload());
 
+        if (previousType != currentType && currentMovementProfile != null && currentMovementProfile.moppedSoundFXs != null)
+        {
+            SoundFXManager.Instance.PlayMopSounds(currentMovementProfile.moppedSoundFXs[Random.Range(0, currentMovementProfile.moppedSoundFXs.Count)], transform);
+        }
+    }
+
+    private void UpdateTileData(GroundType type)
+    {
         currentType = type;
         switch (type)
         {
@@ -52,10 +65,22 @@ public class FloorTile : MonoBehaviour
                 Debug.LogError($"Unsupported Ground Type Passed Into Change Tyle Method on {name}");
                 break;
         }
+    }
 
-        if (previousType != currentType && currentMovementProfile != null && currentMovementProfile.moppedSoundFXs != null)
+    private void UpdateDamageComponent()
+    {
+        if (currentType == GroundType.Dirty && damageComponent == null)
         {
-            SoundFXManager.Instance.PlayMopSounds(currentMovementProfile.moppedSoundFXs[Random.Range(0, currentMovementProfile.moppedSoundFXs.Count)], transform);
+            damageComponent = gameObject.AddComponent<DirtyTileDamage>();
+            damageComponent.damageValue = dirtyTileDamageValue;
+        }
+        else
+        {
+            UnityEditor.EditorApplication.delayCall += () =>
+            {
+                if (damageComponent != null)
+                    DestroyImmediate(damageComponent);
+            };
         }
     }
 
