@@ -92,6 +92,7 @@ public class ChildController : MonoBehaviour
 
     }
 
+    /*
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (animator == null) return;
@@ -102,6 +103,7 @@ public class ChildController : MonoBehaviour
             animator.SetBool("SignPlaced", false);
         }
     }
+    */
 
     private void trackCamera()
     {
