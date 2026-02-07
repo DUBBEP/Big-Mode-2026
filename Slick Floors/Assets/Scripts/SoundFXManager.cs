@@ -8,7 +8,7 @@ public class SoundFXManager : MonoBehaviour
     [SerializeField] private AudioSource audioSourcePrefab;
 
     private float moppingTimer = 0f;
-    public float moppingInterval = 0.3f;
+    public float moppingInterval = 0.8f;
 
     private void Awake()
     {
@@ -43,14 +43,9 @@ public class SoundFXManager : MonoBehaviour
 
         if (moppingTimer >= moppingInterval)
         {
-            AudioSource audioSource = Instantiate(audioSourcePrefab, sourceTransform.position, Quaternion.identity);
-
-            audioSource.clip = clip;
-            audioSource.volume = volume;
-            audioSource.Play();
-            Destroy(audioSource.gameObject, audioSource.clip.length);
-
+            playSoundFXClip(clip, sourceTransform, volume);
             moppingTimer = 0f;
         }
     }
+
 }
