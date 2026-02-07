@@ -6,6 +6,7 @@ public class CautionPlace : MonoBehaviour
     public MopHandle mopHandleControls;
     [SerializeField] float placeSpeed = 10f;
     [SerializeField] float spawnHeight = 1f;
+    [SerializeField] private AudioClip placeSignSoundFXClip;
 
     private Animator anim;
     private int _signCount = 0;
@@ -84,6 +85,7 @@ public class CautionPlace : MonoBehaviour
                     rb.gravityScale = 1f;
                     rb.constraints = RigidbodyConstraints2D.None;
                     rb.linearVelocity = Vector2.down * placeSpeed;
+                    SoundFXManager.Instance.playSoundFXClip(placeSignSoundFXClip, this.transform, volume: 2.0f);
                 }
 
                 Collider2D signCollider = signChild.GetComponent<Collider2D>();

@@ -5,58 +5,65 @@ using UnityEngine;
 
 public class RandomTextWriter : MonoBehaviour
 {
-    [SerializeField] private List<TextMeshProUGUI> randomInitialTexts;
-    [SerializeField] private List<TextMeshProUGUI> randomFollowUpTexts;
-    [SerializeField] private TextMeshProUGUI aSignText;
-    [SerializeField] private TextMeshProUGUI reportedText;
+    [SerializeField] private TextMeshProUGUI displayText;
+    [SerializeField] private string reportedText = "L get <wave>Reported.";
+
+    [SerializeField]
+    private List<string> randomInitialTexts = new()
+    {
+        "My <palette> lawyers </palette>shall be hearing about this one<jump>...",
+        "Shitty ass Janitor...",
+        "Thats it! <!wait=0.2> Im calling ... <!wait=0.35> <palette><!delay=0.3><shake>911"
+    };
+
+    [SerializeField]
+    private List<string> randomFollowUpTexts = new()
+    {
+        "<shake> WAIT! </shake> A<wave> <palette> Slick </palette></wave> Sign ???",
+        "I guess the <dangle> insurance </dangle> should cover it...",
+        "Damn. My fault.",
+        "He's <palette>slick </palette>for that one :(",
+        "You <palette> slick </palette> motherfucker..."
+    };
+
+    private void Start()
+    {
+        hideAllText();
+    }
 
     public void showTextInitial()
     {
-        // pick a one random text mesh to show
+        if (displayText == null || randomInitialTexts.Count == 0) return;
+
+        // pick a one random text to show
         int randomIndex = UnityEngine.Random.Range(0, randomInitialTexts.Count);
-        for (int i = 0; i < randomInitialTexts.Count; i++)
-        {
-            randomInitialTexts[i].alpha = (i == randomIndex) ? 1f : 0f;
-        }
+        displayText.text = randomInitialTexts[randomIndex];
+        displayText.alpha = 1f;
     }
 
     public void showTextFollowUp()
     {
-        // pick a one random text mesh to show
-        int randomIndex = UnityEngine.Random.Range(0, randomFollowUpTexts.Count);
-        for (int i = 0; i < randomFollowUpTexts.Count; i++)
-        {
-            randomFollowUpTexts[i].alpha = (i == randomIndex) ? 1f : 0f;
-        }
-    }
+        if (displayText == null || randomFollowUpTexts.Count == 0) return;
 
-    public void showSignText()
-    {
-        aSignText.alpha = 1f;
+        // pick a one random text to show
+        int randomIndex = UnityEngine.Random.Range(0, randomFollowUpTexts.Count);
+        displayText.text = randomFollowUpTexts[randomIndex];
+        displayText.alpha = 1f;
     }
 
     public void showReportedText()
     {
-        reportedText.alpha = 1f;
+        displayText.text = reportedText;
+        displayText.alpha = 1f;
     }
 
 
     public void hideAllText()
     {
-        aSignText.alpha = 0f;
-        reportedText.alpha = 0f;
-        foreach (var textMesh in randomInitialTexts)
+        if (displayText != null)
         {
-            textMesh.alpha = 0f;
+            displayText.alpha = 0f;
+            displayText.text = "";
         }
-        foreach (var textMesh in randomFollowUpTexts)
-        {
-            textMesh.alpha = 0f;
-        }
-    }
-
-    private void Start()
-    {
-        hideAllText();
     }
 }

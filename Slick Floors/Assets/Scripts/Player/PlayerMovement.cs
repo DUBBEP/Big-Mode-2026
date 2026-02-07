@@ -32,11 +32,18 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PhysicalBalance leftLegBone;
     [SerializeField] private PhysicalBalance rightLegBone;
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip pickUpItemSoundFXClip;
+
+    private float walkFootstepTimer;
+    private bool _hasPlayedSpeedySound = false;
 
     private float _jumpBufferCounter;
     private float _wallJumpLockCounter;
 
     private bool _isGrounded;
+    private bool _wasGrounded = true;
+    private float _lastUngroundedTime = -10f;
     private int _wallSide;
     private float _horizontalInput;
     private bool _isCrouching = false;
@@ -76,11 +83,25 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckPhysics()
     {
+        _wasGrounded = _isGrounded;
         _isGrounded = Physics2D.OverlapCircle(leftFootGroundedCheck.position, groundCheckRadius, groundLayer) ||
                       Physics2D.OverlapCircle(leftFootGroundedCheck.position, groundCheckRadius, groundLayer);
 
         if (!_isGrounded && rb.linearVelocity.y < 0f)
             rb.gravityScale = movementData.fallingGravityScale;
+
+        // Debounce: Only play land sound if ungrounded for > 0.4
+        if (!_isGrounded && _wasGrounded)
+        {
+            _lastUngroundedTime = Time.time;
+        }
+        if (_isGrounded && !_wasGrounded && rb.linearVelocity.y < -20f)
+        {
+            if (Time.time - _lastUngroundedTime > 0.4f)
+            {
+                SoundFXManager.Instance.playSoundFXClip(movementData.landSoundFX, this.transform, volume: 2.0f);
+            }
+        }
 
         // BoxCast for Left and Right sides
         Vector2 leftBoxPos = (Vector2)transform.position + new Vector2(-wallCheckOffset.x, wallCheckOffset.y);
@@ -106,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
                 ExecuteJump(Vector2.up * movementData.jumpForce);
                 Debug.Log("Did grounded jump");
             }
-            else if (_wallSide !=  0)
+            else if (_wallSide != 0)
             {
                 ExecuteJump(new Vector2(movementData.wallJumpForce.x * -_wallSide, movementData.wallJumpForce.y));
                 Debug.Log("Did wall jump");
@@ -118,6 +139,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.gravityScale = movementData.jumpGravityScale;
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0);
+        SoundFXManager.Instance.playSoundFXClip(movementData.jumpSoundFXs[Random.Range(0, movementData.jumpSoundFXs.Count)], transform, volume: 0.25f);
         rb.AddForce(force, ForceMode2D.Impulse);
         _jumpBufferCounter = 0;
     }
@@ -137,9 +159,9 @@ public class PlayerMovement : MonoBehaviour
     public void OnCrouch(InputAction.CallbackContext context)
     {
         if (context.performed && !_isCrouching)
-                StartCrouch();
+            StartCrouch();
         else if (context.canceled && _isCrouching)
-                StopCrouch();
+            StopCrouch();
     }
     private void ApplyMovement()
     {
@@ -150,6 +172,28 @@ public class PlayerMovement : MonoBehaviour
         float accelType = (Mathf.Abs(targetSpeed) > 0.01f) ? movementData.acceleration : movementData.deceleration;
         float accelRate = _isGrounded ? accelType : accelType * movementData.airResist;
         rb.AddForce(Vector2.right * speedDif * accelRate);
+
+        // Play speedy sound effect once when speed exceeds threshold
+        float speedThreshold = movementData.moveSpeed * 0.6f;
+        if (Mathf.Abs(rb.linearVelocity.x) > speedThreshold && !_hasPlayedSpeedySound && movementData.speedySoundFX != null)
+        {
+            SoundFXManager.Instance.playSoundFXClip(movementData.speedySoundFX, this.transform, volume: 1f);
+            _hasPlayedSpeedySound = true;
+        }
+        else if (Mathf.Abs(rb.linearVelocity.x) <= speedThreshold)
+        {
+            _hasPlayedSpeedySound = false;
+        }
+
+        if (walkFootstepTimer > movementData.walkSoundTiming && _isGrounded && Mathf.Abs(_horizontalInput) > 0.1f)
+        {
+            SoundFXManager.Instance.playSoundFXClip(movementData.walkSoundFX, this.transform, volume: 0.5f);
+            walkFootstepTimer = 0f;
+        }
+        else
+        {
+            walkFootstepTimer += Time.fixedDeltaTime;
+        }
     }
 
     private void OnDrawGizmosSelected()
@@ -202,7 +246,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void addSign()
     {
-        Debug.Log("Added a sign");
+        SoundFXManager.Instance.playSoundFXClip(pickUpItemSoundFXClip, transform, 1f);
         if (_cautionPlace != null) _cautionPlace.AddSign();
     }
 
@@ -211,7 +255,7 @@ public class PlayerMovement : MonoBehaviour
         _isCrouching = true;
         physicalBody.enabled = false;
 
-        rb.linearVelocity = new Vector2 (rb.linearVelocity.x, 0f);
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
         rb.AddForce(Vector2.down * movementData.fastFallForce, ForceMode2D.Impulse);
     }
 
