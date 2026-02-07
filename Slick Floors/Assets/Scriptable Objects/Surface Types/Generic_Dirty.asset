@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: Generic_Dirty
   m_EditorClassIdentifier: Assembly-CSharp::FloorTypeDefinitionSO
   floorTypeName: Generic Dirty
-  floorRenderer: {fileID: 5912053581461148121, guid: af9d9c10540f6a14c97b177347af00fa, type: 3}
+  floorRenderers:
+  - {fileID: 5912053581461148121, guid: 4cdabfb5c67d0774aa6b6d975eae3267, type: 3}
+  - {fileID: 5912053581461148121, guid: af9d9c10540f6a14c97b177347af00fa, type: 3}
+  - {fileID: 5912053581461148121, guid: 2189de2d1caa9694d880249358debbf5, type: 3}
   material: {fileID: 6200000, guid: 27b6da9b79c5d81449296874a4be506a, type: 2}
   playerMovementProfile: {fileID: 11400000, guid: d995cb3690de0014b8c39f3a7d93f475, type: 2}
