@@ -54,23 +54,19 @@ public class RespawnManager : MonoBehaviour
 
     private IEnumerator InitializeSequenceWhenReady()
     {
-        yield return new WaitForEndOfFrame();
-        SpawnSign();
-    }
-
-    private void SpawnSign()
-    {
         Transform playerTransform = FindFirstObjectByType<PlayerMovement>().transform;
         GameObject newSign = Instantiate(CautionSignPrefab, (Vector2)playerTransform.position + (Vector2.right * 5), Quaternion.identity);
         SpriteRenderer sr = newSign.GetComponent<PlayerImageHolder>().PlayerImageRenderer;
-         signRb = newSign.GetComponentInChildren<Rigidbody2D>();
-        
+        signRb = newSign.GetComponentInChildren<Rigidbody2D>();
+
         sr.sprite = PlayerDeathSprite;
         signRb.gravityScale = 0f;
         Invoke(nameof(SetSignGrav), 2f);
 
-        StartCoroutine(StartUpSequence());
         RespawnCameraController.Instance.MoveCamera(sr.transform, startCamZoom);
+        yield return new WaitForEndOfFrame();
+
+        StartCoroutine(StartUpSequence());
         StartCoroutine(RespawnCameraController.Instance.ZoomSequence(null, RespawnCameraController.ZoomType.Out));
     }
 
