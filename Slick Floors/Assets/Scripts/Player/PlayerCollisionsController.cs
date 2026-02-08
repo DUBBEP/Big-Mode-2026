@@ -18,19 +18,19 @@ public class PlayerCollisionsController : MonoBehaviour
 
         if (other.layer == LayerMask.NameToLayer("Pickup"))
         {
-            GameObject rootObject = other.transform.root.gameObject;
+            GameObject targetToDestroy = other;
             // Prevent double-processing
-            if (rootObject == null || rootObject.activeSelf == false)
+            if (targetToDestroy == null || targetToDestroy.activeSelf == false)
                 return;
-            int instanceId = rootObject.GetInstanceID();
-            if (processedPickups.Contains(rootObject))
+            
+            if (processedPickups.Contains(targetToDestroy))
                 return;
 
-            processedPickups.Add(rootObject);
+            processedPickups.Add(targetToDestroy);
 
             // Deactivate immediately to prevent further collisions
-            rootObject.SetActive(false);
-            Destroy(rootObject);
+            targetToDestroy.SetActive(false);
+            Destroy(targetToDestroy);
             movement.addSign();
         }
     }
