@@ -58,6 +58,7 @@ public class ChildController : MonoBehaviour
         // checkSlipped(collision);
         if (collision.gameObject.layer == LayerMask.NameToLayer("Objects"))
         {
+            if (!hasSlipped) { return; };
             Debug.Log("ChildController: Sign placed!");
             if (!animator.GetBool("SignPlaced"))
             {
