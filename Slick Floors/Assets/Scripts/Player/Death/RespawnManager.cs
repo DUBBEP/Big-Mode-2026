@@ -48,6 +48,13 @@ public class RespawnManager : MonoBehaviour
             Debug.LogWarning("No PlayerDeathSprite in Respawn Manager. This Should Be first Load of Scene.");
             return;
         }
+
+        StartCoroutine(InitializeSequenceWhenReady());
+    }
+
+    private IEnumerator InitializeSequenceWhenReady()
+    {
+        yield return new WaitForEndOfFrame();
         SpawnSign();
     }
 
