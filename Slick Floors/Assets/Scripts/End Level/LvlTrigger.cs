@@ -5,13 +5,21 @@ public class LvlTrigger : MonoBehaviour
 {
 
     [SerializeField] private string sceneToLoad;
+
+    public bool atDoor = false;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (LevelScoreCalculator.Instance == null)
-            Debug.LogError("Score Calculator is null");
-        else
-            LevelScoreCalculator.Instance.CalculateFinalScores();
+        // SceneManager.LoadScene(sceneToLoad);
+        atDoor = true;
+    }
 
-        SceneManager.LoadScene(sceneToLoad);
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        atDoor = false;
+    }
+
+    public void LoadNextScene()
+    {
+        if (atDoor) SceneManager.LoadScene(sceneToLoad);
     }
 }
